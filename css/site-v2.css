@@ -765,3 +765,35 @@ body { background: var(--ivory); }
   box-shadow: var(--shadow-soft);
   padding: clamp(24px, 4vw, 36px);
 }
+
+/* ===== Downloadable resources (brochure / posters / FAQs) ===== */
+.resource-list { display: flex; flex-direction: column; gap: 14px; }
+.resource-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 18px 22px;
+  box-shadow: var(--shadow-soft);
+}
+.resource-item-icon {
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--ivory-deep);
+  color: var(--coral);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.resource-item-icon svg { width: 19px; height: 19px; }
+.resource-item-body { flex: 1; min-width: 0; }
+.resource-item-body h4 { font-size: 14px; color: var(--ink); font-weight: 600; }
+.resource-item-body p { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.resource-item .btn { flex: none; }
+@media (max-width: 480px) {
+  .resource-item { flex-wrap: wrap; }
+  .resource-item .btn { width: 100%; }
+}
