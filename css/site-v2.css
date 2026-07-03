@@ -506,8 +506,8 @@ body { background: var(--ivory); }
 @media (max-width: 899px) {
   .founder-v2-media {
     float: right;
-    width: 42%;
-    max-width: 190px;
+    width: 56%;
+    max-width: 260px;
     margin: 0 0 18px 20px;
   }
 }
