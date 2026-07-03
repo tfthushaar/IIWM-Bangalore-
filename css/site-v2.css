@@ -202,7 +202,17 @@ body { background: var(--ivory); }
   .hero-poster { min-height: 760px; }
 }
 .hero-poster-media { position: absolute; inset: 0; z-index: 0; }
-.hero-poster-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.hero-poster-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: hero-media-zoom 9s cubic-bezier(.25, .1, .25, 1) forwards;
+}
+@keyframes hero-media-zoom {
+  from { transform: scale(1.08); }
+  to { transform: scale(1); }
+}
 .hero-poster-scrim {
   position: absolute;
   inset: 0;
@@ -312,6 +322,41 @@ body { background: var(--ivory); }
   margin-bottom: 2px;
 }
 .hero-poster-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+/* Choreographed entrance, timed to start as the preloader (3s, style.css)
+   finishes fading — content rises in just as the photo is revealed. */
+.hero-poster-flourish,
+.hero-poster-eyebrow,
+.hero-poster-title,
+.hero-poster-tagline,
+.hero-poster-info,
+.hero-poster-actions {
+  opacity: 0;
+  transform: translateY(18px);
+  animation: hero-content-in .9s cubic-bezier(.19, 1, .22, 1) forwards;
+}
+.hero-poster-flourish { animation-delay: 2.5s; }
+.hero-poster-eyebrow { animation-delay: 2.62s; }
+.hero-poster-title { animation-delay: 2.74s; }
+.hero-poster-tagline { animation-delay: 2.88s; }
+.hero-poster-info { animation-delay: 3.02s; }
+.hero-poster-actions { animation-delay: 3.16s; }
+@keyframes hero-content-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-poster-media img { animation: none; }
+  .hero-poster-flourish,
+  .hero-poster-eyebrow,
+  .hero-poster-title,
+  .hero-poster-tagline,
+  .hero-poster-info,
+  .hero-poster-actions {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
 
 /* Fade the photo out into the page's ivory background at the very bottom
    edge of the hero, so the section ends smoothly instead of a hard cut —
@@ -454,14 +499,33 @@ body { background: var(--ivory); }
 /* ===== Founder section ===== */
 .founder-v2 {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 44px;
-  align-items: center;
+  grid-template-columns: minmax(96px, 140px) 1fr;
+  grid-template-areas:
+    "media head"
+    "copy  copy";
+  column-gap: 20px;
+  row-gap: 22px;
+  align-items: start;
 }
+.founder-v2-head { grid-area: head; }
+.founder-v2-copy-wrap { grid-area: copy; }
+.founder-v2-media { grid-area: media; }
 @media (min-width: 900px) {
-  .founder-v2 { grid-template-columns: 1.05fr .95fr; }
-  .founder-v2.founder-v2--reverse { grid-template-columns: .95fr 1.05fr; }
-  .founder-v2.founder-v2--reverse .founder-v2-media { order: 2; }
+  .founder-v2 {
+    grid-template-columns: 1.05fr .95fr;
+    grid-template-areas:
+      "head media"
+      "copy media";
+    column-gap: 44px;
+    row-gap: 0;
+    align-items: center;
+  }
+  .founder-v2.founder-v2--reverse {
+    grid-template-columns: .95fr 1.05fr;
+    grid-template-areas:
+      "media head"
+      "media copy";
+  }
 }
 .founder-v2-eyebrow {
   font-size: 11px;
@@ -498,7 +562,14 @@ body { background: var(--ivory); }
   position: relative;
   max-width: 420px;
   margin: 0 auto;
-  padding: 6% 8% clamp(28px, 5vw, 64px);
+  padding: 6% 8% clamp(16px, 5vw, 64px);
+}
+@media (max-width: 899px) {
+  .founder-v2-name { font-size: clamp(22px, 6.4vw, 28px); margin-top: 8px; }
+  .founder-v2-role { font-size: 15px; margin-top: 4px; }
+  .founder-v2-eyebrow { font-size: 9.5px; letter-spacing: .16em; }
+  .founder-v2-copy { margin-top: 0; }
+  .founder-v2-copy-wrap .founder-v2-copy:first-child { margin-top: 0; }
 }
 .founder-v2-blob {
   position: absolute;
