@@ -183,12 +183,11 @@ body { background: var(--ivory); }
   overflow: hidden;
   padding: clamp(18px, 3vw, 40px) var(--side-pad) clamp(22px, 3.4vw, 44px);
 }
-/* Phones: text never sits on top of the photo. The image becomes a plain
-   top block (full-bleed, fixed aspect ratio) and the headline/CTAs/stats
-   flow below it on the solid ivory background — dark ink text on ivory,
-   full contrast, no scrim needed. */
+/* Phones: full-bleed, full-height photo with the headline/CTA overlaid
+   on a dark gradient (like a hotel hero), stats card floats up over the
+   photo's bottom edge, overflow is allowed to show through that overlap. */
 @media (max-width: 679px) {
-  .hero-fade { padding: 0 0 clamp(28px, 7vw, 40px); }
+  .hero-fade { padding: 0 0 32px; overflow: visible; }
 }
 
 /* Photo layer: anchored to the right, full height of the section (so it
@@ -226,14 +225,15 @@ body { background: var(--ivory); }
    blends into the ivory page background instead of a hard cut line. */
 @media (max-width: 679px) {
   .hero-fade-media {
-    position: relative;
-    top: auto; right: auto; bottom: auto;
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: auto;
     width: 100%;
-    aspect-ratio: 5 / 4;
+    height: 100svh;
+    aspect-ratio: auto;
   }
   .hero-fade-media::before { display: none; }
   .hero-fade-media::after {
-    background: linear-gradient(0deg, var(--ivory) 0%, rgba(253, 243, 236, 0) 14%);
+    background: linear-gradient(180deg, rgba(27, 18, 12, .05) 0%, rgba(27, 18, 12, .12) 38%, rgba(27, 18, 12, .64) 74%, rgba(27, 18, 12, .88) 100%);
   }
 }
 
@@ -266,13 +266,25 @@ body { background: var(--ivory); }
   .hero-fade-content {
     max-width: none;
     margin-top: 0;
-    padding: clamp(22px, 6vw, 32px) var(--side-pad) 4px;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+    padding: 120px var(--side-pad) 96px;
   }
-  /* Standard ink/maroon palette — plain ivory background now, so no
-     scrim or light-on-dark treatment is needed. */
-  .hero-fade-title {
-    font-size: clamp(28px, 8vw, 36px);
+  /* Now sits over the full-bleed photo with a dark gradient beneath it,
+     so headline/eyebrow flip to light-on-dark like the reference. Extra
+     `.hero-fade-content` qualifier bumps specificity above the base
+     ink/maroon rules that are declared later in this file. */
+  .hero-fade-content .hero-fade-eyebrow { color: var(--ivory); }
+  .hero-fade-content .hero-fade-title {
+    color: var(--white);
+    font-size: clamp(30px, 9vw, 38px);
+    text-shadow: 0 2px 20px rgba(10, 6, 4, .35);
   }
+  .hero-fade-content .hero-fade-title span { color: var(--gold-soft); }
 }
 
 .hero-fade-eyebrow {
@@ -314,7 +326,7 @@ body { background: var(--ivory); }
   margin: 18px 0 24px;
 }
 @media (max-width: 679px) {
-  .hero-fade-divider { margin: 12px 0 16px; gap: 8px; }
+  .hero-fade-divider { margin: 12px 0 16px; gap: 8px; justify-content: center; }
   .hero-fade-divider-line { width: clamp(34px, 9vw, 60px); }
   .hero-fade-eyebrow { font-size: 9px; letter-spacing: .04em; margin-bottom: 10px; }
   /* Let the eyebrow wrap to the narrow column naturally — the desktop
@@ -346,7 +358,7 @@ body { background: var(--ivory); }
   gap: 14px;
 }
 @media (max-width: 679px) {
-  .hero-fade-actions { gap: 8px; }
+  .hero-fade-actions { gap: 10px; justify-content: center; }
   .hero-fade-actions .btn {
     padding: 11px 16px;
     font-size: 10.5px;
@@ -354,6 +366,16 @@ body { background: var(--ivory); }
   }
   .hero-fade-actions .btn-icon { width: 16px; height: 16px; }
   .hero-fade-actions .btn-icon svg { width: 7px; height: 7px; }
+  /* Frosted glass secondary CTA over the photo, matching the reference's
+     translucent pill instead of a solid white one. */
+  .hero-fade-actions .btn--outline {
+    background: rgba(253, 243, 236, .16);
+    border-color: rgba(253, 243, 236, .55);
+    color: var(--white);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+  .hero-fade-actions .btn--outline .btn-icon { background: rgba(27, 18, 12, .55); }
 }
 /* Mid widths: the ~50vw text column is too narrow for the full-size pills
    to share a row — slim them so both stay side by side like the design. */
@@ -380,7 +402,11 @@ body { background: var(--ivory); }
   list-style: none;
 }
 @media (max-width: 679px) {
-  .hero-fade-stats { margin: 8px var(--side-pad) 0; }
+  .hero-fade-stats {
+    position: relative;
+    z-index: 3;
+    margin: -56px var(--side-pad) 0;
+  }
 }
 @media (min-width: 680px) {
   .hero-fade-stats { grid-template-columns: repeat(4, 1fr); }
