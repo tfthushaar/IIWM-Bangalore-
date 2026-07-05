@@ -183,11 +183,18 @@ body { background: var(--ivory); }
   overflow: hidden;
   padding: clamp(18px, 3vw, 40px) var(--side-pad) clamp(22px, 3.4vw, 44px);
 }
-/* Phones: full-bleed, full-height photo with the headline/CTA overlaid
-   on a dark gradient (like a hotel hero), stats card floats up over the
-   photo's bottom edge, overflow is allowed to show through that overlap. */
+/* Phones: poster layout — headline stack centered on ivory up top, the
+   info items down the left with gold circle icons, and the photo anchored
+   to the bottom of the screen fading up into the ivory (like the print
+   poster this hero is based on). */
 @media (max-width: 679px) {
-  .hero-fade { padding: 0 0 32px; overflow: visible; }
+  .hero-fade {
+    padding: 0 0 24px;
+    overflow: hidden;
+    min-height: calc(100svh - 74px);
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 /* Photo layer: anchored to the right, full height of the section (so it
@@ -220,20 +227,22 @@ body { background: var(--ivory); }
   inset: 0;
   background: linear-gradient(180deg, rgba(253, 243, 236, .55) 0%, rgba(253, 243, 236, 0) 18%, rgba(253, 243, 236, 0) 72%, rgba(253, 243, 236, .85) 100%);
 }
-/* Phones: the photo is a plain top block — no text overlay, no scrim.
-   Just a crisp image with a short fade at its own bottom edge so it
-   blends into the ivory page background instead of a hard cut line. */
+/* Phones: the photo anchors to the bottom of the poster screen. Its top
+   edge dissolves up into the ivory and its left edge softens where the
+   info items overlap it — no dark scrim, the page stays light. */
 @media (max-width: 679px) {
   .hero-fade-media {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: auto;
+    top: auto; left: 0; right: 0; bottom: 0;
     width: 100%;
-    height: 100svh;
-    aspect-ratio: auto;
+    height: 48%;
   }
-  .hero-fade-media::before { display: none; }
+  .hero-fade-media img { object-position: center 72%; }
+  .hero-fade-media::before {
+    background: linear-gradient(90deg, var(--ivory) 0%, rgba(253, 243, 236, .55) 22%, rgba(253, 243, 236, 0) 58%);
+  }
   .hero-fade-media::after {
-    background: linear-gradient(180deg, rgba(27, 18, 12, .05) 0%, rgba(27, 18, 12, .12) 38%, rgba(27, 18, 12, .64) 74%, rgba(27, 18, 12, .88) 100%);
+    background: linear-gradient(180deg, var(--ivory) 0%, rgba(253, 243, 236, .6) 24%, rgba(253, 243, 236, 0) 62%);
   }
 }
 
@@ -265,56 +274,74 @@ body { background: var(--ivory); }
 @media (max-width: 679px) {
   .hero-fade-content {
     max-width: none;
-    margin-top: 0;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
     text-align: center;
-    padding: 120px var(--side-pad) 96px;
+    padding: 26px var(--side-pad) 6px;
   }
-  /* Now sits over the full-bleed photo with a dark gradient beneath it,
-     so headline/eyebrow flip to light-on-dark like the reference. Extra
-     `.hero-fade-content` qualifier bumps specificity above the base
-     ink/maroon rules that are declared later in this file. */
-  .hero-fade-content .hero-fade-eyebrow { color: var(--ivory); }
-  .hero-fade-content .hero-fade-title {
-    color: var(--white);
-    font-size: clamp(30px, 9vw, 38px);
-    text-shadow: 0 2px 20px rgba(10, 6, 4, .35);
-  }
-  .hero-fade-content .hero-fade-title span { color: var(--gold-soft); }
 }
 
-.hero-fade-eyebrow {
+/* Poster headline stack: INDIA'S / FIRST / Residential / WEDDING PLANNING
+   PROGRAM — tracked sans kicker, oversized gold serif, maroon script,
+   maroon small-caps serif. */
+.hero-fade-title { margin: 0; }
+.hero-title-kicker {
+  display: block;
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: clamp(10.5px, 1.2vw, 13px);
-  letter-spacing: .08em;
+  font-size: clamp(12px, 3.4vw, 15px);
+  letter-spacing: .44em;
+  text-indent: .44em;
   text-transform: uppercase;
-  /* warm orange-gold from the reference, brighter than --gold-text */
-  color: #C6812F;
-  line-height: 1.6;
-  margin: 0 0 14px;
+  color: var(--ink);
+  margin-bottom: 4px;
 }
-.hero-fade-title {
+.hero-title-first {
+  display: block;
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: clamp(21px, 6.2vw, 28px);
-  line-height: 1.14;
+  font-size: clamp(54px, 16vw, 84px);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  line-height: .95;
+  /* rich poster gold, warmer than --gold */
+  color: #C9973B;
+}
+.hero-title-script {
+  display: block;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(32px, 10vw, 52px);
+  line-height: 1.05;
   color: var(--maroon);
-  margin: 0;
+  margin-top: 2px;
 }
-.hero-fade-title span { color: var(--coral); }
-/* The vw-based size above assumes the full-width phone column. From 680px
-   the copy lives in a ~50vw column, so re-scale to the column to keep the
-   headline at 3 lines like the reference. */
+.hero-title-main {
+  display: block;
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: clamp(20px, 6.2vw, 30px);
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  line-height: 1.24;
+  color: var(--maroon);
+  margin-top: 10px;
+}
+.hero-fade-tagline {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(16px, 4.6vw, 20px);
+  letter-spacing: .12em;
+  color: var(--ink);
+  margin: 0 0 22px;
+}
+/* From 680px the copy lives in a ~50vw column — rein the poster type in
+   so the stack stays proportional inside it. */
 @media (min-width: 680px) {
-  .hero-fade-title { font-size: clamp(24px, 3.4vw, 34px); }
-}
-@media (min-width: 1100px) {
-  .hero-fade-title { font-size: clamp(36px, 3.5vw, 52px); }
+  .hero-title-kicker { font-size: clamp(11px, 1.2vw, 14px); }
+  .hero-title-first { font-size: clamp(48px, 6.4vw, 92px); }
+  .hero-title-script { font-size: clamp(30px, 4vw, 56px); }
+  .hero-title-main { font-size: clamp(19px, 2.4vw, 34px); }
+  .hero-fade-tagline { font-size: clamp(14px, 1.5vw, 20px); }
 }
 
 /* line — ◆ lotus ◆ — line divider under the headline */
@@ -326,12 +353,8 @@ body { background: var(--ivory); }
   margin: 18px 0 24px;
 }
 @media (max-width: 679px) {
-  .hero-fade-divider { margin: 12px 0 16px; gap: 8px; justify-content: center; }
+  .hero-fade-divider { margin: 12px 0 14px; gap: 8px; justify-content: center; }
   .hero-fade-divider-line { width: clamp(34px, 9vw, 60px); }
-  .hero-fade-eyebrow { font-size: 9px; letter-spacing: .04em; margin-bottom: 10px; }
-  /* Let the eyebrow wrap to the narrow column naturally — the desktop
-     line break lands mid-phrase here. */
-  .hero-fade-eyebrow br { display: none; }
 }
 .hero-fade-divider svg { flex: none; width: 32px; height: 18px; }
 .hero-fade-divider-line {
@@ -358,24 +381,9 @@ body { background: var(--ivory); }
   gap: 14px;
 }
 @media (max-width: 679px) {
-  .hero-fade-actions { gap: 10px; justify-content: center; }
-  .hero-fade-actions .btn {
-    padding: 11px 16px;
-    font-size: 10.5px;
-    gap: 6px;
-  }
-  .hero-fade-actions .btn-icon { width: 16px; height: 16px; }
-  .hero-fade-actions .btn-icon svg { width: 7px; height: 7px; }
-  /* Frosted glass secondary CTA over the photo, matching the reference's
-     translucent pill instead of a solid white one. */
-  .hero-fade-actions .btn--outline {
-    background: rgba(253, 243, 236, .16);
-    border-color: rgba(253, 243, 236, .55);
-    color: var(--white);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-  }
-  .hero-fade-actions .btn--outline .btn-icon { background: rgba(27, 18, 12, .55); }
+  /* The poster has no buttons and the fixed mobile apply bar already
+     carries Explore Program / Download Brochure / Apply Now. */
+  .hero-fade-actions { display: none; }
 }
 /* Mid widths: the ~50vw text column is too narrow for the full-size pills
    to share a row — slim them so both stay side by side like the design. */
@@ -402,10 +410,29 @@ body { background: var(--ivory); }
   list-style: none;
 }
 @media (max-width: 679px) {
+  /* Poster style: a plain left-aligned column of items with gold circle
+     icons, sitting on the ivory / over the photo's faded left edge —
+     no white card. */
   .hero-fade-stats {
     position: relative;
     z-index: 3;
-    margin: -56px var(--side-pad) 0;
+    background: transparent;
+    box-shadow: none;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin: 6px auto 0 var(--side-pad);
+    padding: 0;
+    width: min(66%, 300px);
+  }
+  /* Doubled class keeps this above the base icon rule declared later. */
+  .hero-fade-stats .hero-fade-stats-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1.3px solid #C6812F;
   }
 }
 @media (min-width: 680px) {
@@ -447,7 +474,7 @@ body { background: var(--ivory); }
 /* Choreographed entrance, timed to start as the preloader (3s, style.css)
    finishes fading. */
 .hero-fade-media,
-.hero-fade-eyebrow,
+.hero-fade-tagline,
 .hero-fade-title,
 .hero-fade-divider,
 .hero-fade-actions,
@@ -455,7 +482,7 @@ body { background: var(--ivory); }
   opacity: 0;
   animation: hero-content-in .8s cubic-bezier(.19, 1, .22, 1) forwards;
 }
-.hero-fade-eyebrow,
+.hero-fade-tagline,
 .hero-fade-title,
 .hero-fade-divider,
 .hero-fade-actions,
@@ -470,17 +497,17 @@ body { background: var(--ivory); }
   to { opacity: .55; }
 }
 .hero-fade-media { animation-delay: 2.4s; }
-.hero-fade-eyebrow { animation-delay: 2.6s; }
-.hero-fade-title { animation-delay: 2.7s; }
-.hero-fade-divider { animation-delay: 2.82s; }
-.hero-fade-actions { animation-delay: 2.94s; }
-.hero-fade-stats { animation-delay: 3.08s; }
+.hero-fade-title { animation-delay: 2.6s; }
+.hero-fade-divider { animation-delay: 2.74s; }
+.hero-fade-tagline { animation-delay: 2.86s; }
+.hero-fade-actions { animation-delay: 2.98s; }
+.hero-fade-stats { animation-delay: 3.1s; }
 @keyframes hero-content-in {
   to { opacity: 1; transform: translateY(0); }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero-fade-media,
-  .hero-fade-eyebrow,
+  .hero-fade-tagline,
   .hero-fade-title,
   .hero-fade-divider,
   .hero-fade-actions,
