@@ -227,22 +227,34 @@ body { background: var(--ivory); }
   inset: 0;
   background: linear-gradient(180deg, rgba(253, 243, 236, .55) 0%, rgba(253, 243, 236, 0) 18%, rgba(253, 243, 236, 0) 72%, rgba(253, 243, 236, .85) 100%);
 }
-/* Phones: the photo anchors to the bottom of the poster screen. Its top
-   edge dissolves up into the ivory and its left edge softens where the
-   info items overlap it — no dark scrim, the page stays light. */
+/* Phones: match the print poster's photo treatment — the mandap sits
+   large on the right of the lower half, its sky melts up into the ivory
+   with a tall soft fade, its left edge dissolves where the info items
+   sit, and the lotus pond runs the full width at the very bottom (the
+   left fade releases before it reaches the pond). */
 @media (max-width: 679px) {
   .hero-fade-media {
     position: absolute;
     top: auto; left: 0; right: 0; bottom: 0;
     width: 100%;
-    height: 48%;
+    height: 58%;
   }
-  .hero-fade-media img { object-position: center 72%; }
+  .hero-fade-media img { object-position: 78% 62%; }
   .hero-fade-media::before {
-    background: linear-gradient(90deg, var(--ivory) 0%, rgba(253, 243, 236, .55) 22%, rgba(253, 243, 236, 0) 58%);
+    bottom: 24%;
+    background: linear-gradient(90deg, var(--ivory) 0%, rgba(253, 243, 236, .95) 22%, rgba(253, 243, 236, .55) 42%, rgba(253, 243, 236, 0) 66%);
   }
   .hero-fade-media::after {
-    background: linear-gradient(180deg, var(--ivory) 0%, rgba(253, 243, 236, .6) 24%, rgba(253, 243, 236, 0) 62%);
+    background: linear-gradient(180deg, var(--ivory) 0%, rgba(253, 243, 236, .75) 14%, rgba(253, 243, 236, .35) 30%, rgba(253, 243, 236, 0) 52%);
+  }
+  /* Thin gold hairline frame around the poster screen, like the print. */
+  .hero-fade::after {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border: 1px solid rgba(201, 151, 59, .45);
+    pointer-events: none;
+    z-index: 4;
   }
 }
 

@@ -203,13 +203,17 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 
 .site-nav {
   display: none;
-  gap: clamp(14px, 1.6vw, 26px);
+  /* 12 tabs: tighter gaps, and allow a graceful wrap to a second centered
+     row on narrower desktop widths instead of overflowing. */
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px clamp(10px, 1.1vw, 20px);
   justify-self: center;
   grid-column: 2;
 }
 .site-nav a {
   position: relative;
-  font-size: clamp(10.5px, 1vw, 12px);
+  font-size: clamp(10px, .85vw, 11.5px);
   letter-spacing: .03em;
   padding-bottom: 5px;
   white-space: nowrap;
