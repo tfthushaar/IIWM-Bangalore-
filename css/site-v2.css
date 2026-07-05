@@ -185,15 +185,13 @@ body { background: var(--ivory); }
 }
 /* Phones: poster layout — headline stack centered on ivory up top, the
    info items down the left with gold circle icons, and the photo anchored
-   to the bottom of the screen fading up into the ivory (like the print
-   poster this hero is based on). */
+   to the bottom-RIGHT corner (behind/beside the info list, not a full-width
+   block underneath it) like the print poster this hero is based on. */
 @media (max-width: 679px) {
   .hero-fade {
     padding: 0;
     overflow: hidden;
     min-height: calc(100svh - 74px);
-    display: flex;
-    flex-direction: column;
   }
 }
 
@@ -227,30 +225,28 @@ body { background: var(--ivory); }
   inset: 0;
   background: linear-gradient(180deg, rgba(253, 243, 236, .55) 0%, rgba(253, 243, 236, 0) 18%, rgba(253, 243, 236, 0) 72%, rgba(253, 243, 236, .85) 100%);
 }
-/* Phones: match the print poster's photo treatment. The photo is an
-   IN-FLOW block after the text and info items (never underneath them),
-   so the full mandap is always visible in the first screen. The merge
-   happens in a fixed overlap band: the photo pulls up slightly under the
-   last info items, where its top edge melts into the ivory and its left
-   edge dissolves so the item text stays fully readable. */
+/* Phones: the photo stays anchored to the bottom-right corner behind the
+   info list (matching the poster and the desktop side-anchored layout) —
+   it never becomes a separate full-width block stacked below everything.
+   Only a small sliver fades at its own top-left corner so it reads bright
+   and vivid, not washed out. */
 @media (max-width: 679px) {
   .hero-fade-media {
-    position: relative;
-    top: auto; left: auto; right: auto; bottom: auto;
-    order: 3;
-    width: 100%;
-    height: auto;
-    flex: 1;
-    min-height: 340px;
-    margin-top: -88px;
+    position: absolute;
+    top: auto; left: auto;
+    right: 0;
+    bottom: 0;
+    width: 78%;
+    height: 56%;
+    z-index: 0;
   }
-  .hero-fade-media img { object-position: 78% 62%; }
-  /* One unclipped, two-directional fade so the ivory dissolves into the
-     photo smoothly on every edge of the overlap band — no hard box line.
-     Below this band the mandap shows clear and vivid like the poster. */
+  .hero-fade-media img { object-position: 66% 55%; }
+  /* Left ~55% (where the info-list text sits) fades into the ivory so
+     text stays legible; the right ~45% (peacock + mandap) stays fully
+     vivid — a localized fade instead of dulling the whole photo. */
   .hero-fade-media::before {
-    background: linear-gradient(180deg, var(--ivory) 0%, rgba(253, 243, 236, .82) 16%, rgba(253, 243, 236, .42) 30%, rgba(253, 243, 236, 0) 46%),
-      linear-gradient(90deg, var(--ivory) 0%, rgba(253, 243, 236, .88) 24%, rgba(253, 243, 236, .38) 46%, rgba(253, 243, 236, 0) 68%);
+    background: linear-gradient(180deg, var(--ivory) 0%, rgba(253, 243, 236, .3) 8%, rgba(253, 243, 236, 0) 18%),
+      linear-gradient(90deg, var(--ivory) 0%, rgba(253, 243, 236, .82) 28%, rgba(253, 243, 236, .3) 48%, rgba(253, 243, 236, 0) 62%);
   }
   .hero-fade-media::after {
     background: none;
@@ -453,6 +449,12 @@ body { background: var(--ivory); }
     border-radius: 50%;
     background: transparent;
     border: 1.3px solid #C6812F;
+  }
+  /* Text sits partly over the vivid photo — a soft shadow keeps it
+     readable without needing a background panel or extra photo fade. */
+  .hero-fade-stats-text strong,
+  .hero-fade-stats-text {
+    text-shadow: 0 1px 8px rgba(253, 243, 236, .9), 0 1px 2px rgba(253, 243, 236, .9);
   }
 }
 @media (min-width: 680px) {

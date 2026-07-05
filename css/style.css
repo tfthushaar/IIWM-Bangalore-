@@ -109,6 +109,17 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   max-width: 78vw;
   height: auto;
   animation: preloader-breathe 2.1s ease-in-out .9s infinite;
+  /* The JPEG's watercolor wash isn't perfectly flat (#F8E2CB–#FCF2E6), so
+     a solid page background alone leaves a faint rectangle at the card's
+     edges. Feather ~6% of each edge so the card melts into the screen. */
+  -webkit-mask-image:
+    linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%),
+    linear-gradient(0deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%),
+    linear-gradient(0deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+  mask-composite: intersect;
 }
 @keyframes preloader-in {
   to { opacity: 1; transform: translateY(0) scale(1); }
@@ -180,7 +191,7 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .wordmark:hover,
 .wordmark:focus-visible { opacity: .78; }
 .wordmark-mark {
-  width: clamp(54px, 7vw, 72px);
+  width: clamp(62px, 8vw, 84px);
   height: auto;
   display: block;
 }
@@ -292,6 +303,51 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   .site-nav { display: flex; }
   .cta-pill { display: inline-block; }
   .menu-toggle { display: none; }
+  /* Extra `nav.mobile-quicknav` qualifier beats the unconditional
+     `.mobile-quicknav { display: flex }` rule declared further below at
+     equal specificity otherwise (that rule would win on source order). */
+  nav.mobile-quicknav { display: none; }
+}
+
+/* ===== Mobile/tablet quick-nav — a second row under the logo/hamburger
+   bar with plain text links (no icons) to the three pages that don't fit
+   in the collapsed header otherwise. Same background as the header so it
+   reads as one continuous top bar rather than a separate strip. */
+.mobile-quicknav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(14px, 4vw, 26px);
+  padding: 0 var(--side-pad) 14px;
+  background: rgba(247, 242, 233, .97);
+  border-bottom: 1px solid rgba(32, 24, 16, .07);
+}
+.mobile-quicknav a {
+  font-family: var(--font-sans);
+  font-size: clamp(13.5px, 3.6vw, 15px);
+  font-weight: 500;
+  letter-spacing: .01em;
+  color: var(--ink);
+  white-space: nowrap;
+  padding: 4px 0;
+  position: relative;
+}
+.mobile-quicknav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .28s cubic-bezier(.4, 0, .2, 1);
+}
+.mobile-quicknav a:hover::after,
+.mobile-quicknav a:focus-visible::after { transform: scaleX(1); }
+@media (max-width: 380px) {
+  .mobile-quicknav { gap: 12px; }
 }
 
 /* ===== Mobile / overlay menu ===== */
