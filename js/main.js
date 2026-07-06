@@ -79,7 +79,7 @@
     }, { passive: true });
   }
 
-  /* ---- Career roles: show 2, expand to see all 12 ---- */
+  /* ---- Career roles: show 3, expand to see the rest ---- */
   var careerExtra = document.getElementById('careerExtra');
   var careerExpandToggle = document.getElementById('careerExpandToggle');
   if (careerExtra && careerExpandToggle) {
@@ -88,7 +88,7 @@
       careerExtra.hidden = expanded;
       careerExpandToggle.setAttribute('aria-expanded', String(!expanded));
       careerExpandToggle.querySelector('.career-expand-label').textContent =
-        expanded ? 'Show All 12 Roles' : 'Show Fewer Roles';
+        expanded ? 'Show More' : 'Show Less';
     });
   }
 
@@ -307,6 +307,7 @@
   var roleModal = document.getElementById('roleModal');
   var roleModalBody = document.getElementById('roleModalBody');
   var roleModalClose = document.getElementById('roleModalClose');
+  var roleModalBack = document.getElementById('roleModalBack');
   var roleTriggers = document.querySelectorAll('[data-role]');
 
   function escapeHtml(str) {
@@ -327,11 +328,6 @@
         '<p class="role-modal-eyebrow">The Role of a</p>' +
         '<h3 class="role-modal-title" id="roleModalTitle">' + escapeHtml(data.title) + '</h3>' +
         '<p class="role-modal-tagline">' + escapeHtml(data.tagline) + '</p>' +
-        '<button type="button" class="role-modal-video-btn" data-video-soon>' +
-          '<span class="role-modal-video-icon"><svg viewBox="0 0 10 10" fill="none"><path d="M1 1l8 4-8 4V1z" fill="#fff"/></svg></span>' +
-          'Watch Video' +
-        '</button>' +
-        '<span class="video-soon-note" hidden>Video coming soon for this role</span>' +
       '</div>' +
       '<p class="role-modal-summary">' + escapeHtml(data.summary) + '</p>' +
       '<p class="role-modal-what">What I Do</p>' +
@@ -358,6 +354,7 @@
       });
     });
     roleModalClose.addEventListener('click', closeRoleModal);
+    if (roleModalBack) roleModalBack.addEventListener('click', closeRoleModal);
     roleOverlay.addEventListener('click', function (e) {
       if (e.target === roleOverlay) closeRoleModal();
     });

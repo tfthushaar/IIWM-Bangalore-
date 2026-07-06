@@ -23,7 +23,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="css/style.css?v=14">
-<link rel="stylesheet" href="css/site-v2.css?v=47">
+<link rel="stylesheet" href="css/site-v2.css?v=59">
 </head>
 <body class="has-mobile-apply-bar">
 
@@ -176,70 +176,44 @@
     </ul>
   </section>
 
-  <section class="section career" id="careers" data-reveal>
-    <div class="section-head" style="display:block">
-      <p class="celebrates-heading" style="text-align:center">Career Path &mdash; One Industry,<br>Endless Opportunities</p>
-      <p class="career-sub" style="text-align:center">12 wedding career roles this program opens — tap any role to see exactly what it involves.</p>
-    </div>
-
-    <div class="career-preview-row career-preview-row--full">
-      <button type="button" class="career-preview-item" data-role="wedding-planner">
-        <span class="career-preview-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 3h6l1 4H8l1-4z"/><path d="M6 7h12l-1.2 13.2a1 1 0 01-1 .8H8.2a1 1 0 01-1-.8L6 7z"/><path d="M9 11h6"/></svg></span>
-        Wedding Planner
-      </button>
-      <button type="button" class="career-preview-item" data-role="destination-wedding-planner">
-        <span class="career-preview-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9S14.5 18.3 12 21c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg></span>
-        Destination Wedding Planner
-      </button>
-      <div class="career-preview-extra" id="careerExtra" hidden>
-      <button type="button" class="career-preview-item" data-role="wedding-designer">
-        <span class="career-preview-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 4a8 8 0 100 16c1.1 0 2-.7 2-1.8 0-.5-.2-.9-.5-1.2-.3-.3-.5-.7-.5-1.2 0-1 .9-1.8 2-1.8h1.3A4.2 4.2 0 0020 9.5C20 6.5 16.4 4 12 4z"/><circle cx="8.2" cy="10.5" r=".9" fill="currentColor" stroke="none"/><circle cx="10.5" cy="7.8" r=".9" fill="currentColor" stroke="none"/><circle cx="14" cy="7.8" r=".9" fill="currentColor" stroke="none"/><circle cx="15.8" cy="10.5" r=".9" fill="currentColor" stroke="none"/></svg></span>
-        Wedding Designer
-      </button>
-      <button type="button" class="career-preview-item" data-role="wedding-decor-stylist">
-        <span class="career-preview-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10h18l-2 9H5l-2-9z"/><path d="M8 10V6h8v4"/></svg></span>
-        Wedding Decor Stylist
-      </button>
-      <button type="button" class="career-preview-item" data-role="hospitality-guest-experience-manager">
-        <span class="career-preview-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 18a9 9 0 0118 0"/><path d="M2.5 18h19"/><circle cx="12" cy="5.5" r="1.1" fill="currentColor" stroke="none"/><path d="M12 6.6V9"/></svg></span>
-        Hospitality &amp; Guest Experience Manager
-      </button>
-      <button type="button" class="career-preview-item" data-role="wedding-production-manager">
-        <span class="career-preview-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 10v4h4l6 5V5L7 10H3z"/><path d="M16.5 9a4.2 4.2 0 010 6"/><path d="M19.5 6.5a8 8 0 010 11"/></svg></span>
-        Wedding Production Manager
-      </button>
-      <button type="button" class="career-preview-item" data-role="destination-wedding-specialist">
-        <span class="career-preview-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l18-8-8 18-2-8-8-2z"/></svg></span>
-        Destination Wedding Specialist
-      </button>
-      <button type="button" class="career-preview-item" data-role="vendor-relationship-manager">
-        <span class="career-preview-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9.5 14.5l5-5"/><path d="M8 12.8l-2.1 2.1a3 3 0 004.2 4.2l2.1-2.1"/><path d="M16 11.2l2.1-2.1a3 3 0 00-4.2-4.2l-2.1 2.1"/></svg></span>
-        Vendor Relationship Manager
-      </button>
-      <button type="button" class="career-preview-item" data-role="floral-designer">
-        <span class="career-preview-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2.4"/><path d="M12 3c1.6 2 1.6 4.5 0 6-1.6-1.5-1.6-4 0-6zM12 21c1.6-2 1.6-4.5 0-6-1.6 1.5-1.6 4 0 6zM3 12c2-1.6 4.5-1.6 6 0-1.5 1.6-4 1.6-6 0zM21 12c-2 1.6-4.5 1.6-6 0 1.5-1.6 4-1.6 6 0z"/></svg></span>
-        Floral Designer
-      </button>
-      <button type="button" class="career-preview-item" data-role="wedding-onsite-coordinator">
-        <span class="career-preview-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="3.4"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg></span>
-        Wedding Onsite Coordinator
-      </button>
-      <button type="button" class="career-preview-item" data-role="wedding-consultant">
-        <span class="career-preview-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3a6 6 0 00-3 11.2V17h6v-2.8A6 6 0 0012 3z"/><path d="M10 20h4"/></svg></span>
-        Wedding Consultant
-      </button>
-      <button type="button" class="career-preview-item" data-role="wedding-entertainment-curator">
-        <span class="career-preview-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="8" cy="17" r="2.4"/><path d="M10.4 17V5l8-1.6v11.2"/><circle cx="18.4" cy="14.6" r="2.4"/></svg></span>
-        Wedding Entertainment Curator
-      </button>
+  <section class="section" id="careers" style="padding-top:0" data-reveal>
+    <div class="cta-banner cta-banner--career">
+      <div class="cta-banner-head">
+        <p class="cta-banner-title">Career Path &mdash; One Industry, Endless Opportunities</p>
+        <p class="cta-banner-sub">Wedding career roles this program opens — tap any role to see exactly what it involves.</p>
       </div>
-    </div>
 
-    <div class="career-expand-wrap">
-      <button type="button" class="career-expand-toggle" id="careerExpandToggle" aria-expanded="false" aria-controls="careerExtra">
-        <span class="career-expand-label">Show All 12 Roles</span>
-        <span class="career-expand-icon" aria-hidden="true">+</span>
-      </button>
+      <div class="career-preview-row career-preview-row--oncard">
+        <button type="button" class="career-preview-item" data-role="wedding-planner">Wedding Planner</button>
+        <button type="button" class="career-preview-item" data-role="destination-wedding-planner">Destination Wedding Planner</button>
+        <button type="button" class="career-preview-item" data-role="wedding-designer">Wedding Designer</button>
+        <div class="career-preview-extra" id="careerExtra" hidden>
+          <button type="button" class="career-preview-item" data-role="wedding-decor-stylist">Wedding Decor Stylist</button>
+          <button type="button" class="career-preview-item" data-role="hospitality-guest-experience-manager">Hospitality &amp; Guest Experience Manager</button>
+          <button type="button" class="career-preview-item" data-role="wedding-production-manager">Wedding Production Manager</button>
+          <button type="button" class="career-preview-item" data-role="destination-wedding-specialist">Destination Wedding Specialist</button>
+          <button type="button" class="career-preview-item" data-role="vendor-relationship-manager">Vendor Relationship Manager</button>
+          <button type="button" class="career-preview-item" data-role="floral-designer">Floral Designer</button>
+          <button type="button" class="career-preview-item" data-role="wedding-onsite-coordinator">Wedding Onsite Coordinator</button>
+          <button type="button" class="career-preview-item" data-role="wedding-consultant">Wedding Consultant</button>
+          <button type="button" class="career-preview-item" data-role="wedding-entertainment-curator">Wedding Entertainment Curator</button>
+        </div>
+      </div>
+
+      <div class="career-expand-wrap">
+        <button type="button" class="career-expand-toggle" id="careerExpandToggle" aria-expanded="false" aria-controls="careerExtra">
+          <span class="career-expand-label">Show More</span>
+          <span class="career-expand-icon" aria-hidden="true">+</span>
+        </button>
+      </div>
+
+      <div class="cta-banner-actions">
+        <button type="button" class="btn btn--ghost-light" data-video-soon>
+          <span class="btn-icon"><svg viewBox="0 0 10 10" fill="none"><path d="M1 1l8 4-8 4V1z" fill="#fff"/></svg></span>
+          Watch Video
+        </button>
+        <span class="video-soon-note" hidden>Video coming soon</span>
+      </div>
     </div>
   </section>
 
@@ -248,6 +222,7 @@
       <div>
         <p class="cta-banner-title">Want to know where you fit in?</p>
         <p class="cta-banner-sub">Take the self-assessment.</p>
+        <p class="cta-banner-desc">We&rsquo;ve created an exclusive Wedding Career Self-Assessment Test to help you discover where you fit best. It will help you identify your strengths, explore career paths that match your personality, and guide your next step with confidence.</p>
       </div>
       <div class="cta-banner-actions">
         <a class="btn btn--white" href="quiz.html">Take the Self-Assessment</a>
@@ -264,7 +239,6 @@
     <div class="founder-v2 founder-v2--home">
       <div class="founder-v2-head">
         <p class="founder-v2-eyebrow">Founded by Vision. Built on Experience.</p>
-        <h2 class="founder-v2-name">Meet Lakshmi Keerthi</h2>
       </div>
       <div class="founder-v2-media">
         <span class="founder-v2-blob" aria-hidden="true"></span>
@@ -290,18 +264,8 @@
             <path class="founder-badge-shape-inline" d="M 13 5 Q 25.43 1.00 37.86 5 Q 50.29 1.00 62.71 5 Q 75.14 1.00 87.57 5 Q 100.00 1.00 112.43 5 Q 124.86 1.00 137.29 5 Q 149.71 1.00 162.14 5 Q 174.57 1.00 187.00 5 Q 195 5 195 13 Q 199.00 25.33 195 37.67 Q 199.00 50.00 195 62.33 Q 199.00 74.67 195 87.00 Q 195 95 187 95 Q 174.57 99.00 162.14 95 Q 149.71 99.00 137.29 95 Q 124.86 99.00 112.43 95 Q 100.00 99.00 87.57 95 Q 75.14 99.00 62.71 95 Q 50.29 99.00 37.86 95 Q 25.43 99.00 13.00 95 Q 5 95 5 87 Q 1.00 74.67 5 62.33 Q 1.00 50.00 5 37.67 Q 1.00 25.33 5 13.00 Q 5 5 13 5 Z"/>
           </svg>
           <div class="founder-badge-content">
-            <span class="founder-badge-lotus" aria-hidden="true">
-              <svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.3">
-                <path d="M20 6c3 4 3 8 0 12-3-4-3-8 0-12z"/>
-                <path d="M11 12c4 1 7 4 8 8-4.5-.4-7.7-3.6-8-8z"/>
-                <path d="M29 12c-4 1-7 4-8 8 4.5-.4 7.7-3.6 8-8z"/>
-                <path d="M6 20c4.5.5 8 3 10 7-5 1-9.5-1.8-10-7z"/>
-                <path d="M34 20c-4.5.5-8 3-10 7 5 1 9.5-1.8 10-7z"/>
-              </svg>
-            </span>
             <p class="founder-badge-name">Lakshmi Keerthi</p>
-            <div class="founder-badge-divider" aria-hidden="true"><span></span><p class="founder-badge-title">Founder</p><span></span></div>
-            <p class="founder-badge-sub">Award Winning<br>Luxury Wedding Planner</p>
+            <p class="founder-badge-title">Founder</p>
           </div>
         </div>
       </div>
@@ -324,6 +288,10 @@
 
 <div class="role-modal-overlay" id="roleModalOverlay" hidden>
   <div class="role-modal" id="roleModal" role="dialog" aria-modal="true" aria-labelledby="roleModalTitle">
+    <button type="button" class="role-modal-back" id="roleModalBack">
+      <span class="role-modal-back-icon" aria-hidden="true"><svg viewBox="0 0 10 10" fill="none"><path d="M6.5 1.5L2 5l4.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      Back
+    </button>
     <button type="button" class="role-modal-close" id="roleModalClose" aria-label="Close">&times;</button>
     <div id="roleModalBody"></div>
   </div>

@@ -206,22 +206,35 @@ body { background: var(--ivory); }
   overflow: hidden;
   padding: clamp(18px, 3vw, 40px) var(--side-pad) clamp(22px, 3.4vw, 44px);
 }
-/* Phones: match the actual print poster — a full-width headline block on
-   top, then a true two-column row below it (info list on the left, photo
-   on the right, side by side, same height). The photo never sits behind
-   the text, so nothing has to fight a scrim for legibility. */
+/* Phones: the photo is a full-bleed background behind the whole section
+   — headline and info list sit on top of it, readable against an ivory
+   scrim that fades out toward the bottom so the photo is in full view
+   again by the time you reach it. Text and photo are both on screen
+   together, no scrolling required to see the image at all. */
 @media (max-width: 679px) {
   .hero-fade {
-    display: grid;
-    grid-template-columns: minmax(0, .78fr) minmax(0, 1.32fr);
-    grid-template-areas:
-      "content content"
-      "stats   media";
-    column-gap: 10px;
-    row-gap: 18px;
-    align-items: start;
-    padding: clamp(26px, 7vw, 40px) 0 22px var(--side-pad);
+    padding: clamp(26px, 7vw, 40px) var(--side-pad) 0;
     overflow: hidden;
+    min-height: calc(100svh - 74px);
+  }
+  .hero-fade::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    /* The peacock statue sits right at the top of the photo — never
+       fully opaque here (even at 0%) so it reads as a soft silhouette
+       through the headline instead of being hidden behind a solid block,
+       then clears the rest of the way by the icon list. */
+    background: linear-gradient(
+      to bottom,
+      rgba(253, 243, 236, .92) 0%,
+      rgba(253, 243, 236, .74) 16%,
+      rgba(253, 243, 236, .4) 30%,
+      rgba(253, 243, 236, .15) 45%,
+      transparent 58%
+    );
   }
 }
 
@@ -251,55 +264,27 @@ body { background: var(--ivory); }
   object-position: center;
   display: block;
 }
-/* Phones: the photo is its own grid column, beside the info list — not
-   behind anything, and shown in full (no mask/crop cutting it off or
-   leaving a visible fade edge). It bleeds to the screen's right edge (no
-   side-pad on its side); the column-gap alone separates it from the
-   text so there's no seam to blend in the first place. */
+/* Phones: the photo is a full-bleed background for the entire section —
+   the ivory-to-transparent scrim above (.hero-fade::before) is what
+   actually fades it in/out, not a mask on the image itself. Because the
+   box is so much taller than it is wide here, object-fit: cover scales
+   off the height, not the width — the full vertical composition (peacock
+   statues down to the lotus pond) always fits with zero vertical crop;
+   only some width is trimmed off the sides. */
 @media (max-width: 679px) {
   .hero-fade-media {
-    grid-area: media;
-    position: relative;
-    top: auto; left: auto; right: auto; bottom: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     width: 100%;
-    max-width: 100%;
-    align-self: stretch;
-    min-height: 270px;
-    overflow: hidden;
     z-index: 0;
-    /* Slow, gradual fade-in starting right at the image's own left edge
-       (immediately beside the text column) — many soft stops instead of
-       a hard cut, so the photo builds up to full strength gradually
-       rather than snapping into view. */
-    -webkit-mask-image: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(0, 0, 0, .06) 6%,
-      rgba(0, 0, 0, .16) 14%,
-      rgba(0, 0, 0, .32) 24%,
-      rgba(0, 0, 0, .52) 34%,
-      rgba(0, 0, 0, .72) 45%,
-      rgba(0, 0, 0, .88) 56%,
-      #000 68%
-    );
-    mask-image: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(0, 0, 0, .06) 6%,
-      rgba(0, 0, 0, .16) 14%,
-      rgba(0, 0, 0, .32) 24%,
-      rgba(0, 0, 0, .52) 34%,
-      rgba(0, 0, 0, .72) 45%,
-      rgba(0, 0, 0, .88) 56%,
-      #000 68%
-    );
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
   }
-  .hero-fade-media img {
-    max-width: 100%;
-    object-position: 70% 55%;
-  }
+  /* Biased right of center so the visible slice keeps a peacock statue
+     and the seating/entrance under the mandap both in frame, instead of
+     the plainer mid-ceiling detail a dead-center crop lands on. */
+  .hero-fade-media img { object-position: 54% center; }
 }
 
 .hero-fade-vine {
@@ -340,14 +325,15 @@ body { background: var(--ivory); }
   padding: clamp(32px, 6vw, 96px) 0 clamp(48px, 6vw, 88px);
 }
 @media (max-width: 679px) {
-  /* Spans both grid columns as its own full-width row above the
-     icons/photo pair — centered, like the poster (note "PROGRAM"
-     centers under "WEDDING PLANNING" rather than sharing its left edge). */
+  /* Full width, centered — sits on top of the photo background/scrim,
+     not beside it. Soft cream halo (inherited by the headline/tagline
+     below) keeps the type legible now the peacock shows through behind
+     it rather than sitting behind a fully solid block. */
   .hero-fade-content {
-    grid-area: content;
     max-width: none;
     text-align: center;
-    padding: 0 var(--side-pad) 0 0;
+    padding: 0;
+    text-shadow: 0 1px 12px rgba(253, 243, 236, .85), 0 1px 4px rgba(253, 243, 236, .85);
   }
 }
 
@@ -486,10 +472,9 @@ body { background: var(--ivory); }
 }
 @media (max-width: 679px) {
   /* Poster style: a plain left-aligned column of items with gold circle
-     icons, now spanning the full ivory width (the photo sits below, not
-     beside it) — tightened row gap to match the reference's dense stack. */
+     icons, full width, sitting on top of the photo/scrim below the
+     headline — not a narrow column beside the photo. */
   .hero-fade-stats {
-    grid-area: stats;
     position: relative;
     z-index: 3;
     background: transparent;
@@ -497,30 +482,27 @@ body { background: var(--ivory); }
     border-radius: 0;
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    margin: 0;
+    gap: 13px;
+    margin: 18px 0 0;
     padding: 0;
     width: 100%;
   }
   /* Doubled class keeps this above the base icon rule declared later. */
   .hero-fade-stats .hero-fade-stats-icon {
-    width: 34px;
-    height: 34px;
-    margin-top: 2px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: transparent;
     border: 1.3px solid #C6812F;
   }
-  .hero-fade-stats .hero-fade-stats-icon svg { width: 16px; height: 16px; }
-  /* Icon aligns with the title's top line instead of vertically centering
-     against the whole (often multi-line) text block, matching the poster. */
-  .hero-fade-stats li,
-  .hero-fade-stats-link {
-    align-items: flex-start;
-    gap: 8px;
+  /* Now that the scrim behind the icon list is lighter (photo shows
+     through more), give the text a soft cream halo so it stays legible
+     over the busier parts of the photo instead of relying on the scrim
+     alone. */
+  .hero-fade-stats-text strong,
+  .hero-fade-stats-text {
+    text-shadow: 0 1px 10px rgba(253, 243, 236, .9), 0 1px 3px rgba(253, 243, 236, .9);
   }
-  .hero-fade-stats-text { font-size: 12px; }
-  .hero-fade-stats-text strong { font-size: 13.5px; }
 }
 @media (min-width: 680px) {
   .hero-fade-stats { grid-template-columns: repeat(4, 1fr); }
@@ -542,8 +524,12 @@ body { background: var(--ivory); }
 .hero-fade-stats-link:focus-visible {
   opacity: .82;
 }
-.hero-fade-stats-link:hover .hero-fade-stats-text strong,
-.hero-fade-stats-link:focus-visible .hero-fade-stats-text strong {
+/* Underlined and coral by default (not just on hover) — this is the only
+   stat that's actually a link (opens the venue's Google Maps location),
+   so it needs to visibly read as one at rest, not just discover itself
+   on hover. */
+.hero-fade-stats-link .hero-fade-stats-text strong {
+  color: var(--coral-dark);
   text-decoration: underline;
   text-decoration-color: var(--gold);
   text-underline-offset: 2px;
@@ -776,60 +762,42 @@ body { background: var(--ivory); }
 }
 .career-view-all { text-align: center; margin-top: clamp(36px, 6vw, 52px); }
 
-/* All 12 career roles as tappable pills — clicking one opens the role
-   popup (see js/main.js ROLE_DATA) instead of navigating anywhere, so
-   these are <button> elements styled to look like the original plain
-   text+icon row. */
+/* Every career role as a plain underlined text link, one per line —
+   clicking one opens the role popup (see js/main.js ROLE_DATA) instead
+   of navigating anywhere, so these are <button> elements styled to read
+   as text links rather than buttons or pills. */
 .career-preview-row {
   display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: clamp(12px, 2.4vw, 20px);
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
 }
 .career-preview-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
   font-family: var(--font-sans);
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ink);
-  background: var(--white);
-  border: 1px solid rgba(124, 24, 48, .1);
-  border-radius: var(--radius-pill);
-  padding: 10px 18px 10px 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
-  transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, .55);
+  text-underline-offset: 4px;
+  transition: opacity .18s ease, text-decoration-color .18s ease;
 }
 .career-preview-item:hover,
 .career-preview-item:focus-visible {
-  border-color: var(--coral-soft);
-  box-shadow: var(--shadow-soft);
-  transform: translateY(-2px);
+  opacity: .82;
+  text-decoration-color: #fff;
 }
-.career-preview-icon {
-  flex: none;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--ivory-deep);
-  color: var(--coral);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.career-preview-icon svg { width: 18px; height: 18px; }
-
-/* Only the first 2 roles show by default; the rest sit in this wrapper.
-   `display: contents` (when not [hidden]) makes the wrapper invisible to
-   layout so its buttons join the same flex-wrap row as the first two —
-   the [hidden] rule needs the extra attribute-selector specificity to
-   still win while collapsed, since plain "hidden" alone would lose to
-   the unconditional `display: contents` at equal specificity otherwise. */
+/* Rest of the list, revealed by "Show More" — same column flow as the
+   first 3 (display: contents keeps its buttons in the same flex column
+   instead of nesting a second column inside it). */
 .career-preview-extra { display: contents; }
 .career-preview-extra[hidden] { display: none; }
 
-.career-expand-wrap { text-align: center; margin-top: 20px; }
+.career-expand-wrap { text-align: center; margin-top: 22px; }
 .career-expand-toggle {
   display: inline-flex;
   align-items: center;
@@ -839,14 +807,14 @@ body { background: var(--ivory); }
   font-weight: 600;
   letter-spacing: .05em;
   text-transform: uppercase;
-  color: var(--coral-dark);
+  color: #fff;
 }
 .career-expand-icon {
   flex: none;
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--ivory-deep);
+  background: rgba(255, 255, 255, .2);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -855,6 +823,7 @@ body { background: var(--ivory); }
   transition: transform .2s ease;
 }
 .career-expand-toggle[aria-expanded="true"] .career-expand-icon { transform: rotate(45deg); }
+
 
 /* ===== Career role popup ===== */
 .role-modal-overlay {
@@ -906,6 +875,29 @@ body { background: var(--ivory); }
   box-shadow: var(--shadow-soft);
 }
 .role-modal-close:hover { color: var(--coral); }
+/* Labeled exit, opposite corner from the plain × — a clearer, more
+   discoverable way to leave the popup than the small close glyph alone. */
+.role-modal-back {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px 8px 10px;
+  border-radius: var(--radius-pill);
+  background: var(--white);
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  box-shadow: var(--shadow-soft);
+  transition: color .18s ease;
+}
+.role-modal-back:hover, .role-modal-back:focus-visible { color: var(--coral); }
+.role-modal-back-icon { display: inline-flex; width: 10px; height: 10px; }
+.role-modal-back-icon svg { width: 100%; height: 100%; }
 
 /* Warm gradient header band (instead of plain text on ivory) — the close
    button still sits above it since positioned elements stack above
@@ -955,37 +947,6 @@ body { background: var(--ivory); }
   color: rgba(255, 255, 255, .92);
   margin-top: 8px;
 }
-.role-modal-video-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 18px;
-  padding: 10px 20px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, .16);
-  border: 1px solid rgba(255, 255, 255, .55);
-  color: #fff;
-  font-family: var(--font-sans);
-  font-size: 11.5px;
-  font-weight: 600;
-  letter-spacing: .04em;
-  text-transform: uppercase;
-  backdrop-filter: blur(4px);
-  transition: background-color .18s ease;
-}
-.role-modal-video-btn:hover,
-.role-modal-video-btn:focus-visible { background: rgba(255, 255, 255, .28); }
-.role-modal-video-icon {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, .35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.role-modal-video-icon svg { width: 7px; height: 7px; }
 /* Default (for light backgrounds, e.g. the hero); dark-background
    contexts like the modal header / cta-banner override to light text. */
 .video-soon-note {
@@ -1223,7 +1184,7 @@ body { background: var(--ivory); }
   height: 100%;
   z-index: 0;
 }
-.founder-badge-shape-fill { fill: var(--maroon); }
+.founder-badge-shape-fill { fill: var(--muted); }
 .founder-badge-shape-outline {
   fill: none;
   stroke: var(--gold);
@@ -1237,65 +1198,26 @@ body { background: var(--ivory); }
 .founder-badge-content {
   position: relative;
   z-index: 1;
-  padding: 13% 16%;
+  padding: 14% 12%;
 }
-.founder-badge-lotus {
-  display: inline-flex;
-  width: 22px;
-  height: 22px;
-  color: var(--gold);
-  margin-bottom: 4px;
-}
-.founder-badge-lotus svg { width: 100%; height: 100%; }
 .founder-badge-name {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: clamp(13px, 3.2vw, 19px);
+  font-size: clamp(12px, 2.8vw, 16px);
   letter-spacing: .02em;
   text-transform: uppercase;
   line-height: 1.15;
 }
-.founder-badge-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin: 6px 0 5px;
-}
-.founder-badge-divider span {
-  position: relative;
-  width: 20px;
-  height: 1px;
-  background: var(--gold);
-}
-.founder-badge-divider span::after {
-  content: "";
-  position: absolute;
-  top: -2.5px;
-  width: 5px;
-  height: 5px;
-  background: var(--gold);
-  transform: rotate(45deg);
-}
-.founder-badge-divider span:first-child::after { right: -2.5px; }
-.founder-badge-divider span:last-child::after { left: -2.5px; }
 .founder-badge-title {
+  display: block;
   font-family: var(--font-serif);
-  font-size: clamp(9px, 2vw, 11px);
+  font-size: clamp(8px, 1.7vw, 9.5px);
   letter-spacing: .22em;
   text-indent: .22em;
   text-transform: uppercase;
-  color: #fff;
-  white-space: nowrap;
-}
-.founder-badge-sub {
-  font-family: var(--font-sans);
-  font-size: clamp(7.5px, 1.7vw, 9px);
-  letter-spacing: .06em;
-  text-transform: uppercase;
   color: rgba(255, 255, 255, .85);
-  line-height: 1.6;
-  margin-top: 3px;
+  white-space: nowrap;
+  margin-top: 4px;
 }
 .founder-v2-media {
   position: relative;
@@ -1305,12 +1227,12 @@ body { background: var(--ivory); }
   .founder-v2-media { max-width: 420px; margin: 0 auto; }
 }
 /* Badge sits below the photo (homepage variant), in normal flow — but
-   pulled up slightly so its top edge tucks a little onto the photo
-   instead of sitting with a gap underneath it. Just a light touch, not
-   the earlier version where the badge covered most of the photo. */
+   pulled up so it rides higher on the photo, closer to her hand on the
+   laptop, and sized down so it reads as a small accent rather than a
+   second block anywhere near the width of the photo. */
 .founder-v2-media .founder-badge {
-  width: 100%;
-  margin-top: -22px;
+  width: 52%;
+  margin: -46px auto 0;
   position: relative;
   z-index: 2;
 }
@@ -1355,14 +1277,13 @@ body { background: var(--ivory); }
     grid-template-columns: .8fr 1.3fr;
   }
   .founder-v2--home .founder-v2-media { padding: 4% 4% 12px; }
-  .founder-v2--home .founder-badge { width: clamp(140px, 45vw, 190px); }
-  .founder-v2--home .founder-badge-name { font-size: clamp(11px, 3vw, 14px); }
-  .founder-v2--home .founder-badge-title { font-size: 8px; letter-spacing: .16em; }
-  .founder-v2--home .founder-badge-sub { font-size: 6.5px; }
-  .founder-v2--home .founder-badge-lotus { width: 16px; height: 16px; margin-bottom: 2px; }
-  .founder-v2--home .founder-badge-divider { margin: 4px 0 3px; gap: 4px; }
-  .founder-v2--home .founder-badge-divider span { width: 12px; }
-  .founder-v2--home .founder-badge-content { padding: 10% 13%; }
+  .founder-v2--home .founder-badge {
+    width: clamp(88px, 30vw, 120px);
+    margin: -28px auto 0;
+  }
+  .founder-v2--home .founder-badge-name { font-size: clamp(9.5px, 2.6vw, 12px); }
+  .founder-v2--home .founder-badge-title { font-size: 7px; letter-spacing: .16em; }
+  .founder-v2--home .founder-badge-content { padding: 12% 10%; }
 }
 .founder-v2-blob {
   position: absolute;
@@ -1422,6 +1343,13 @@ body { background: var(--ivory); }
   line-height: 1.2;
 }
 .cta-banner-sub { font-size: 13.5px; margin-top: 8px; color: rgba(255, 255, 255, .9); }
+.cta-banner-desc {
+  font-size: 13.5px;
+  line-height: 1.7;
+  margin-top: 14px;
+  max-width: 46ch;
+  color: rgba(255, 255, 255, .88);
+}
 .cta-banner > * { position: relative; z-index: 1; }
 .cta-banner-actions {
   display: flex;
@@ -1429,6 +1357,38 @@ body { background: var(--ivory); }
   align-items: center;
   gap: 14px;
 }
+/* Phones: the card is narrower than a couple of these buttons' own
+   nowrap text needs (e.g. "Take the Self-Assessment" wants ~250px on a
+   ~220px-wide card), which was pushing them past the card's edge instead
+   of sitting flush inside it — stack full-width and let the text wrap
+   instead of forcing a single line. */
+@media (max-width: 679px) {
+  .cta-banner-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cta-banner-actions .btn {
+    width: 100%;
+    white-space: normal;
+    text-align: center;
+  }
+}
+/* Career Path section, restyled as a banner "tab" like the
+   self-assessment CTA below it — heading, then every role as an inline
+   pill (no more show-2/expand-to-see-all split), then a Watch Video
+   action, all stacked instead of the base banner's title-left/actions-
+   right split (there's a third block here, the roles row, so the
+   two-column layout doesn't apply). */
+.cta-banner--career {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 26px;
+}
+@media (min-width: 760px) {
+  .cta-banner--career { flex-direction: column; }
+}
+.cta-banner-head { text-align: center; }
+.cta-banner--career .cta-banner-sub { margin-top: 10px; }
 /* Frosted-glass secondary CTA for colored/photo backgrounds (cta-banner,
    hero) — used for "Watch Video" next to a solid .btn--white primary. */
 .btn--ghost-light {
