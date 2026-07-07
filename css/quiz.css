@@ -570,6 +570,17 @@
 .rank-peach .result-rank { background: linear-gradient(135deg, var(--peach-deep), #92562F); }
 
 .result-card-title { flex: 1; }
+.result-card-title .result-card-kicker {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 10.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--antique-gold);
+  margin: 0 0 5px;
+}
+.rank-champagne .result-card-kicker { color: var(--champagne-deep); }
+.rank-peach .result-card-kicker { color: var(--peach-deep); }
 .result-card-title h3 {
   font-family: var(--font-serif);
   font-weight: 500;

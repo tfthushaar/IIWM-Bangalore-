@@ -1270,7 +1270,7 @@ body { background: var(--ivory); }
   height: 100%;
   z-index: 0;
 }
-.founder-badge-shape-fill { fill: var(--muted); }
+.founder-badge-shape-fill { fill: #D9905F; }
 .founder-badge-shape-outline {
   fill: none;
   stroke: var(--gold);
@@ -1286,10 +1286,12 @@ body { background: var(--ivory); }
   z-index: 1;
   padding: 14% 12%;
 }
-/* Dark-peach family for the badge's three text lines — an analogous warm
-   hue sitting between the shape's maroon fill and gold hairline, so the
-   text reads as part of the same warm palette instead of a flat white
-   overlay. Hierarchy comes from opacity: name brightest, sub most muted. */
+/* Deep-maroon family for the badge's three text lines — the badge fill
+   is now dark peach (warm/light), so text needs to run dark instead of
+   light to hold contrast. Maroon is the site's existing dark warm anchor
+   (sits opposite peach on the same warm arc from gold), which keeps the
+   badge in the same palette rather than introducing a new hue. Hierarchy
+   comes from opacity: name darkest/boldest, sub slightly softer. */
 .founder-badge-name {
   font-family: var(--font-serif);
   font-weight: 700;
@@ -1297,7 +1299,7 @@ body { background: var(--ivory); }
   letter-spacing: .02em;
   text-transform: uppercase;
   line-height: 1.15;
-  color: #EFB48A;
+  color: #5C1420;
 }
 .founder-badge-title {
   display: block;
@@ -1306,7 +1308,7 @@ body { background: var(--ivory); }
   letter-spacing: .22em;
   text-indent: .22em;
   text-transform: uppercase;
-  color: rgba(239, 180, 138, .82);
+  color: rgba(92, 20, 32, .8);
   white-space: nowrap;
   margin-top: 5px;
 }
@@ -1321,7 +1323,7 @@ body { background: var(--ivory); }
   letter-spacing: .03em;
   line-height: 1.25;
   text-transform: uppercase;
-  color: rgba(239, 180, 138, .92);
+  color: rgba(92, 20, 32, .88);
   white-space: normal;
   margin-top: 4px;
 }

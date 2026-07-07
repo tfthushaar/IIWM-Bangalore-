@@ -439,6 +439,7 @@
     var topArchetype = ARCHETYPES[top3[0].code];
     var rankClasses = ['rank-gold', 'rank-champagne', 'rank-peach'];
     var rankNumerals = ['01', '02', '03'];
+    var rankLabels = ['Your Best Match', 'Also Consider', 'Creative Compatibility'];
 
     var cardsHtml = top3.map(function (r, i) {
       var arch = ARCHETYPES[r.code];
@@ -446,6 +447,7 @@
         '<div class="result-card-head">' +
         '<span class="result-rank">' + rankNumerals[i] + '</span>' +
         '<div class="result-card-title">' +
+        '<p class="result-card-kicker">' + escapeHtml(rankLabels[i]) + '</p>' +
         '<h3>' + escapeHtml(arch.name) + '</h3>' +
         '<p>' + escapeHtml(whyText(r.code, results)) + '</p>' +
         '</div>' +
