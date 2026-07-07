@@ -534,6 +534,16 @@ body { background: var(--ivory); }
   text-decoration-color: var(--gold);
   text-underline-offset: 2px;
 }
+/* The coral link color hue-matches the coral/pink garland band that sits
+   right behind it in the mobile full-bleed photo — ink keeps it
+   readable there; the gold underline (unchanged) still marks it as a
+   link. Placed after the unconditional rule above so it wins the
+   cascade at equal specificity instead of being silently overridden. */
+@media (max-width: 679px) {
+  .hero-fade-stats-link .hero-fade-stats-text strong {
+    color: var(--ink);
+  }
+}
 @media (min-width: 680px) {
   .hero-fade-stats li:not(:last-child) {
     border-right: 1px solid rgba(124, 24, 48, .12);
