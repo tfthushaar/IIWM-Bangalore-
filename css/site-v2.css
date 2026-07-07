@@ -199,16 +199,16 @@ body { background: var(--ivory); }
 .page-banner::after { bottom: -200px; right: -100px; }
 
 /* ===== Launch banner — a small maroon/gold pennant announcing the next
-   batch date, sitting centered above the hero. Two stacked clip-path
-   shapes (gold outer, maroon-gradient inner inset 3px) fake a bordered
-   ribbon with a notched flag-tail bottom, since clip-path can't take a
-   CSS border directly. ===== */
+   batch date, pinned to the top-left like a corner tag (not centered).
+   Two stacked clip-path shapes (gold outer, maroon-gradient inner inset
+   3px) fake a bordered ribbon with a notched flag-tail bottom, since
+   clip-path can't take a CSS border directly. ===== */
 .launch-banner {
   position: relative;
   z-index: 5;
-  width: clamp(168px, 15vw, 208px);
-  margin: clamp(16px, 2.6vw, 28px) auto 0;
-  filter: drop-shadow(0 10px 18px rgba(43, 8, 16, .28));
+  width: clamp(108px, 9vw, 132px);
+  margin: 0 0 0 var(--side-pad);
+  filter: drop-shadow(0 8px 14px rgba(43, 8, 16, .26));
 }
 .launch-banner-shape {
   position: absolute;
@@ -219,31 +219,31 @@ body { background: var(--ivory); }
 .launch-banner-shape::before {
   content: "";
   position: absolute;
-  inset: 3px;
+  inset: 2px;
   clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 78%, 0 100%);
   background: linear-gradient(165deg, #5C1220, #380A13 60%, #4a0f1a);
 }
 .launch-banner-content {
   position: relative;
   z-index: 1;
-  padding: 18px 12px 32px;
+  padding: 10px 8px 20px;
   text-align: center;
 }
 .launch-banner-eyebrow {
   font-family: var(--font-sans);
-  font-size: 10px;
+  font-size: 7.5px;
   font-weight: 500;
-  letter-spacing: .18em;
+  letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--gold);
 }
 .launch-banner-date {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: clamp(15px, 1.9vw, 19px);
+  font-size: clamp(11px, 1.1vw, 13px);
   letter-spacing: .01em;
   color: #F7E6BE;
-  margin-top: 4px;
+  margin-top: 3px;
   line-height: 1.2;
 }
 
@@ -1385,6 +1385,23 @@ body { background: var(--ivory); }
 .founder-v2-sprig svg { width: 100%; height: auto; display: block; }
 @media (min-width: 900px) {
   .founder-v2-media { margin-bottom: -56px; }
+}
+
+/* Softens the hand-off from the hero's ivory background into the coral
+   Career Path card right below it — a wide, faint coral radial glow
+   bleeds upward into the hero's bottom whitespace so the card's color
+   feels like it eases in rather than starting abruptly at a hard edge. */
+.section--blend-top { position: relative; }
+.section--blend-top::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -140px;
+  height: 200px;
+  background: radial-gradient(60% 100% at 50% 100%, rgba(226, 101, 93, .16), transparent 74%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ===== CTA banner ===== */
