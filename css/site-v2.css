@@ -200,6 +200,8 @@ body { background: var(--ivory); }
 
 /* ===== Launch banner — a small maroon/gold pennant announcing the next
    batch date, pinned to the top-left like a corner tag (not centered).
+   Lives inside .hero-fade now so it can sit right on the mobile poster's
+   gold hairline frame corner instead of floating in the ivory above it.
    Two stacked clip-path shapes (gold outer, maroon-gradient inner inset
    3px) fake a bordered ribbon with a notched flag-tail bottom, since
    clip-path can't take a CSS border directly. ===== */
@@ -207,8 +209,22 @@ body { background: var(--ivory); }
   position: relative;
   z-index: 5;
   width: clamp(108px, 9vw, 132px);
-  margin: 0 0 0 var(--side-pad);
+  margin: 0 0 16px;
   filter: drop-shadow(0 8px 14px rgba(43, 8, 16, .26));
+}
+/* Phones: the poster's gold hairline frame (.hero-fade::after, inset
+   10px) is what the banner should read as "pinned to" — absolutely
+   positioned so its top-left corner sits exactly on that frame corner,
+   instead of sitting in normal flow above the headline. */
+@media (max-width: 679px) {
+  .launch-banner {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: clamp(84px, 24vw, 104px);
+    margin: 0;
+    z-index: 6;
+  }
 }
 .launch-banner-shape {
   position: absolute;
