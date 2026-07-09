@@ -1405,11 +1405,11 @@ body { background: var(--ivory); }
    it reads as a corner stamp rather than covering the whole photo. */
 @media (max-width: 679px) {
   .founder-v2--home {
-    grid-template-columns: .8fr 1.3fr;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.3fr);
   }
   .founder-v2--home .founder-v2-media { padding: 4% 4% 12px; }
   .founder-v2--home .founder-badge {
-    width: clamp(140px, 48vw, 180px);
+    width: clamp(140px, 48%, 180px);
     margin: -28px auto 0;
   }
   .founder-v2--home .founder-badge-name { font-size: clamp(12.5px, 3.6vw, 15.5px); }
