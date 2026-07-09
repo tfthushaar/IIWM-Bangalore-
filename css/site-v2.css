@@ -1648,6 +1648,38 @@ body { background: var(--ivory); }
   max-width: 100%;
 }
 
+/* ===== Founder fact rows (icon + credential, left-aligned like the
+   source bio poster) ===== */
+.founder-facts { margin-top: 0; }
+.founder-facts + .founder-v2-copy,
+.founder-facts + .founder-facts { margin-top: 20px; }
+.founder-fact-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  text-align: left;
+}
+.founder-fact-row + .founder-fact-row { margin-top: 16px; }
+.founder-fact-icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--ivory-deep);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.founder-fact-icon svg { width: 19px; height: 19px; }
+.founder-fact-row p {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.65;
+  margin: 0;
+}
+.founder-fact-row p strong { color: var(--ink); font-weight: 600; }
+
 /* ===== Generic content sections (inner pages) ===== */
 .content-block { max-width: 760px; }
 .content-block.center { max-width: 640px; margin: 0 auto; text-align: center; }
