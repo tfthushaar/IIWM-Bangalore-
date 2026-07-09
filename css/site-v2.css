@@ -1621,6 +1621,31 @@ body { background: var(--ivory); }
   line-height: 1.5;
 }
 
+/* ===== Brand logo row (founder's prior ventures) ===== */
+.brand-logos-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 24px;
+  margin-top: clamp(32px, 5vw, 44px);
+}
+.brand-logo-card {
+  background: var(--white);
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.brand-logo-card img {
+  display: block;
+  width: 160px;
+  height: auto;
+  max-width: 100%;
+}
+
 /* ===== Generic content sections (inner pages) ===== */
 .content-block { max-width: 760px; }
 .content-block.center { max-width: 640px; margin: 0 auto; text-align: center; }
