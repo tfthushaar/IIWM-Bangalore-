@@ -1168,6 +1168,12 @@ body { background: var(--ivory); }
 .ph-4 { background: linear-gradient(150deg, #9FB08C, #5F7A4A); }
 .ph-5 { background: linear-gradient(150deg, #E2A6C9, #A8508A); }
 .ph-6 { background: linear-gradient(150deg, #8FA9C9, #4E6C94); }
+.ph-7 { background: linear-gradient(150deg, #D9B96B, #8A6B2E); }
+.ph-8 { background: linear-gradient(150deg, #9C4A5C, #5C1A28); }
+.ph-9 { background: linear-gradient(150deg, #A8C9B8, #4F7A63); }
+.ph-10 { background: linear-gradient(150deg, #E2B68C, #A8683A); }
+.ph-11 { background: linear-gradient(150deg, #B8A9D9, #6E5A9E); }
+.ph-12 { background: linear-gradient(150deg, #D98F6B, #A8502E); }
 
 /* ===== Founder section ===== */
 /* Mobile/tablet: a large photo on the right, vertically centered against
