@@ -564,7 +564,7 @@ body { background: var(--ivory); }
     display: block;
     position: relative;
     z-index: 3;
-    margin: 18px auto 0 var(--side-pad);
+    margin: 18px auto 28px var(--side-pad);
   }
   /* Sized to match the fixed mobile-apply-bar's compact pills (same
      padding/font-size/radius as .mobile-apply-bar a) instead of the
