@@ -134,7 +134,7 @@
      — one page per role in that deck. */
   var ROLE_DATA = {
     'wedding-planner': {
-      title: 'Wedding Planner',
+      title: 'Luxury Wedding Planner',
       tagline: 'Your Vision. My Expertise. A Perfect Celebration.',
       summary: 'A Wedding Planner is your partner, guide and problem solver—turning your dreams into a beautifully planned, stress-free celebration you and your guests will cherish forever.',
       items: [
@@ -151,7 +151,7 @@
       closing: 'Behind every magical wedding is a planner who cares.'
     },
     'destination-wedding-planner': {
-      title: 'Destination Wedding Planner',
+      title: 'Luxury Destination Wedding Planner',
       tagline: 'Turning Dreams Into Unforgettable Celebrations, Anywhere in the World.',
       summary: 'A Destination Wedding Planner is your guide, organiser, problem-solver and creative partner—all rolled into one—for a wedding held anywhere in the world.',
       items: [
@@ -169,7 +169,7 @@
       closing: 'We plan. You celebrate. Memories last forever.'
     },
     'wedding-designer': {
-      title: 'Wedding Designer',
+      title: 'Signature Wedding Designer',
       tagline: "We Don't Just Decorate, We Design Experiences.",
       summary: 'A wedding designer is the creative architect behind every unforgettable celebration—transforming ideas into immersive, beautifully curated experiences that reflect your story, style and soul.',
       items: [
@@ -186,7 +186,7 @@
       closing: 'Beyond decor. Beyond beautiful. We design dreams.'
     },
     'wedding-decor-stylist': {
-      title: 'Wedding Decor Stylist',
+      title: 'Luxury Decor Stylist',
       tagline: "We Don't Just Decorate Spaces, We Create Atmospheres.",
       summary: 'A wedding decor stylist transforms a vision into an immersive experience through creativity, detail, colour, texture and emotion. We design the look. You feel the magic.',
       items: [
@@ -203,7 +203,7 @@
       closing: "We don't just decorate spaces, we create atmospheres guests remember."
     },
     'hospitality-guest-experience-manager': {
-      title: 'Hospitality & Guest Experience Manager',
+      title: 'Elite Guest Experience Manager',
       tagline: 'Beyond Welcome. Towards Memories.',
       summary: 'A Hospitality & Guest Experience Manager ensures every guest feels valued, comfortable and cared for—so they can relax, celebrate and cherish every moment of your special day.',
       items: [
@@ -220,7 +220,7 @@
       closing: "We don't just manage guests, we create experiences they will always remember."
     },
     'wedding-production-manager': {
-      title: 'Wedding Production Manager',
+      title: 'Premier Production Manager',
       tagline: 'Behind the Scenes. Beyond Expectations.',
       summary: 'A Wedding Production Manager turns plans into reality with precision, coordination and calm leadership—ensuring every detail comes together seamlessly.',
       items: [
@@ -238,7 +238,7 @@
       closing: 'Behind every flawless wedding, there is a production manager making it look effortless.'
     },
     'destination-wedding-specialist': {
-      title: 'Destination Wedding Specialist',
+      title: 'Global Destination Wedding Specialist',
       tagline: 'Curating Love Stories Across Borders.',
       summary: 'A Destination Wedding Specialist turns dreams of a wedding in paradise into reality with expertise, precision and passion—wherever in the world the couple wants to celebrate.',
       items: [
@@ -255,7 +255,7 @@
       closing: 'Wherever your heart dreams, we make it happen.'
     },
     'vendor-relationship-manager': {
-      title: 'Vendor Relationship Manager',
+      title: 'Vendor Relations Director',
       tagline: 'Strong Partnerships. Seamless Celebrations.',
       summary: 'A Vendor Relationship Manager builds and nurtures strong relationships with vendors, ensuring alignment, trust and excellence to deliver unforgettable celebrations.',
       items: [
@@ -272,7 +272,7 @@
       closing: 'Strong vendors. Stronger partnerships. Extraordinary celebrations.'
     },
     'floral-designer': {
-      title: 'Floral Designer',
+      title: 'Luxury Floral Designer',
       tagline: 'We design more than flowers, we design emotions.',
       summary: "A Floral Designer transforms nature's beauty into breathtaking designs that set the mood, elevate the space and leave lasting impressions.",
       items: [
@@ -288,7 +288,7 @@
       closing: 'Flowers fade, but the feeling they create lasts forever.'
     },
     'wedding-onsite-coordinator': {
-      title: 'Wedding Onsite Coordinator',
+      title: 'Onsite Wedding Director',
       tagline: 'On The Day. Every Detail. Perfectly Executed.',
       summary: 'A Wedding Onsite Coordinator is the calm behind the celebration—managing every moving part so you can be fully present and enjoy your big day, stress-free.',
       items: [
@@ -305,7 +305,7 @@
       closing: "You enjoy the moment, I'll take care of the rest."
     },
     'wedding-consultant': {
-      title: 'Wedding Consultant',
+      title: 'Luxury Wedding Consultant',
       tagline: 'Your Vision. Our Expertise. A Celebration Beyond Imagination.',
       summary: 'A Wedding Consultant is your trusted guide from the first idea to the final farewell—turning your dreams into a beautifully planned and flawlessly executed celebration.',
       items: [
@@ -322,7 +322,7 @@
       closing: 'Behind every magical wedding is a consultant who cares, plans and makes it happen.'
     },
     'wedding-entertainment-curator': {
-      title: 'Wedding Entertainment Curator',
+      title: 'Signature Entertainment Curator',
       tagline: 'Right Entertainment, Right Moments. Unforgettable Celebrations.',
       summary: 'A Wedding Entertainment Curator designs and orchestrates experiences that captivate, engage and create magical moments your guests will talk about forever.',
       items: [
