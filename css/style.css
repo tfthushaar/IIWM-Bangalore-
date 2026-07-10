@@ -161,9 +161,16 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   top: 0;
   z-index: 40;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  /* auto (not 1fr) on the outer columns: the logo and the Apply Now
+     pill always keep their own natural width now, and the nav — the
+     only column that should ever flex or wrap — takes whatever space
+     is left. With 1fr on the outer columns, a wide unwrapped nav could
+     demand more than the available width and the grid would squeeze
+     the flanking 1fr tracks all the way down to 0, which visibly
+     collapsed the logo to nothing around 900–1150px viewports. */
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  column-gap: 24px;
+  column-gap: clamp(16px, 2.4vw, 24px);
   /* Slimmer vertical padding — the enlarged logo mark carries the height. */
   padding: 12px var(--side-pad);
   background: rgba(247, 242, 233, .88);
