@@ -720,8 +720,6 @@ body { background: var(--ivory); }
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
-  max-width: 920px;
-  margin: 0 auto;
 }
 @media (min-width: 640px) {
   .why-compare { grid-template-columns: 1fr 1px 1fr; align-items: start; }
@@ -1648,7 +1646,7 @@ button.career-card {
   gap: 12px;
   text-align: center;
 }
-.about-brand-strip img { width: 220px; height: auto; border-radius: 12px; }
+.about-brand-strip img { width: 240px; height: auto; }
 .about-brand-strip p {
   font-family: var(--font-serif);
   font-style: italic;
@@ -1662,8 +1660,7 @@ button.career-card {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
-  max-width: 1200px;
-  margin: clamp(36px, 6vw, 52px) auto 0;
+  margin-top: clamp(36px, 6vw, 52px);
 }
 @media (min-width: 640px) { .fact-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1000px) { .fact-grid { grid-template-columns: repeat(5, 1fr); } }
@@ -1743,17 +1740,15 @@ button.career-card {
 .founder-fact-row p strong { color: var(--ink); font-weight: 600; }
 
 /* ===== Generic content sections (inner pages) ===== */
-.content-block { max-width: 880px; }
-.content-block.center { max-width: 700px; margin: 0 auto; text-align: center; }
-/* Alternates single-column narrative blocks to the right side of the
-   section instead of every one sitting flush left — text itself stays
-   left-aligned (ragged-right, easy to read), only the block's position
-   shifts, giving the page a left/right rhythm instead of a single rail. */
-.content-block--right { margin-left: auto; }
+/* Fills the full width of its section — no fixed cap, so there's no
+   dead margin on wide screens and no block that stops or starts
+   partway across the row. */
+.content-block { width: 100%; }
+.content-block.center { text-align: center; }
 .content-block h2 {
   font-family: var(--font-serif);
   font-weight: 600;
-  font-size: clamp(28px, 4vw, 40px);
+  font-size: clamp(28px, 3vw, 42px);
   color: var(--ink);
   line-height: 1.18;
 }
@@ -2105,8 +2100,7 @@ button.career-card {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  max-width: 900px;
-  margin: 44px auto 0;
+  margin-top: 44px;
 }
 .faq-item {
   background: var(--white);
