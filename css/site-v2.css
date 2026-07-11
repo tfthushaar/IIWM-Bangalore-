@@ -2203,3 +2203,136 @@ button.career-card {
   margin-top: 6px;
   padding-left: 4px;
 }
+
+/* ===== Admissions & fee structure ===== */
+.fee-cards { display: flex; flex-direction: column; gap: 20px; }
+.fee-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: clamp(24px, 3vw, 32px);
+  box-shadow: var(--shadow-soft);
+}
+.fee-card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ivory-deep);
+  color: var(--maroon);
+  margin-bottom: 16px;
+}
+.fee-card-icon svg { width: 24px; height: 24px; }
+.fee-card-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+.fee-card-price {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: clamp(32px, 4vw, 42px);
+  color: var(--ink);
+  margin-top: 10px;
+}
+.fee-card-price .unit {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-left: 6px;
+}
+.fee-card-note {
+  font-size: 14px;
+  color: var(--muted);
+  margin-top: 10px;
+  line-height: 1.6;
+}
+.fee-card .list-check { margin-top: 14px; gap: 10px; }
+.fee-card .list-check li { font-size: 15px; }
+
+/* Reuses .apply-steps' circle + dotted-connector layout, with a plain
+   number in the circle instead of an icon, for the 5-step selection
+   process — same visual language as the How to Apply page's steps. */
+.apply-steps-icon--num {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: clamp(24px, 5vw, 56px);
+}
+.badge-row-item { display: flex; align-items: center; gap: 12px; }
+.badge-row-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  flex: none;
+  border: 1px solid rgba(184, 134, 63, .4);
+  color: var(--gold-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.badge-row-icon svg { width: 20px; height: 20px; }
+.badge-row-item span {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+/* ===== Curriculum modules ===== */
+.module-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+@media (min-width: 720px) { .module-grid { grid-template-columns: 1fr 1fr; } }
+.module-card--wide { grid-column: 1 / -1; }
+.module-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  padding: clamp(24px, 3vw, 30px);
+  box-shadow: var(--shadow-soft);
+}
+.module-card-label {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+}
+.module-card h3 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 21px;
+  color: var(--ink);
+  margin-top: 6px;
+}
+.module-topic-list { margin-top: 16px; display: flex; flex-direction: column; gap: 9px; }
+.module-topic-list li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 14.5px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+.module-topic-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .6em;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+}
