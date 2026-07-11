@@ -423,15 +423,15 @@ main p strong { font-weight: 800; color: var(--maroon); }
      equal specificity otherwise (that rule would win on source order). */
   nav.mobile-quicknav { display: none; }
 }
-/* 900–1599px (most laptop screens, incl. the common 1366px and 1536px
-   widths): the 12-tab nav's own clamp() sizing still runs too wide to
-   fit one row here, so "Contact Us" wraps alone onto a lopsided second
-   line. Tighten font and gap specifically in this band — wide screens
-   (>=1600px) keep the more spacious clamp() values untouched. */
-@media (min-width: 900px) and (max-width: 1599px) {
-  .site-nav { gap: 10px 11px; }
+/* 900–1699px (most laptop screens, incl. the common 1280/1366/1536/1600
+   widths): the 13-tab nav's own clamp() sizing still runs too wide to
+   fit one row here, so the last tab or two wraps alone onto a lopsided
+   second line. Tighten font and gap specifically in this band — wide
+   screens (>=1700px) keep the more spacious clamp() values untouched. */
+@media (min-width: 900px) and (max-width: 1699px) {
+  .site-nav { gap: 9px 9px; }
   .site-nav a,
-  .site-nav .nav-dropdown-trigger { font-size: 12.5px; }
+  .site-nav .nav-dropdown-trigger { font-size: 12px; }
 }
 
 /* ===== Mobile/tablet quick-nav — sits inline in the header row itself
