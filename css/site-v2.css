@@ -1682,6 +1682,16 @@ button.career-card {
 }
 
 /* ===== Brand logo row (founder's prior ventures) ===== */
+.founder-iiwm-mark {
+  display: flex;
+  justify-content: center;
+  margin: clamp(24px, 5vw, 36px) 0;
+}
+.founder-iiwm-mark img {
+  width: clamp(140px, 22vw, 200px);
+  height: auto;
+}
+
 /* Logos are pre-cropped to transparent PNGs, so they float directly on
    the page background — no card, no seam. */
 .brand-logos-row {
