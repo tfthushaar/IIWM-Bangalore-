@@ -563,9 +563,10 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
 .footer-top {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 28px;
 }
-.footer-logo { width: clamp(160px, 14vw, 200px); height: auto; }
+.footer-logo { display: block; margin: 0 auto; width: clamp(160px, 14vw, 200px); height: auto; }
 .footer-tagline {
   font-size: 16px;
   color: var(--muted);
@@ -584,7 +585,8 @@ button { font: inherit; color: inherit; background: none; border: none; cursor: 
   color: var(--muted-label);
 }
 @media (min-width: 900px) {
-  .footer-top { flex-direction: row; justify-content: space-between; align-items: flex-start; }
+  .footer-top { flex-direction: column; align-items: center; }
+  .footer-top .footer-cols { width: 100%; }
 }
 
 /* ===== Admin login (hidden trigger: 5 clicks on the header wordmark) ===== */
