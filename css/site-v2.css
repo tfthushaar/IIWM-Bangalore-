@@ -2308,18 +2308,18 @@ button.career-card {
   box-shadow: var(--shadow-soft);
 }
 .module-card-label {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 26px;
+  color: var(--ink);
+}
+.module-card h3 {
   font-family: var(--font-sans);
   font-size: 12px;
   font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--gold-text);
-}
-.module-card h3 {
-  font-family: var(--font-serif);
-  font-weight: 600;
-  font-size: 21px;
-  color: var(--ink);
   margin-top: 6px;
 }
 .module-topic-list { margin-top: 16px; display: flex; flex-direction: column; gap: 9px; }
