@@ -2037,6 +2037,32 @@ button.career-card {
 .blog-post-modal-date { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold-text); }
 .blog-post-modal h2 { font-family: var(--font-serif); font-weight: 600; font-size: clamp(24px, 4vw, 32px); color: var(--ink); margin-top: 10px; line-height: 1.25; }
 .blog-post-modal-body { font-size: 16.5px; color: var(--muted); line-height: 1.8; margin-top: 22px; white-space: pre-wrap; }
+.blog-post-links, .blog-post-related {
+  margin-top: 28px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(32, 24, 16, .1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  align-items: center;
+}
+.blog-post-links-label {
+  width: 100%;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold-text);
+  margin-bottom: 2px;
+}
+.blog-post-links a, .blog-post-related-link {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--coral);
+  text-decoration: underline;
+  text-decoration-color: var(--gold);
+  text-underline-offset: 3px;
+}
 
 /* ===== Contact ===== */
 .contact-grid { display: grid; grid-template-columns: 1fr; gap: 44px; }
