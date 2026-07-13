@@ -10,10 +10,6 @@
   var LEADS_ENDPOINT = null;
   var LEADS_STORAGE_KEY = 'iiwm_quiz_leads';
 
-  /* TODO(IIWM): add the WhatsApp number (country code + number, no symbols,
-     e.g. '911234567890') to enable the "Book a Counselling Session" CTA. */
-  var WHATSAPP_NUMBER = '';
-
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var SECTION_SCALE_LABELS = {
@@ -459,8 +455,6 @@
 
     var skillsHtml = topArchetype.skills.map(function (s) { return '<li>' + escapeHtml(s) + '</li>'; }).join('');
 
-    var whatsappHref = buildWhatsAppLink(state.lead, topArchetype.name);
-
     screenResults.innerHTML =
       '<div class="results-inner">' +
       '<p class="quiz-eyebrow results-eyebrow">Your Result</p>' +
@@ -481,7 +475,7 @@
       '</div>' +
 
       '<div class="results-cta-row">' +
-      '<a class="quiz-btn-primary" href="' + whatsappHref + '" target="_blank" rel="noopener">Book a Counselling Session</a>' +
+      '<button type="button" class="quiz-btn-primary" id="bookCounsellingBtn">Book a Counselling Session</button>' +
       '<button type="button" class="quiz-btn-secondary" id="downloadReportBtn">Download Full Report (PDF)</button>' +
       '</div>' +
       '<div class="results-footer-row">' +
@@ -492,6 +486,15 @@
 
     document.getElementById('downloadReportBtn').addEventListener('click', function () {
       downloadResultsPdf(topArchetype, top3, state.lead, results);
+    });
+    document.getElementById('bookCounsellingBtn').addEventListener('click', function () {
+      if (window.IIWMOpenApplicationForm) {
+        window.IIWMOpenApplicationForm('Counselling Session', {
+          name: state.lead && state.lead.name,
+          phone: state.lead && state.lead.phone,
+          extra: { archetypeName: topArchetype.name }
+        });
+      }
     });
     document.getElementById('retakeBtn').addEventListener('click', function () {
       state.index = 0;
@@ -630,12 +633,6 @@
     requestAnimationFrame(step);
   }
 
-  function buildWhatsAppLink(lead, archetypeName) {
-    var msg = 'Hi IIWM, I just completed the Wedding Career Profiler and matched as a ' + archetypeName +
-      '. My name is ' + (lead && lead.name ? lead.name : '') + '. I would like to book a counselling session.';
-    var base = 'https://wa.me/' + WHATSAPP_NUMBER;
-    return base + '?text=' + encodeURIComponent(msg);
-  }
 
   /* ================= Utilities ================= */
 

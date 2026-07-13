@@ -37,6 +37,14 @@
     <section class="admin-panel is-active" id="panelLeads">
       <div class="admin-stats-row">
         <div class="admin-stat-card">
+          <span class="admin-stat-num" id="statApplications">—</span>
+          <span class="admin-stat-label">Applications</span>
+        </div>
+        <div class="admin-stat-card">
+          <span class="admin-stat-num" id="statCounselling">—</span>
+          <span class="admin-stat-label">Counselling Requests</span>
+        </div>
+        <div class="admin-stat-card">
           <span class="admin-stat-num" id="statQuiz">—</span>
           <span class="admin-stat-label">Quiz Leads</span>
         </div>
@@ -60,6 +68,17 @@
       </div>
 
       <div class="admin-panel-head">
+        <h2>Applications</h2>
+        <div class="admin-panel-head-actions">
+          <p class="admin-panel-sub" id="applicationsCount"></p>
+          <button type="button" class="btn-admin-ghost btn-admin-sm" data-export="applications">Export CSV</button>
+        </div>
+      </div>
+      <div class="admin-table-wrap" id="applicationsTableWrap">
+        <p class="admin-empty">Loading…</p>
+      </div>
+
+      <div class="admin-panel-head" style="margin-top:44px">
         <h2>Quiz Leads</h2>
         <div class="admin-panel-head-actions">
           <p class="admin-panel-sub" id="quizLeadsCount"></p>
@@ -67,6 +86,17 @@
         </div>
       </div>
       <div class="admin-table-wrap" id="quizLeadsTableWrap">
+        <p class="admin-empty">Loading…</p>
+      </div>
+
+      <div class="admin-panel-head" style="margin-top:44px">
+        <h2>Counselling Session Applicants</h2>
+        <div class="admin-panel-head-actions">
+          <p class="admin-panel-sub" id="counsellingCount"></p>
+          <button type="button" class="btn-admin-ghost btn-admin-sm" data-export="counselling">Export CSV</button>
+        </div>
+      </div>
+      <div class="admin-table-wrap" id="counsellingTableWrap">
         <p class="admin-empty">Loading…</p>
       </div>
 
@@ -93,7 +123,7 @@
       </div>
 
       <div class="admin-panel-head" style="margin-top:44px">
-        <h2>Contact Us Leads</h2>
+        <h2>Enquiries (Contact Us)</h2>
         <div class="admin-panel-head-actions">
           <p class="admin-panel-sub" id="contactLeadsCount"></p>
           <button type="button" class="btn-admin-ghost btn-admin-sm" data-export="contact">Export CSV</button>
