@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script>document.documentElement.classList.add('js');</script>
-<title>Wedding Career Profiler — IIWM Bangalore</title>
-<meta name="description" content="Take IIWM Bangalore's Wedding Career Profiler — a 5-minute assessment matching you to your ideal wedding industry career path.">
+<title>IIWM Career Fit Profiler — IIWM Bangalore</title>
+<meta name="description" content="Discover your wedding industry career match in 7 minutes — IIWM Bangalore's Career Fit Profiler.">
 <meta name="theme-color" content="#F7F2E9">
 <meta name="robots" content="noindex">
 <link rel="icon" href="assets/iiwm-mark.png" type="image/png">
@@ -55,10 +55,10 @@
       <div class="quiz-landing-inner">
         <img class="quiz-landing-mark" src="assets/iiwm-mark.png" alt="" width="40" height="36">
         <p class="quiz-eyebrow">IIWM Bangalore Presents</p>
-        <h1 class="quiz-landing-title">The Wedding<br>Career Profiler</h1>
-        <p class="quiz-landing-desc">A five-minute assessment matching your personality, interests and natural skills to the wedding industry career path where you'll thrive most.</p>
+        <h1 class="quiz-landing-title">Discover Your Wedding<br>Industry Career Match<br>in 7 Minutes</h1>
+        <p class="quiz-landing-desc">The IIWM Career Fit Profiler matches your personality, interests and natural skills to the wedding industry career path where you'll thrive most.</p>
         <ul class="quiz-landing-meta">
-          <li>38 quick questions</li>
+          <li>34 quick questions</li>
           <li>~5 minutes</li>
           <li>Personalized results</li>
         </ul>
@@ -82,6 +82,25 @@
             <label for="leadPhone">Contact Number</label>
             <input type="tel" id="leadPhone" name="phone" autocomplete="tel" required>
             <span class="quiz-field-error" id="phoneError"></span>
+          </div>
+          <div class="quiz-field">
+            <label for="leadStatus">Current Status</label>
+            <select id="leadStatus" name="status">
+              <option value="Student">Student</option>
+              <option value="Graduate">Graduate</option>
+              <option value="Working Professional">Working Professional</option>
+              <option value="Entrepreneur">Entrepreneur</option>
+              <option value="Career Switcher">Career Switcher</option>
+              <option value="Homemaker">Homemaker</option>
+            </select>
+          </div>
+          <div class="quiz-field">
+            <label for="leadEducation">Current Education</label>
+            <input type="text" id="leadEducation" name="education" autocomplete="off">
+          </div>
+          <div class="quiz-field">
+            <label for="leadCity">Current City</label>
+            <input type="text" id="leadCity" name="city" autocomplete="address-level2">
           </div>
           <button type="submit" class="quiz-btn-primary quiz-lead-submit">Start Assessment</button>
         </form>
@@ -111,7 +130,6 @@
 <script type="module" src="js/application-gate.js"></script>
 <script src="js/quiz-data.js"></script>
 <script type="module" src="js/quiz-submit.js"></script>
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="js/quiz.js" defer></script>
 </body>
 </html>

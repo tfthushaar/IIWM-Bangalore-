@@ -13,9 +13,10 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var SECTION_SCALE_LABELS = {
-    'Interests': ['Not for me', 'Love it'],
-    'Skills': ['Still developing', 'Excellent'],
-    'Stress Tolerance': ['I struggle', 'I thrive']
+    'Personality': ['Disagree', 'Agree'],
+    'Interest Mapping': ['Not for me', 'Love it'],
+    'Entrepreneurial Mindset': ['Disagree', 'Agree'],
+    'Soft Skills': ['Still developing', 'Excellent']
   };
 
   /* ================= State ================= */
@@ -28,8 +29,11 @@
 
   var QUESTIONS = QUIZ_QUESTIONS;
   var ARCHETYPES = QUIZ_ARCHETYPES;
+  var DIMENSIONS = QUIZ_DIMENSIONS;
+  var STATUS_OPTIONS = QUIZ_STATUS_OPTIONS;
   var TOTAL = QUESTIONS.length;
-  var MAX_POSSIBLE = computeMaxPossible();
+  var MAX_POSSIBLE = computeMaxPossible(ARCHETYPES, function (q) { return q.archetypeWeights; }, function (o) { return o.archetypeWeights; });
+  var MAX_POSSIBLE_DIM = computeMaxPossible(keyByDimension(), function (q) { return q.dimensionWeights; }, function (o) { return o.dimensionWeights; });
 
   /* ================= DOM refs ================= */
   var topbar = document.getElementById('quizTopbar');
@@ -52,35 +56,32 @@
 
   /* ================= Scoring engine ================= */
 
-  function computeMaxPossible() {
+  function keyByDimension() {
+    var obj = {};
+    DIMENSIONS.forEach(function (d) { obj[d.key] = true; });
+    return obj;
+  }
+
+  /* Generic across both scoring tracks (archetype match + the 12
+     behind-the-scenes dimensions) - `getQuestionWeights`/`getOptionWeights`
+     pick which weight map (archetypeWeights or dimensionWeights) to read. */
+  function computeMaxPossible(keysObj, getQuestionWeights, getOptionWeights) {
     var max = {};
-    Object.keys(ARCHETYPES).forEach(function (a) { max[a] = 0; });
+    Object.keys(keysObj).forEach(function (k) { max[k] = 0; });
 
     QUESTIONS.forEach(function (q) {
       if (q.type === 'slider') {
-        Object.keys(q.archetypeWeights).forEach(function (a) {
-          max[a] += q.archetypeWeights[a];
-        });
+        var qw = getQuestionWeights(q) || {};
+        Object.keys(qw).forEach(function (k) { max[k] += qw[k]; });
       } else if (q.type === 'single') {
-        var perArchetype = {};
+        var perKey = {};
         q.options.forEach(function (opt) {
-          Object.keys(opt.archetypeWeights || {}).forEach(function (a) {
-            perArchetype[a] = Math.max(perArchetype[a] || 0, opt.archetypeWeights[a]);
+          var ow = getOptionWeights(opt) || {};
+          Object.keys(ow).forEach(function (k) {
+            perKey[k] = Math.max(perKey[k] || 0, ow[k]);
           });
         });
-        Object.keys(perArchetype).forEach(function (a) { max[a] += perArchetype[a]; });
-      } else if (q.type === 'multi') {
-        var byArchetype = {};
-        q.options.forEach(function (opt) {
-          Object.keys(opt.archetypeWeights || {}).forEach(function (a) {
-            (byArchetype[a] = byArchetype[a] || []).push(opt.archetypeWeights[a]);
-          });
-        });
-        Object.keys(byArchetype).forEach(function (a) {
-          var arr = byArchetype[a].sort(function (x, y) { return y - x; });
-          var top = arr.slice(0, q.pick).reduce(function (s, v) { return s + v; }, 0);
-          max[a] += top;
-        });
+        Object.keys(perKey).forEach(function (k) { max[k] += perKey[k]; });
       }
     });
     return max;
@@ -89,16 +90,21 @@
   function computeScores() {
     var scores = {};
     var contributions = {};
+    var dimScores = {};
     Object.keys(ARCHETYPES).forEach(function (a) { scores[a] = 0; contributions[a] = []; });
+    DIMENSIONS.forEach(function (d) { dimScores[d.key] = 0; });
 
     QUESTIONS.forEach(function (q) {
       var ans = state.answers[q.id];
       if (q.type === 'slider') {
         var value = (ans == null) ? 3 : ans;
-        Object.keys(q.archetypeWeights).forEach(function (a) {
+        Object.keys(q.archetypeWeights || {}).forEach(function (a) {
           var amt = q.archetypeWeights[a] * (value / 5);
           scores[a] += amt;
-          if (amt > 0) contributions[a].push({ label: q.label, amount: amt });
+          if (amt > 0) contributions[a].push({ label: q.text, amount: amt });
+        });
+        Object.keys(q.dimensionWeights || {}).forEach(function (k) {
+          dimScores[k] += q.dimensionWeights[k] * (value / 5);
         });
       } else if (q.type === 'single') {
         if (ans != null) {
@@ -106,18 +112,12 @@
           Object.keys(opt.archetypeWeights || {}).forEach(function (a) {
             var w = opt.archetypeWeights[a];
             scores[a] += w;
-            contributions[a].push({ label: opt.why || opt.label, amount: w });
+            contributions[a].push({ label: opt.label, amount: w });
+          });
+          Object.keys(opt.dimensionWeights || {}).forEach(function (k) {
+            dimScores[k] += opt.dimensionWeights[k];
           });
         }
-      } else if (q.type === 'multi') {
-        (ans || []).forEach(function (i) {
-          var o = q.options[i];
-          Object.keys(o.archetypeWeights || {}).forEach(function (a) {
-            var w = o.archetypeWeights[a];
-            scores[a] += w;
-            contributions[a].push({ label: o.why || o.label, amount: w });
-          });
-        });
       }
     });
 
@@ -125,6 +125,13 @@
     Object.keys(ARCHETYPES).forEach(function (a) {
       percentages[a] = MAX_POSSIBLE[a] > 0
         ? Math.max(0, Math.min(100, Math.round((scores[a] / MAX_POSSIBLE[a]) * 100)))
+        : 0;
+    });
+
+    var dimPercentages = {};
+    DIMENSIONS.forEach(function (d) {
+      dimPercentages[d.key] = MAX_POSSIBLE_DIM[d.key] > 0
+        ? Math.max(0, Math.min(100, Math.round((dimScores[d.key] / MAX_POSSIBLE_DIM[d.key]) * 100)))
         : 0;
     });
 
@@ -143,7 +150,56 @@
         });
     });
 
-    return { scores: scores, percentages: percentages, ranked: ranked, contributions: contributions };
+    var top3 = rescaleTop3(ranked.slice(0, 3));
+
+    var dimRanked = DIMENSIONS
+      .map(function (d) { return { key: d.key, label: d.label, pct: dimPercentages[d.key], strength: d.strength, growth: d.growth }; })
+      .sort(function (x, y) { return y.pct - x.pct; });
+    var superpowers = dimRanked.slice(0, 5).map(function (d) { return d.strength; });
+    var growthAreas = dimRanked.slice().reverse().slice(0, 4).map(function (d) { return d.growth; });
+    var entrepreneurPct = dimPercentages.entrepreneurship || 0;
+    var overallFitScore = Math.round(0.5 * top3[0].pct + 0.5 * average(Object.keys(dimPercentages).map(function (k) { return dimPercentages[k]; })));
+
+    return {
+      scores: scores, percentages: percentages, ranked: ranked, contributions: contributions,
+      dimPercentages: dimPercentages, top3: top3, superpowers: superpowers, growthAreas: growthAreas,
+      entrepreneurPct: entrepreneurPct, overallFitScore: overallFitScore
+    };
+  }
+
+  function average(nums) {
+    if (!nums.length) return 0;
+    return nums.reduce(function (s, n) { return s + n; }, 0) / nums.length;
+  }
+
+  /* Top 3 archetype matches are rescaled into an 80-97% display band,
+     preserving their relative order - the raw match strength beneath a
+     "top pick" should always read as a confident recommendation rather
+     than a middling absolute score. */
+  function rescaleTop3(top3) {
+    var best = top3[0].pct;
+    var worst = top3[top3.length - 1].pct;
+    var spread = best - worst;
+    return top3.map(function (r) {
+      var displayPct = spread > 0
+        ? Math.round(80 + ((r.pct - worst) / spread) * 17)
+        : 95 - (top3.indexOf(r) * 4);
+      return { code: r.code, pct: displayPct };
+    });
+  }
+
+  function starString(pct, max) {
+    max = max || 5;
+    var filled = Math.max(1, Math.min(max, Math.round((pct / 100) * max)));
+    return '&#9733;'.repeat(filled) + '&#9734;'.repeat(max - filled);
+  }
+
+  function fitLabel(pct) {
+    if (pct >= 85) return 'Excellent Fit';
+    if (pct >= 70) return 'Strong Fit';
+    if (pct >= 55) return 'Good Fit';
+    if (pct >= 40) return 'Developing Fit';
+    return 'Early Stage';
   }
 
   /* ================= Rendering: question screens ================= */
@@ -370,10 +426,14 @@
       /* email must be present (as a string) for the Firestore rules' lead
          shape check — the quiz form intentionally only asks name + phone. */
       email: '',
+      status: lead.status || '',
+      education: lead.education || '',
+      city: lead.city || '',
       source: 'Career Profiler Quiz',
       submittedAt: new Date().toISOString(),
       archetypeCode: top.code,
       archetypeName: ARCHETYPES[top.code].name,
+      overallFitScore: results.overallFitScore,
       matchPercentages: results.percentages,
       answers: state.answers
     };
@@ -396,7 +456,10 @@
       e.preventDefault();
       var data = {
         name: leadForm.elements.name.value,
-        phone: leadForm.elements.phone.value
+        phone: leadForm.elements.phone.value,
+        status: leadForm.elements.status ? leadForm.elements.status.value : '',
+        education: leadForm.elements.education ? leadForm.elements.education.value.trim() : '',
+        city: leadForm.elements.city ? leadForm.elements.city.value.trim() : ''
       };
       var errors = validateLead(data);
       ['name', 'phone'].forEach(function (field) {
@@ -421,21 +484,28 @@
 
   /* ================= Results ================= */
 
-  function whyText(code, results) {
-    var contribs = results.contributions[code].slice(0, 3).map(function (c) { return c.label; });
-    if (!contribs.length) return 'This match is based on your overall pattern of answers across the assessment.';
-    if (contribs.length === 1) return 'This match is driven mainly by your strength in ' + contribs[0] + '.';
-    var last = contribs.pop();
-    return 'This match is driven by your standout strengths in ' + contribs.join(', ') + ' and ' + last + '.';
+  var LEARNING_STYLE = ['Live events', 'Practical projects', 'Simulations', 'Industry internships'];
+  var WHY_IIWM_FITS = [
+    'Practical event execution',
+    'Luxury wedding exposure',
+    'Business and entrepreneurship modules',
+    'Internship opportunities',
+    'Portfolio development'
+  ];
+
+  function entrepreneurBlurb(pct) {
+    if (pct >= 85) return 'You have exceptional potential to build and lead your own wedding business.';
+    if (pct >= 70) return 'You have strong potential to build your own wedding business after gaining industry experience.';
+    if (pct >= 55) return 'You show promising entrepreneurial instincts worth developing further.';
+    return "Entrepreneurship isn't your primary driver, and that's perfectly fine — many rewarding careers in this industry thrive within established teams.";
   }
 
   function renderResults() {
     var results = state.results;
-    var top3 = results.ranked.slice(0, 3);
+    var top3 = results.top3;
     var topArchetype = ARCHETYPES[top3[0].code];
     var rankClasses = ['rank-gold', 'rank-champagne', 'rank-peach'];
-    var rankNumerals = ['01', '02', '03'];
-    var rankLabels = ['Your Best Match', 'Also Consider', 'Creative Compatibility'];
+    var rankNumerals = ['1', '2', '3'];
 
     var cardsHtml = top3.map(function (r, i) {
       var arch = ARCHETYPES[r.code];
@@ -443,9 +513,7 @@
         '<div class="result-card-head">' +
         '<span class="result-rank">' + rankNumerals[i] + '</span>' +
         '<div class="result-card-title">' +
-        '<p class="result-card-kicker">' + escapeHtml(rankLabels[i]) + '</p>' +
         '<h3>' + escapeHtml(arch.name) + '</h3>' +
-        '<p>' + escapeHtml(whyText(r.code, results)) + '</p>' +
         '</div>' +
         '<span class="result-pct" data-target="' + r.pct + '">0%</span>' +
         '</div>' +
@@ -453,30 +521,56 @@
         '</article>';
     }).join('');
 
-    var skillsHtml = topArchetype.skills.map(function (s) { return '<li>' + escapeHtml(s) + '</li>'; }).join('');
+    var superpowersHtml = results.superpowers.map(function (s) { return '<li>' + escapeHtml(s) + '</li>'; }).join('');
+    var growthHtml = results.growthAreas.map(function (s) { return '<li>' + escapeHtml(s) + '</li>'; }).join('');
+    var learningHtml = LEARNING_STYLE.map(function (s) { return '<li>' + escapeHtml(s) + '</li>'; }).join('');
+    var whyFitsHtml = WHY_IIWM_FITS.map(function (s) { return '<li>' + escapeHtml(s) + '</li>'; }).join('');
 
     screenResults.innerHTML =
       '<div class="results-inner">' +
-      '<p class="quiz-eyebrow results-eyebrow">Your Result</p>' +
-      '<h1 class="results-headline">' + escapeHtml(topArchetype.headline) + '</h1>' +
-      '<p class="results-desc">' + escapeHtml(topArchetype.description) + '</p>' +
+      '<p class="quiz-eyebrow results-eyebrow">Your Wedding Industry Career Match</p>' +
 
-      '<p class="results-section-label">Your Top 3 Career Matches</p>' +
+      '<div class="results-fitscore">' +
+      '<p class="results-fitscore-label">Overall Fit Score</p>' +
+      '<p class="results-fitscore-num"><span class="result-num" data-target="' + results.overallFitScore + '">0</span><span class="results-fitscore-max">/100</span></p>' +
+      '<p class="results-fitscore-stars">' + starString(results.overallFitScore) + ' <span>' + fitLabel(results.overallFitScore) + '</span></p>' +
+      '</div>' +
+
+      '<p class="results-section-label">Your Personality</p>' +
+      '<div class="results-panel">' +
+      '<h2 class="results-persona-name">' + escapeHtml(topArchetype.persona) + '</h2>' +
+      '<p class="results-desc results-desc--left">' + escapeHtml(topArchetype.description) + '</p>' +
+      '</div>' +
+
+      '<p class="results-section-label">Your Top Career Matches</p>' +
       '<div class="result-cards">' + cardsHtml + '</div>' +
 
+      '<p class="results-section-label">Your Superpowers</p>' +
+      '<div class="results-panel"><ul class="results-skills results-skills--check">' + superpowersHtml + '</ul></div>' +
+
+      '<p class="results-section-label">Areas to Develop</p>' +
+      '<div class="results-panel"><ul class="results-skills">' + growthHtml + '</ul></div>' +
+
+      '<p class="results-section-label">Entrepreneur Potential</p>' +
       '<div class="results-panel">' +
-      '<p class="results-panel-label">Skills to Develop</p>' +
-      '<ul class="results-skills">' + skillsHtml + '</ul>' +
+      '<p class="results-fitscore-stars">' + starString(results.entrepreneurPct) + '</p>' +
+      '<p>' + escapeHtml(entrepreneurBlurb(results.entrepreneurPct)) + '</p>' +
+      '</div>' +
+
+      '<p class="results-section-label">Your Learning Style</p>' +
+      '<div class="results-panel">' +
+      '<p>You learn best through:</p>' +
+      '<ul class="results-skills">' + learningHtml + '</ul>' +
       '</div>' +
 
       '<div class="results-panel results-panel--path">' +
-      '<p class="results-panel-label">Recommended IIWM Path</p>' +
-      '<p class="results-path">' + escapeHtml(topArchetype.path) + '</p>' +
+      '<p class="results-panel-label">Recommended IIWM Training Program</p>' +
+      '<p>Why it fits:</p>' +
+      '<ul class="results-skills">' + whyFitsHtml + '</ul>' +
       '</div>' +
 
       '<div class="results-cta-row">' +
       '<button type="button" class="quiz-btn-primary" id="bookCounsellingBtn">Book a Counselling Session</button>' +
-      '<button type="button" class="quiz-btn-secondary" id="downloadReportBtn">Download Full Report (PDF)</button>' +
       '</div>' +
       '<div class="results-footer-row">' +
       '<button type="button" class="results-retake" id="retakeBtn">Retake the Assessment</button>' +
@@ -484,9 +578,6 @@
       '</div>' +
       '</div>';
 
-    document.getElementById('downloadReportBtn').addEventListener('click', function () {
-      downloadResultsPdf(topArchetype, top3, state.lead, results);
-    });
     document.getElementById('bookCounsellingBtn').addEventListener('click', function () {
       if (window.IIWMOpenApplicationForm) {
         window.IIWMOpenApplicationForm('Counselling Session', {
@@ -507,103 +598,9 @@
     animateResultsIn();
   }
 
-  function downloadResultsPdf(topArchetype, top3, lead, results) {
-    var jsPDFCtor = window.jspdf && window.jspdf.jsPDF;
-    if (!jsPDFCtor) return;
-
-    var doc = new jsPDFCtor({ unit: 'pt', format: 'a4' });
-    var margin = 48;
-    var pageWidth = doc.internal.pageSize.getWidth();
-    var contentWidth = pageWidth - margin * 2;
-    var y = margin;
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(10);
-    doc.setTextColor(169, 128, 63);
-    doc.text('IIWM BANGALORE', margin, y);
-    y += 22;
-
-    doc.setFontSize(20);
-    doc.setTextColor(43, 33, 24);
-    doc.text('Wedding Career Profile', margin, y);
-    y += 26;
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(11);
-    doc.setTextColor(90, 90, 90);
-    doc.text('Prepared for ' + (lead && lead.name ? lead.name : 'You'), margin, y);
-    y += 30;
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(15);
-    doc.setTextColor(43, 33, 24);
-    var headlineLines = doc.splitTextToSize(topArchetype.headline, contentWidth);
-    doc.text(headlineLines, margin, y);
-    y += headlineLines.length * 18 + 8;
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(11);
-    doc.setTextColor(90, 75, 60);
-    var descLines = doc.splitTextToSize(topArchetype.description, contentWidth);
-    doc.text(descLines, margin, y);
-    y += descLines.length * 15 + 22;
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
-    doc.setTextColor(43, 33, 24);
-    doc.text('Your Top 3 Career Matches', margin, y);
-    y += 18;
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(11);
-    top3.forEach(function (r, i) {
-      var arch = ARCHETYPES[r.code];
-      doc.text((i + 1) + '. ' + arch.name + ' — ' + r.pct + '%', margin, y);
-      y += 16;
-    });
-    y += 12;
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
-    doc.text('Skills to Develop', margin, y);
-    y += 18;
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(11);
-    topArchetype.skills.forEach(function (s) {
-      var lines = doc.splitTextToSize('• ' + s, contentWidth);
-      doc.text(lines, margin, y);
-      y += lines.length * 15;
-    });
-    y += 12;
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(12);
-    doc.text('Recommended IIWM Path', margin, y);
-    y += 18;
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(11);
-    var pathLines = doc.splitTextToSize(topArchetype.path, contentWidth);
-    doc.text(pathLines, margin, y);
-
-    doc.setFontSize(9);
-    doc.setTextColor(140, 140, 140);
-    doc.text('Generated by the IIWM Bangalore Wedding Career Profiler', margin, 800);
-
-    var filenameSafe = (lead && lead.name ? lead.name.replace(/[^a-z0-9]+/gi, '-') : 'guest');
-    doc.save('IIWM-Career-Profile-' + filenameSafe + '.pdf');
-
-    if (window.IIWMFirebaseLogPdf) {
-      window.IIWMFirebaseLogPdf({
-        name: (lead && lead.name) || '',
-        phone: (lead && lead.phone) || '',
-        archetypeName: topArchetype.name,
-        matchPercentages: results.percentages
-      }).catch(function () { /* logging is best-effort — download already happened */ });
-    }
-  }
-
   function animateResultsIn() {
     var pctEls = screenResults.querySelectorAll('.result-pct');
+    var numEls = screenResults.querySelectorAll('.result-num');
     var fillEls = screenResults.querySelectorAll('.result-meter-fill');
 
     fillEls.forEach(function (el, i) {
@@ -616,18 +613,24 @@
       var target = parseFloat(el.getAttribute('data-target'));
       if (reduceMotion) { el.textContent = target + '%'; return; }
       var delay = i * 180;
-      setTimeout(function () { animateCount(el, target); }, delay);
+      setTimeout(function () { animateCount(el, target, '%'); }, delay);
+    });
+
+    numEls.forEach(function (el) {
+      var target = parseFloat(el.getAttribute('data-target'));
+      if (reduceMotion) { el.textContent = target; return; }
+      animateCount(el, target, '');
     });
   }
 
-  function animateCount(el, target) {
+  function animateCount(el, target, suffix) {
     var start = null;
     var duration = 900;
     function step(ts) {
       if (!start) start = ts;
       var progress = Math.min(1, (ts - start) / duration);
       var eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.round(eased * target) + '%';
+      el.textContent = Math.round(eased * target) + suffix;
       if (progress < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
