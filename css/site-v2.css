@@ -217,7 +217,7 @@ body { background: var(--ivory); }
 .launch-banner {
   position: relative;
   z-index: 5;
-  width: clamp(108px, 9vw, 132px);
+  width: clamp(130px, 10.5vw, 158px);
   margin: 0 0 16px;
   filter: drop-shadow(0 8px 14px rgba(43, 8, 16, .26));
 }
@@ -230,7 +230,7 @@ body { background: var(--ivory); }
     position: absolute;
     top: 10px;
     left: 10px;
-    width: clamp(84px, 24vw, 104px);
+    width: clamp(102px, 28vw, 128px);
     margin: 0;
     z-index: 6;
   }
@@ -256,7 +256,7 @@ body { background: var(--ivory); }
 }
 .launch-banner-eyebrow {
   font-family: var(--font-sans);
-  font-size: 7.5px;
+  font-size: 9.5px;
   font-weight: 500;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -265,7 +265,7 @@ body { background: var(--ivory); }
 .launch-banner-date {
   font-family: var(--font-serif);
   font-weight: 700;
-  font-size: clamp(11px, 1.1vw, 13px);
+  font-size: clamp(14px, 1.4vw, 17px);
   letter-spacing: .01em;
   color: #F7E6BE;
   margin-top: 3px;

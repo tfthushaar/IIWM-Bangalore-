@@ -477,8 +477,10 @@ main p strong { font-weight: 800; color: var(--maroon); }
   background: var(--ivory);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 44px;
+  justify-content: flex-start;
+  padding: 44px 44px 110px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   visibility: hidden;
   opacity: 0;
   transform: translateY(-8px);

@@ -18,6 +18,7 @@ var LEADS_STORAGE_KEY = 'iiwm_application_leads';
 var COPY = {
   'Apply Now': {
     title: 'Apply Now',
+    intro: '1. Send your resume to <a href="mailto:joiniiwmbangalore@gmail.com">joiniiwmbangalore@gmail.com</a> and our team will get back to you.',
     submitLabel: 'Submit Application',
     successTitle: 'Thank you!',
     successBody: 'Thank you for your application. Our team will get back to you ASAP!'
@@ -47,10 +48,15 @@ function openApplicationForm(source, prefill) {
   var phone = (prefill && prefill.phone) || '';
   var extra = (prefill && prefill.extra) || {};
 
+  var introHtml = copy.intro
+    ? '<p style="font-size:14px;line-height:1.5;color:var(--muted);margin:0 0 20px">' + copy.intro + '</p>'
+    : '';
+
   modal.innerHTML =
     '<button type="button" class="admin-login-close" aria-label="Close">&times;</button>' +
     '<p class="eyebrow">IIWM Bangalore</p>' +
     '<h3>' + escapeHtml(copy.title) + '</h3>' +
+    introHtml +
     '<form id="applicationForm" novalidate>' +
     '<div class="admin-login-field"><label for="appName">Full Name</label>' +
     '<input type="text" id="appName" autocomplete="name" value="' + escapeHtml(name) + '" required></div>' +
