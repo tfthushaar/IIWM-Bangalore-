@@ -63,6 +63,8 @@ function formatDate(ts) {
 
 /* ================= Leads ================= */
 var leadsById = {};
+var applicationsCache = [];
+var counsellingCache = [];
 var quizLeadsCache = [];
 var contactLeadsCache = [];
 var brochureLeadsCache = [];
@@ -78,6 +80,8 @@ function initLeadsToolbar() {
     renderPdfDownloadsTable();
   });
   document.getElementById('refreshLeadsBtn').addEventListener('click', function () {
+    document.getElementById('applicationsTableWrap').innerHTML = '<p class="admin-empty">Refreshing…</p>';
+    document.getElementById('counsellingTableWrap').innerHTML = '<p class="admin-empty">Refreshing…</p>';
     document.getElementById('quizLeadsTableWrap').innerHTML = '<p class="admin-empty">Refreshing…</p>';
     document.getElementById('contactLeadsTableWrap').innerHTML = '<p class="admin-empty">Refreshing…</p>';
     document.getElementById('brochureLeadsTableWrap').innerHTML = '<p class="admin-empty">Refreshing…</p>';
@@ -98,6 +102,8 @@ function matchesSearch(lead) {
 }
 
 function renderAllLeadTables() {
+  renderApplicationsTable();
+  renderCounsellingTable();
   renderQuizLeadsTable();
   renderContactLeadsTable();
   renderBrochureLeadsTable();
@@ -107,19 +113,27 @@ function initLeads() {
   getDocs(query(collection(db, 'leads'), orderBy('submittedAt', 'desc')))
     .then(function (snap) {
       leadsById = {};
+      applicationsCache = [];
+      counsellingCache = [];
       quizLeadsCache = [];
       contactLeadsCache = [];
       brochureLeadsCache = [];
       snap.forEach(function (d) {
         var lead = Object.assign({ id: d.id }, d.data());
         leadsById[d.id] = lead;
-        if (lead.source === 'Contact Form') contactLeadsCache.push(lead);
+        if (lead.source === 'Apply Now') applicationsCache.push(lead);
+        else if (lead.source === 'Counselling Session') counsellingCache.push(lead);
+        else if (lead.source === 'Contact Form') contactLeadsCache.push(lead);
         else if (lead.source === 'Brochure Download') brochureLeadsCache.push(lead);
         else quizLeadsCache.push(lead);
       });
+      document.getElementById('applicationsCount').textContent = applicationsCache.length + ' total';
+      document.getElementById('counsellingCount').textContent = counsellingCache.length + ' total';
       document.getElementById('quizLeadsCount').textContent = quizLeadsCache.length + ' total';
       document.getElementById('contactLeadsCount').textContent = contactLeadsCache.length + ' total';
       document.getElementById('brochureLeadsCount').textContent = brochureLeadsCache.length + ' total';
+      document.getElementById('statApplications').textContent = applicationsCache.length;
+      document.getElementById('statCounselling').textContent = counsellingCache.length;
       document.getElementById('statQuiz').textContent = quizLeadsCache.length;
       document.getElementById('statContact').textContent = contactLeadsCache.length;
       document.getElementById('statBrochure').textContent = brochureLeadsCache.length;
@@ -127,6 +141,8 @@ function initLeads() {
     })
     .catch(function (err) {
       var msg = '<p class="admin-empty">Couldn\'t load leads (' + escapeHtml(err.message) + ').</p>';
+      document.getElementById('applicationsTableWrap').innerHTML = msg;
+      document.getElementById('counsellingTableWrap').innerHTML = msg;
       document.getElementById('quizLeadsTableWrap').innerHTML = msg;
       document.getElementById('contactLeadsTableWrap').innerHTML = msg;
       document.getElementById('brochureLeadsTableWrap').innerHTML = msg;
@@ -137,6 +153,51 @@ function emptyOrNoMatch(cache, emptyMsg) {
   return cache.length
     ? '<p class="admin-empty">No matches for "' + escapeHtml(leadSearchTerm) + '".</p>'
     : '<p class="admin-empty">' + emptyMsg + '</p>';
+}
+
+function renderApplicationsTable() {
+  var wrap = document.getElementById('applicationsTableWrap');
+  var visible = applicationsCache.filter(matchesSearch);
+  if (!visible.length) {
+    wrap.innerHTML = emptyOrNoMatch(applicationsCache, 'No applications yet.');
+    return;
+  }
+  var rows = visible.map(function (lead) {
+    return '<tr class="is-clickable" data-id="' + lead.id + '">' +
+      '<td class="admin-table-name">' + escapeHtml(lead.name) + '</td>' +
+      '<td>' + escapeHtml(lead.phone) + '</td>' +
+      '<td>' + escapeHtml(truncate(lead.message, 60)) + '</td>' +
+      '<td class="admin-table-muted">' + formatDate(lead.submittedAt) + '</td>' +
+      '</tr>';
+  }).join('');
+  wrap.innerHTML =
+    '<table class="admin-table"><thead><tr>' +
+    '<th>Name</th><th>Phone</th><th>Message</th><th>Submitted</th>' +
+    '</tr></thead><tbody>' + rows + '</tbody></table>';
+  bindLeadRowClicks(wrap);
+}
+
+function renderCounsellingTable() {
+  var wrap = document.getElementById('counsellingTableWrap');
+  var visible = counsellingCache.filter(matchesSearch);
+  if (!visible.length) {
+    wrap.innerHTML = emptyOrNoMatch(counsellingCache, 'No counselling session requests yet.');
+    return;
+  }
+  var rows = visible.map(function (lead) {
+    return '<tr class="is-clickable" data-id="' + lead.id + '">' +
+      '<td class="admin-table-name">' + escapeHtml(lead.name) + '</td>' +
+      '<td>' + escapeHtml(lead.phone) + '</td>' +
+      '<td>' + (lead.archetypeName ? escapeHtml(lead.archetypeName) : '<span class="admin-table-muted">—</span>') + '</td>' +
+      '<td>' + escapeHtml(truncate(lead.message, 60)) + '</td>' +
+      '<td class="admin-table-muted">' + formatDate(lead.submittedAt) + '</td>' +
+      '</tr>';
+  }).join('');
+  wrap.innerHTML =
+    '<table class="admin-table"><thead><tr>' +
+    '<th>Name</th><th>Phone</th><th>Top Match</th><th>Message</th><th>Submitted</th>' +
+    '</tr></thead><tbody>' + rows + '</tbody></table>';
+  bindLeadRowClicks(wrap);
 }
 
 function renderQuizLeadsTable() {
@@ -366,6 +427,16 @@ function renderVisits(visits) {
 
 /* ================= CSV export ================= */
 var EXPORT_CONFIGS = {
+  applications: {
+    filename: 'iiwm-applications.csv',
+    columns: ['name', 'phone', 'message', 'submittedAt'],
+    rows: function () { return applicationsCache; }
+  },
+  counselling: {
+    filename: 'iiwm-counselling-requests.csv',
+    columns: ['name', 'phone', 'archetypeName', 'message', 'submittedAt'],
+    rows: function () { return counsellingCache; }
+  },
   quiz: {
     filename: 'iiwm-quiz-leads.csv',
     columns: ['name', 'phone', 'archetypeName', 'submittedAt'],
