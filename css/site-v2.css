@@ -470,6 +470,16 @@ body { background: var(--ivory); }
   .hero-fade-divider-line { width: clamp(34px, 9vw, 60px); }
 }
 .hero-fade-divider svg { flex: none; width: 32px; height: 18px; }
+.hero-fade-divider-label {
+  flex: none;
+  font-family: var(--font-sans);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+}
 .hero-fade-divider-line {
   position: relative;
   width: clamp(52px, 6.5vw, 96px);
