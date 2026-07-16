@@ -54,7 +54,7 @@ function openApplicationForm(source, prefill) {
 
   modal.innerHTML =
     '<button type="button" class="admin-login-close" aria-label="Close">&times;</button>' +
-    '<p class="eyebrow">IIWM Bangalore</p>' +
+    '<p class="eyebrow">The Wedding Business School</p>' +
     '<h3>' + escapeHtml(copy.title) + '</h3>' +
     introHtml +
     '<form id="applicationForm" novalidate>' +

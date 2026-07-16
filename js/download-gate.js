@@ -33,7 +33,7 @@ import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/fir
     overlay.innerHTML =
       '<div class="admin-login-modal" role="dialog" aria-modal="true" aria-label="Get your download">' +
       '<button type="button" class="admin-login-close" aria-label="Close">&times;</button>' +
-      '<p class="eyebrow">IIWM Bangalore</p>' +
+      '<p class="eyebrow">The Wedding Business School</p>' +
       '<h3>Get Your Download</h3>' +
       '<form id="downloadGateForm" novalidate>' +
       '<div class="admin-login-field"><label for="dgName">Full Name</label>' +

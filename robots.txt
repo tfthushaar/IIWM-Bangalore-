@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://iiwmbangalore.com/sitemap.xml
+Sitemap: https://theweddingbusiness.school/sitemap.xml

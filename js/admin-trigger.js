@@ -50,7 +50,7 @@ import { ADMIN_EMAIL_DOMAIN } from "./firebase-config.js";
     overlay.innerHTML =
       '<div class="admin-login-modal" role="dialog" aria-modal="true" aria-label="Admin login">' +
       '<button type="button" class="admin-login-close" aria-label="Close">&times;</button>' +
-      '<p class="eyebrow">IIWM Admin</p>' +
+      '<p class="eyebrow">The Wedding Business School Admin</p>' +
       '<h3>Admin Login</h3>' +
       '<form id="adminLoginForm" novalidate>' +
       '<div class="admin-login-field"><label for="adminUsername">Username</label>' +

@@ -1,4 +1,4 @@
-/* IIWM Career Fit Profiler — question bank, scoring weights, archetype
+/* Career Fit Profiler — question bank, scoring weights, archetype
    and dimension content. Pure data, no logic. See js/quiz.js for the
    engine that consumes this.
 
@@ -11,63 +11,63 @@ var QUIZ_ARCHETYPES = {
     persona: 'Luxury Experience Creator',
     description: "You naturally enjoy creating memorable experiences and have the emotional intelligence, organisation, and creativity required to thrive in the wedding industry. You thrive on taking charge — coordinating people, timelines, and vision into one seamless celebration.",
     skills: ['Advanced client consultation', 'Vendor contract negotiation', 'Budget architecture for luxury weddings'],
-    path: "IIWM's Luxury Wedding Planning & Management track"
+    path: "The Wedding Business School's Luxury Wedding Planning & Management track"
   },
   designer: {
     name: 'Wedding Designer',
     persona: 'Visionary Creator',
     description: "You see weddings as immersive design stories — colour, texture, and atmosphere are your language. You'd rather sketch a concept than follow a template.",
     skills: ['Concept boarding & styling', 'Colour theory for events', 'Set & décor production'],
-    path: "IIWM's Wedding Design & Styling specialization"
+    path: "The Wedding Business School's Wedding Design & Styling specialization"
   },
   florist: {
     name: 'Floral Designer',
     persona: "Nature's Artist",
     description: "Flowers are your medium. You have an instinct for colour, texture and composition, and you find focus in detailed, hands-on creative work.",
     skills: ['Floral composition & structure', 'Seasonal sourcing', 'Large-scale installation design'],
-    path: "IIWM's Floral & Décor Artistry module"
+    path: "The Wedding Business School's Floral & Décor Artistry module"
   },
   destination: {
     name: 'Destination Wedding Specialist',
     persona: 'Global Celebration Curator',
     description: "You light up at the idea of producing celebrations in new places — juggling logistics across cities, cultures and time zones excites rather than exhausts you.",
     skills: ['Cross-border vendor logistics', 'Travel & hospitality coordination', 'Multi-day event production'],
-    path: "IIWM's Destination Wedding Operations track"
+    path: "The Wedding Business School's Destination Wedding Operations track"
   },
   production: {
     name: 'Production Manager',
     persona: 'Calm Commander',
     description: "When everything is happening at once, you're at your best. You think on your feet, manage crises quietly, and keep an event running exactly on time.",
     skills: ['Run-of-show & timeline mastery', 'On-site crisis management', 'Team & crew coordination'],
-    path: "IIWM's Event Production & Operations track"
+    path: "The Wedding Business School's Event Production & Operations track"
   },
   guest: {
     name: 'Guest Experience Manager',
     persona: 'Natural Host',
     description: "You read a room instinctively and care deeply about how people feel. Hospitality isn't a task for you — it's an instinct.",
     skills: ['Guest journey design', 'Hospitality service standards', 'On-ground guest management'],
-    path: "IIWM's Hospitality & Guest Experience specialization"
+    path: "The Wedding Business School's Hospitality & Guest Experience specialization"
   },
   vendor: {
     name: 'Vendor Relationship Manager',
     persona: 'Master Connector',
     description: "You build trust fast and negotiate fair. Vendors and partners remember you — and that network becomes your biggest asset.",
     skills: ['Vendor sourcing & vetting', 'Contract negotiation', 'Long-term partnership management'],
-    path: "IIWM's Vendor & Partnership Management module"
+    path: "The Wedding Business School's Vendor & Partnership Management module"
   },
   entertainment: {
     name: 'Entertainment Curator',
     persona: 'Energy Setter',
     description: "You understand pacing, mood and performance. You know exactly when a room needs the music to swell — or quiet down.",
     skills: ['Entertainment programming', 'Talent sourcing & booking', 'Live show coordination'],
-    path: "IIWM's Entertainment & Experience Design module"
+    path: "The Wedding Business School's Entertainment & Experience Design module"
   },
   logistics: {
     name: 'Logistics Manager',
     persona: 'Master Planner',
     description: "Spreadsheets, timelines, checklists — you find calm in structure, and you're the reason nothing falls through the cracks.",
     skills: ['Timeline & critical-path planning', 'Resource & inventory management', 'Process systems for events'],
-    path: "IIWM's Wedding Logistics & Planning Systems track"
+    path: "The Wedding Business School's Wedding Logistics & Planning Systems track"
   }
 };
 
