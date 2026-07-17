@@ -17,10 +17,10 @@
   --maroon: #7C1830;
   --ink: #2B2118;
   --muted: #7A6B5D;
-  --muted-label: #8B7A6A;
+  --muted-label: #76675A;
 
-  --coral: #B8863F;
-  --coral-dark: #9C7538;
+  --coral: #936B32;
+  --coral-dark: #7C5D2C;
   --coral-soft: #E7CE9C;
   --white: #FFFFFF;
 
@@ -415,8 +415,9 @@ body { background: var(--ivory); }
   letter-spacing: .05em;
   text-transform: uppercase;
   line-height: .95;
-  /* rich poster gold, warmer than --gold */
-  color: #C9973B;
+  /* rich poster gold, warmer than --gold; darkened from #C9973B to clear
+     WCAG large-text contrast (3:1) against the ivory hero background */
+  color: #AA8032;
 }
 .hero-title-script {
   display: block;
@@ -1625,7 +1626,7 @@ button.career-card {
      than its track and blow out the grid horizontally on phones. */
   min-width: 0;
 }
-.footer-col h4 {
+.footer-col-title {
   font-size: 11.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
