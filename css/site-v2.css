@@ -1480,7 +1480,7 @@ button.career-card {
   inset: -14% -20% 2%;
   z-index: 0;
   border-radius: 46% 54% 42% 58% / 56% 46% 54% 44%;
-  background: radial-gradient(60% 58% at 48% 36%, rgba(238, 127, 120, .4), rgba(238, 127, 120, .15) 58%, transparent 78%);
+  background: radial-gradient(60% 58% at 48% 36%, rgba(184, 134, 63, .4), rgba(184, 134, 63, .15) 58%, transparent 78%);
   filter: blur(8px);
 }
 .founder-v2-frame {
@@ -1508,8 +1508,8 @@ button.career-card {
   .founder-v2-media { margin-bottom: -56px; }
 }
 
-/* Softens the hand-off from the hero's ivory background into the coral
-   Career Path card right below it — a wide, faint coral radial glow
+/* Softens the hand-off from the hero's ivory background into the gold
+   Career Path card right below it — a wide, faint gold radial glow
    bleeds upward into the hero's bottom whitespace so the card's color
    feels like it eases in rather than starting abruptly at a hard edge. */
 .section--blend-top { position: relative; }
@@ -1520,7 +1520,7 @@ button.career-card {
   right: 0;
   top: -140px;
   height: 200px;
-  background: radial-gradient(60% 100% at 50% 100%, rgba(226, 101, 93, .16), transparent 74%);
+  background: radial-gradient(60% 100% at 50% 100%, rgba(184, 134, 63, .16), transparent 74%);
   pointer-events: none;
   z-index: 0;
 }
@@ -1531,7 +1531,7 @@ button.career-card {
   overflow: hidden;
   border-radius: var(--radius-card);
   background:
-    linear-gradient(100deg, rgba(226, 101, 93, .94) 35%, rgba(226, 101, 93, .55) 100%),
+    linear-gradient(100deg, rgba(184, 134, 63, .94) 35%, rgba(156, 117, 56, .55) 100%),
     url("../assets/images/hero-mandap.jpg") center / cover;
   margin: 0 var(--side-pad);
   padding: clamp(36px, 6vw, 54px) clamp(28px, 5vw, 56px);
