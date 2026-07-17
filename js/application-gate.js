@@ -18,7 +18,7 @@ var LEADS_STORAGE_KEY = 'iiwm_application_leads';
 var COPY = {
   'Apply Now': {
     title: 'Apply Now',
-    intro: '1. Send your resume to <a href="mailto:joiniiwmbangalore@gmail.com">joiniiwmbangalore@gmail.com</a> and our team will get back to you.',
+    intro: '1. Send your resume to <a href="mailto:apply@theweddingbusiness.school">apply@theweddingbusiness.school</a> and our team will get back to you.',
     submitLabel: 'Submit Application',
     successTitle: 'Thank you!',
     successBody: 'Thank you for your application. Our team will get back to you ASAP!'
