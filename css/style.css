@@ -144,10 +144,11 @@ main p strong { font-weight: 800; color: var(--maroon); }
 }
 
 .eyebrow {
-  font-family: var(--font-sans);
-  font-size: 11px;
-  letter-spacing: .28em;
-  text-transform: uppercase;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
+  letter-spacing: .02em;
+  text-transform: none;
   color: var(--gold-text);
   font-weight: 400;
 }
