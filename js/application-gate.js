@@ -49,19 +49,19 @@ function openApplicationForm(source, prefill) {
   var extra = (prefill && prefill.extra) || {};
 
   var introHtml = copy.intro
-    ? '<p style="font-size:14px;line-height:1.5;color:var(--muted);margin:0 0 20px">' + copy.intro + '</p>'
+    ? '<p style="font-size:16.5px;font-weight:700;line-height:1.5;color:var(--ink);margin:4px 0 20px">' + copy.intro + '</p>'
     : '';
 
   modal.innerHTML =
     '<button type="button" class="admin-login-close" aria-label="Close">&times;</button>' +
     '<p class="eyebrow">The Wedding Business School</p>' +
     '<h3>' + escapeHtml(copy.title) + '</h3>' +
-    introHtml +
     '<form id="applicationForm" novalidate>' +
     '<div class="admin-login-field"><label for="appName">Full Name</label>' +
     '<input type="text" id="appName" autocomplete="name" value="' + escapeHtml(name) + '" required></div>' +
     '<div class="admin-login-field"><label for="appPhone">Contact Number</label>' +
     '<input type="tel" id="appPhone" autocomplete="tel" value="' + escapeHtml(phone) + '" required></div>' +
+    introHtml +
     '<div class="admin-login-field"><label for="appMessage">Anything you\'d like to share? (optional)</label>' +
     '<textarea id="appMessage" rows="4"></textarea></div>' +
     '<p class="admin-login-error" id="appError"></p>' +
