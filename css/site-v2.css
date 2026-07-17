@@ -19,9 +19,9 @@
   --muted: #7A6B5D;
   --muted-label: #8B7A6A;
 
-  --coral: #EE7F78;
-  --coral-dark: #E2655D;
-  --coral-soft: #F7C3BF;
+  --coral: #B8863F;
+  --coral-dark: #9C7538;
+  --coral-soft: #E7CE9C;
   --white: #FFFFFF;
 
   --radius-card: 22px;
@@ -337,7 +337,7 @@ body { background: var(--ivory); }
     height: 56%;
     z-index: 0;
   }
-  .hero-fade-media img { object-position: 66% 55%; }
+  .hero-fade-media img { object-position: 50% 32%; }
   /* Left ~55% (where the info-list text sits) fades into the ivory so
      text stays legible; the right ~45% (peacock + mandap) stays fully
      vivid — a localized fade instead of dulling the whole photo. */
