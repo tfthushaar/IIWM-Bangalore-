@@ -564,7 +564,7 @@
       '</div>' +
 
       '<div class="results-panel results-panel--path">' +
-      '<p class="results-panel-label">Recommended Training Program</p>' +
+      '<p class="results-panel-label">Recommended Program</p>' +
       '<p>Why it fits:</p>' +
       '<ul class="results-skills">' + whyFitsHtml + '</ul>' +
       '</div>' +

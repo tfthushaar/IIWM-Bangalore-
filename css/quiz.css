@@ -77,7 +77,7 @@
 .quiz-progress-label {
   display: block;
   flex-shrink: 0;
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted-label);
@@ -169,6 +169,14 @@
   color: var(--antique-gold);
   margin: 0 0 14px;
 }
+/* Question screen's section label (e.g. "Personality") reads as a small
+   caption otherwise — sized up substantially so it lands as an actual
+   section marker above each question. */
+.quiz-question .quiz-eyebrow {
+  font-size: clamp(56px, 15vw, 84px);
+  line-height: 1.05;
+  margin-bottom: 20px;
+}
 
 /* ===== Landing ===== */
 .quiz-landing {
@@ -207,6 +215,7 @@
 }
 .quiz-landing-title {
   font-family: var(--font-serif);
+  font-style: italic;
   font-weight: 300;
   font-size: clamp(38px, 8vw, 58px);
   line-height: 1.05;
@@ -230,7 +239,7 @@
   margin: 0 0 36px;
 }
 .quiz-landing-meta li {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--ivory);
@@ -425,7 +434,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 14px;
-  font-size: 11.5px;
+  font-size: 13.5px;
   letter-spacing: .04em;
   color: var(--muted-label);
 }
@@ -457,6 +466,7 @@
 }
 .quiz-lead-title {
   font-family: var(--font-serif);
+  font-style: italic;
   font-weight: 300;
   font-size: clamp(26px, 5vw, 34px);
   color: var(--ink);
@@ -466,7 +476,7 @@
 .quiz-lead-form { display: flex; flex-direction: column; gap: 22px; }
 .quiz-field { display: flex; flex-direction: column; }
 .quiz-field label {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: .1em;
   text-transform: uppercase;
   color: var(--muted-label);
@@ -516,7 +526,7 @@
 @keyframes resultFade { to { opacity: 1; } }
 
 .results-section-label {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--muted-label);
@@ -573,7 +583,7 @@
 .result-card-title .result-card-kicker {
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 10.5px;
+  font-size: 12.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--antique-gold);
@@ -623,7 +633,7 @@
   margin-bottom: 20px;
 }
 .results-panel-label {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--antique-gold);
@@ -655,7 +665,7 @@
 
 .results-fitscore { text-align: center; margin: 0 auto 40px; }
 .results-fitscore-label {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: .14em;
   text-transform: uppercase;
   color: var(--muted-label);

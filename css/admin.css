@@ -110,7 +110,7 @@
   color: var(--ink);
 }
 .admin-stat-label {
-  font-size: 11.5px;
+  font-size: 13.5px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--muted-label);
@@ -139,9 +139,10 @@
   border-color: var(--gold);
   box-shadow: 0 0 0 3px rgba(169, 131, 79, .15);
 }
-.btn-admin-sm { padding: 6px 14px; font-size: 11.5px; }
+.btn-admin-sm { padding: 6px 14px; font-size: 13.5px; }
 .admin-panel-head h2 {
   font-family: var(--font-serif);
+  font-style: italic;
   font-weight: 600;
   font-size: 26px;
   color: var(--ink);
@@ -193,7 +194,7 @@
 .admin-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 .admin-table th {
   text-align: left;
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: .06em;
   text-transform: uppercase;
   color: var(--muted-label);
@@ -245,7 +246,7 @@
 .admin-table-muted { color: var(--muted); font-size: 12.5px; }
 .admin-pill {
   display: inline-block;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 500;
   padding: 4px 10px;
   border-radius: 999px;
@@ -286,7 +287,7 @@
 .admin-modal-meta { font-size: 12.5px; color: var(--muted-label); margin-bottom: 20px; }
 .admin-modal-section { margin-bottom: 20px; }
 .admin-modal-section h4 {
-  font-size: 11px;
+  font-size: 13px;
   letter-spacing: .08em;
   text-transform: uppercase;
   color: var(--gold-text);

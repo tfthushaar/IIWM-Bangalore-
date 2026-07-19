@@ -79,21 +79,14 @@
     }
   });
 
-  /* ---- Scroll reveal ---- */
+  /* ---- Section reveal ----
+     Previously gated behind an IntersectionObserver that faded each
+     section in as it scrolled into view. On some mobile browsers that
+     left freshly-navigated pages showing a blank gap below the banner
+     until a scroll/keypress happened to fire the observer callback. All
+     content now shows immediately on load instead. */
   var revealEls = document.querySelectorAll('[data-reveal]');
-  if (reduceMotion || !('IntersectionObserver' in window)) {
-    revealEls.forEach(function (el) { el.classList.add('is-visible'); });
-  } else {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -10% 0px' });
-    revealEls.forEach(function (el) { observer.observe(el); });
-  }
+  revealEls.forEach(function (el) { el.classList.add('is-visible'); });
 
   /* ---- Footer year ---- */
   var yearEl = document.getElementById('year');
@@ -130,7 +123,7 @@
   }
 
   /* ---- Career role popup (homepage "Career Path" section) ----
-     Content summarised from assets/PDFS/IIWM_Wedding_Careers_Compilation_Final.pdf
+     Content summarised from assets/PDFS/The_Wedding_Business_School_Careers_Compilation.pdf
      — one page per role in that deck. */
   var ROLE_DATA = {
     'wedding-planner': {
@@ -272,6 +265,78 @@
       ],
       quote: 'Great celebrations are built on great partnerships. I connect the right people, align the details and bring the vision to life.',
       closing: 'Strong vendors. Stronger partnerships. Extraordinary celebrations.'
+    },
+    'destination-wedding-planner': {
+      title: 'Destination Wedding Planner',
+      tagline: 'Turning Dreams Into Unforgettable Celebrations, Anywhere in the World.',
+      summary: 'A Destination Wedding Planner is your guide, your organiser, your problem-solver and your creative partner—all rolled into one, bringing your celebration to life wherever in the world you choose to say "I do."',
+      items: [
+        ['Location Expertise', 'Recommends the perfect destination based on your vision, budget & guest experience.'],
+        ['Planning & Coordination', 'Manages every detail, from timelines to logistics, ensuring a seamless experience.'],
+        ['Vendor Management', 'Shortlists & coordinates with trusted local vendors & ensures the highest quality.'],
+        ['Travel & Guest Experience', 'Handles travel, stay, transportation & guest comfort with personal attention.'],
+        ['Design & Conceptualisation', 'Brings your dream to life with creative concepts inspired by the destination.'],
+        ['Budget Management', 'Optimises costs without compromising on style, value & experience.'],
+        ['Legal & Document Assistance', 'Guides you through legalities, permits & documentation with ease.'],
+        ['On-Site Execution', 'Oversees everything on the ground to ensure your big day is flawless.']
+      ],
+      quote: 'A Destination Wedding Planner is your guide, your organiser, your problem-solver and your creative partner—all rolled into one.',
+      closing: 'We plan. You celebrate. Memories last forever.'
+    },
+    'wedding-on-site-coordinator': {
+      title: 'Wedding On-Site Coordinator',
+      tagline: 'On the Day. In the Details. Always by Your Side.',
+      summary: "A Wedding On-Site Coordinator is your calm in the chaos—managing every detail on the day so you can be fully present and enjoy every beautiful moment.",
+      items: [
+        ['Timeline Management', "Oversee the entire day's timeline and ensure every event happens on time."],
+        ['Vendor & Team Coordination', 'Coordinate with all vendors and manage the team for smooth execution.'],
+        ['Setup Supervision & Management', 'Ensure all setups are perfect, on-brand and ready well before the event begins.'],
+        ['Guest Assistance & Hospitality', 'Assist guests with directions, information and special requests with a smile.'],
+        ['Communication Hub', 'Act as the central point of communication for all teams, vendors and the family.'],
+        ['Problem Solving on the Go', 'Handle unexpected situations quickly and efficiently with calm and confidence.'],
+        ['Quality Checks Throughout', 'Conduct regular checks to ensure quality, cleanliness and consistency all day.'],
+        ['Ceremony & Reception Support', 'Manage every transition seamlessly from ceremony to celebration.'],
+        ['Family Support & Comfort', 'Be the go-to person for the family—supporting, guiding and reassuring.'],
+        ['End to End Execution', 'From the first setup to the last send-off, I stay until everything is perfect.']
+      ],
+      quote: 'I handle the details so you can live the moments.',
+      closing: "You celebrate. I'll take care of the rest."
+    },
+    'wedding-consultant': {
+      title: 'Wedding Consultant',
+      tagline: 'Your Vision. Our Expertise. A Celebration Beyond Imagination.',
+      summary: 'A Wedding Consultant is your trusted guide from the first idea to the final farewell—turning your dreams into a beautifully planned and flawlessly executed celebration.',
+      items: [
+        ['Understand & Consult', 'I listen, understand your vision, preferences and priorities to create a plan that truly reflects you.'],
+        ['Plan & Strategize', 'From concepts to timelines, budgets to logistics—I design a clear and customized plan for your big day.'],
+        ['Vendor Curation & Recommendations', 'I connect you with the right vendors and negotiate the best value without compromising on quality.'],
+        ['Design & Concept Development', 'I create creative concepts, mood boards and design direction that bring your dream wedding to life.'],
+        ['Budget Management', 'I help you plan smart, allocate wisely and maximize every penny for the best experience.'],
+        ['Detail Planning & Coordination', 'I manage every detail, big or small, and coordinate seamlessly so everything comes together perfectly.'],
+        ['Problem Solving Expertise', 'I anticipate challenges and handle them efficiently, ensuring a smooth and stress-free experience.'],
+        ['Personalized Guidance Every Step', 'I guide you through every decision with honest advice and industry expertise.'],
+        ['Focus on You', 'While I handle the details, you can focus on what truly matters—celebrating love and making memories.'],
+        ['A Seamless & Memorable Experience', 'My goal is to create a celebration that is stress-free, seamless and truly unforgettable.']
+      ],
+      quote: 'I listen to your story, understand your vision and craft a celebration that is uniquely yours.',
+      closing: 'Behind every magical wedding is a consultant who cares, plans and makes it happen.'
+    },
+    'wedding-decor-stylist': {
+      title: 'Wedding Decor Stylist',
+      tagline: "We Don't Just Decorate Spaces, We Create Atmospheres.",
+      summary: 'A Wedding Decor Stylist transforms a vision into an immersive experience through creativity, detail, colour, texture and emotion. We design the look. You feel the magic.',
+      items: [
+        ['Conceptualise', 'We understand your story, inspiration and preferences to create a unique design concept that sets the tone.'],
+        ['Theme & Style Development', 'From mood boards to colour palettes, we craft a cohesive visual language that reflects your personality and celebration.'],
+        ['Decor Design & Planning', 'We plan every element—florals, drapes, furniture, lighting, props and more—with precision and purpose.'],
+        ['Sourcing & Curation', 'We source the finest materials, premium décor pieces and floral elements to bring our designs to life.'],
+        ['Execution Excellence', 'Our team manages on-ground execution with flawless attention to detail and timely delivery.'],
+        ['Ambience Creation', 'We use lighting, textures and layering to create the perfect mood, depth and ambience for every moment.'],
+        ['Space Transformation', 'We turn any space into a breathtaking setting that wows your guests and enhances every experience.'],
+        ['Emotional Impact', 'Every detail is designed to evoke emotions and leave a lasting impression on you and your guests.']
+      ],
+      quote: 'We style moments that become memories forever.',
+      closing: 'Beyond decor. Beyond beautiful. We design dreams.'
     }
   };
 
