@@ -205,7 +205,7 @@ var QUIZ_QUESTIONS = [
     ] },
 
   // ==================== Section 6 — Career Goals ====================
-  { id: 'career_goal', section: 'Career Goals', type: 'single', text: 'Where do you see yourself in 5 years?',
+  { id: 'career_goal', section: 'Career Goals', type: 'single', text: 'Where do you see yourself in 2 years?',
     options: [
       { label: 'Working in luxury weddings', archetypeWeights: { planner: 4 }, dimensionWeights: { luxury: 3, industryFit: 3 } },
       { label: 'Destination weddings', archetypeWeights: { destination: 4 }, dimensionWeights: { adaptability: 3, luxury: 2 } },
