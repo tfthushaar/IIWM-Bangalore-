@@ -34,8 +34,8 @@ body { background: var(--ivory); }
 
 /* ===== Eyebrows restyled for this direction ===== */
 .eyebrow {
-  color: var(--maroon);
-  font-weight: 500;
+  color: var(--ink);
+  font-weight: 700;
   letter-spacing: .02em;
 }
 
@@ -148,6 +148,8 @@ body { background: var(--ivory); }
   color: var(--white);
 }
 /* Small back-to-home affordance on every inner page's banner. */
+/* Subtle — just the arrow, no circular backdrop. Width/height stay as a
+   comfortable invisible tap target. */
 .page-back-btn {
   position: absolute;
   top: clamp(16px, 3vw, 26px);
@@ -158,18 +160,15 @@ body { background: var(--ivory); }
   justify-content: center;
   width: 34px;
   height: 34px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, .16);
-  border: 1px solid rgba(255, 255, 255, .45);
-  color: var(--white);
-  transition: background-color .18s ease, transform .18s ease;
+  color: rgba(255, 255, 255, .75);
+  transition: color .18s ease, transform .18s ease;
 }
 .page-back-btn:hover,
 .page-back-btn:focus-visible {
-  background: rgba(255, 255, 255, .32);
+  color: var(--white);
   transform: translateX(-2px);
 }
-.page-back-btn svg { width: 16px; height: 16px; }
+.page-back-btn svg { width: 20px; height: 20px; }
 .page-banner-eyebrow {
   font-family: var(--font-sans);
   font-size: 13px;
@@ -439,21 +438,21 @@ body { background: var(--ivory); }
   display: block;
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 500;
+  font-weight: 700;
   font-size: clamp(32px, 10vw, 52px);
   line-height: 1.05;
-  color: var(--maroon);
+  color: var(--ink);
   margin-top: 2px;
 }
 .hero-title-main {
   display: block;
   font-family: var(--font-serif);
-  font-weight: 600;
+  font-weight: 700;
   font-size: clamp(20px, 6.2vw, 30px);
   letter-spacing: .07em;
   text-transform: uppercase;
   line-height: 1.24;
-  color: var(--maroon);
+  color: var(--ink);
   margin-top: 10px;
 }
 .hero-fade-tagline {
@@ -639,9 +638,9 @@ body { background: var(--ivory); }
   line-height: 1.4;
 }
 .hero-fade-stats-text strong {
-  font-weight: 600;
+  font-weight: 700;
   font-size: 15px;
-  color: var(--maroon);
+  color: var(--ink);
 }
 /* "Internships and Live Industry Exposure" is a single two-line heading
    (no separate description line like the other three stats), so both
@@ -765,7 +764,7 @@ body { background: var(--ivory); }
   margin-bottom: 6px;
 }
 .why-compare-col--traditional .why-compare-label { color: var(--muted-label); }
-.why-compare-col--iiwm .why-compare-label { color: var(--maroon); }
+.why-compare-col--iiwm .why-compare-label { color: var(--ink); font-weight: 700; }
 .why-compare-row {
   padding: 9px 0;
   border-bottom: 1px solid rgba(124, 24, 48, .08);
@@ -887,9 +886,9 @@ body { background: var(--ivory); }
 .inner-circle-card-name {
   font-family: var(--font-serif);
   font-style: italic;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 22px;
-  color: var(--maroon);
+  color: var(--ink);
 }
 .inner-circle-card-role {
   font-size: 12.5px;
@@ -1219,8 +1218,8 @@ button.career-card {
 }
 .role-modal-list li strong {
   display: block;
-  font-weight: 600;
-  color: var(--maroon);
+  font-weight: 700;
+  color: var(--ink);
   margin-bottom: 2px;
 }
 .role-modal-list li span { color: var(--muted); }
@@ -1240,9 +1239,9 @@ button.career-card {
   margin-top: 18px;
   text-align: center;
   font-family: var(--font-serif);
-  font-weight: 500;
+  font-weight: 700;
   font-size: 16px;
-  color: var(--maroon);
+  color: var(--ink);
 }
 
 /* "Click to know more" reveal: the full career-grid + View All button
@@ -1355,8 +1354,8 @@ button.career-card {
   font-size: 13px;
   letter-spacing: .22em;
   text-transform: uppercase;
-  color: var(--maroon);
-  font-weight: 600;
+  color: var(--ink);
+  font-weight: 700;
 }
 /* Homepage variant only — reads as a small standalone statement above
    "Meet Lakshmi Keerthi" rather than a standard section eyebrow label, so
@@ -1513,8 +1512,8 @@ button.career-card {
    instead of the ragged 1-word-per-line wrap the narrower column caused. */
 @media (max-width: 679px) {
   .founder-v2 {
-    grid-template-columns: 1.3fr 1fr;
-    column-gap: 16px;
+    grid-template-columns: 1fr 1.05fr;
+    column-gap: 14px;
     row-gap: 20px;
     align-items: center;
   }
@@ -1707,8 +1706,8 @@ button.career-card {
   font-size: 13.5px;
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--maroon);
-  font-weight: 600;
+  color: var(--ink);
+  font-weight: 700;
   margin-bottom: 16px;
 }
 .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
@@ -1716,7 +1715,7 @@ button.career-card {
 .footer-col a:hover, .footer-col a:focus-visible { color: var(--coral); }
 .footer-col-contact li { display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
 .footer-col-contact svg { flex: none; width: 15px; height: 15px; margin-top: 2px; color: var(--gold); }
-.footer-enquire p { font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
+.footer-enquire p:not(.footer-col-title) { font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
 .footer-social { display: flex; gap: 10px; }
 .footer-social a {
   width: 32px;
@@ -1765,8 +1764,8 @@ button.career-card {
   font-size: 13px;
   letter-spacing: .14em;
   text-transform: uppercase;
-  font-weight: 600;
-  color: var(--maroon);
+  font-weight: 700;
+  color: var(--ink);
   margin-bottom: 8px;
 }
 .fact-item p {
@@ -1870,7 +1869,11 @@ button.career-card {
   line-height: 1.2;
   margin-bottom: 4px;
 }
-.content-block p {
+/* :not(.eyebrow) — otherwise this beats the plain .eyebrow class on
+   specificity (class+type > class alone) and silently overrides its
+   color back to muted wherever an eyebrow label sits inside a
+   .content-block, which is most of the site. */
+.content-block p:not(.eyebrow) {
   font-size: 16px;
   color: var(--muted);
   line-height: 1.75;
@@ -1934,7 +1937,7 @@ button.career-card {
   font-size: 26px;
   margin-bottom: 16px;
 }
-.audience-card h3 { font-family: var(--font-serif); font-style: italic; font-size: 18px; font-weight: 600; color: var(--maroon); }
+.audience-card h3 { font-family: var(--font-serif); font-style: italic; font-size: 18px; font-weight: 700; color: var(--ink); }
 .audience-card p { font-size: 15px; color: var(--muted); line-height: 1.65; margin-top: 8px; }
 
 .list-check { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
@@ -1972,7 +1975,7 @@ button.career-card {
 /* Curriculum page: bigger, bolder intro heading and week titles so the
    module-by-module build reads as the page's main event. */
 #curriculum .content-block h2 { font-weight: 700; font-size: clamp(32px, 4.4vw, 50px); }
-#curriculum .timeline-v2-item h4 { font-size: clamp(20px, 2.4vw, 24px); font-weight: 800; color: var(--maroon); }
+#curriculum .timeline-v2-item h4 { font-size: clamp(20px, 2.4vw, 24px); font-weight: 800; color: var(--ink); }
 
 /* ===== Homepage "How to Apply" — two steps (send resume / counselling),
    maroon icon-circles joined by a dotted connector, mirroring the
@@ -2200,7 +2203,7 @@ button.career-card {
   color: var(--ink);
   line-height: 1.6;
 }
-.form-success-msg strong { display: block; font-family: var(--font-serif); font-size: 22px; font-weight: 600; color: var(--maroon); margin-bottom: 8px; }
+.form-success-msg strong { display: block; font-family: var(--font-serif); font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
 .form-error-msg { font-size: 14.5px; color: #B3261E; text-align: center; margin-top: 12px; }
 .form-row { display: grid; grid-template-columns: 1fr; gap: 18px; }
 @media (min-width: 560px) { .form-row { grid-template-columns: 1fr 1fr; } }
