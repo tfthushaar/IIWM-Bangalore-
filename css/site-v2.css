@@ -520,14 +520,14 @@ body { background: var(--ivory); }
      carries Explore Program / Download Brochure / Apply Now. */
   .hero-fade-actions { display: none; }
 }
-/* Mid widths: the ~50vw text column is too narrow for the full-size pills
-   to share a row — slim them so both stay side by side like the design. */
-@media (min-width: 680px) and (max-width: 1099px) {
-  .hero-fade-actions { gap: 10px; }
+/* Desktop: the ~50vw text column is too narrow for the full-size pills to
+   share a row — slim them so all three stay on one line at every desktop
+   width, not just the mid-width band. */
+@media (min-width: 680px) {
+  .hero-fade-actions { gap: 10px; flex-wrap: nowrap; }
   .hero-fade-actions .btn {
     padding: 12px 18px;
-    font-size: 13px;
-    gap: 7px;
+    font-size: 12.5px;
   }
 }
 

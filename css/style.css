@@ -230,9 +230,7 @@ main p strong { font-weight: 800; color: var(--maroon); }
   color: var(--ink);
   border-color: var(--gold);
 }
-@media (min-width: 900px) {
-  .home-btn { display: inline-flex; }
-}
+/* Removed on desktop: redundant with the logo, which already links home. */
 .wordmark-mark {
   width: clamp(62px, 8vw, 84px);
   height: auto;
@@ -410,10 +408,14 @@ main p strong { font-weight: 800; color: var(--maroon); }
 
 @media (max-width: 899px) {
   /* Grid's centered nav column isn't needed below 900px (site-nav is
-     hidden), so switch to flex: logo on the left, header-actions
-     (hamburger) pinned to the right — a clean two-item bar. */
-  .site-header { display: flex; align-items: center; }
-  .header-actions { margin-left: auto; }
+     hidden), so switch to flex: logo + hamburger share the top line,
+     and the quicknav gets forced onto its own full-width line below
+     (order + flex-basis:100%) so it has the whole row to breathe in
+     instead of being squeezed between the logo and the hamburger. */
+  .site-header { display: flex; flex-wrap: wrap; align-items: center; row-gap: 6px; }
+  .header-brand { order: 1; }
+  .header-actions { order: 2; margin-left: auto; }
+  .mobile-quicknav { order: 3; flex-basis: 100%; }
 }
 
 @media (min-width: 900px) {
@@ -436,39 +438,41 @@ main p strong { font-weight: 800; color: var(--maroon); }
   .site-nav .nav-dropdown-trigger { font-size: 12px; }
 }
 
-/* ===== Mobile/tablet quick-nav — sits inline in the header row itself
-   (between the logo and the hamburger), not a separate strip underneath.
-   Space is tight next to the logo/hamburger, so type is smaller than a
-   dedicated row would allow, and a thin gold dot separates each link
-   instead of a wide gap. */
+/* ===== Mobile/tablet quick-nav — its own full-width line below the
+   logo/hamburger row (forced there via order + flex-basis:100% above),
+   so all 4 links get the whole row to fit in without scrolling, wrapping,
+   or shrinking type down too far. Centered with a thin gold dot between
+   each link instead of a wide gap. */
 .mobile-quicknav {
   display: flex;
-  flex: 1 1 auto;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  gap: clamp(18px, 5.4vw, 28px);
+  gap: 8px clamp(10px, 3.4vw, 20px);
+  row-gap: 4px;
   min-width: 0;
-  overflow: hidden;
+  width: 100%;
 }
 .mobile-quicknav a {
   font-family: var(--font-sans);
-  font-size: clamp(9.5px, 2.6vw, 11.5px);
+  font-size: clamp(11px, 3vw, 13px);
   font-weight: 600;
   letter-spacing: .01em;
   color: var(--ink);
   white-space: nowrap;
+  flex: none;
   position: relative;
 }
 .mobile-quicknav a:not(:last-child)::after {
   content: "\2022";
   position: absolute;
-  right: clamp(-21px, -4.6vw, -17px);
+  right: clamp(-15px, -3vw, -11px);
   color: var(--gold);
 }
 @media (max-width: 380px) {
-  .mobile-quicknav { gap: 14px; }
+  .mobile-quicknav { gap: 6px 12px; }
   .mobile-quicknav a { font-size: 11px; }
-  .mobile-quicknav a:not(:last-child)::after { right: -10px; }
+  .mobile-quicknav a:not(:last-child)::after { right: -8px; }
 }
 
 /* ===== Mobile / overlay menu ===== */
@@ -746,13 +750,23 @@ main p strong { font-weight: 800; color: var(--maroon); }
   border: 5px solid transparent;
   border-top-color: var(--ink);
 }
+/* Kept visible at all widths now — Apply Now must stay persistent at the
+   bottom on desktop too, not just mobile. Above 900px it becomes a
+   centered floating dock instead of a full-bleed bar, so it doesn't
+   stretch edge-to-edge on wide screens. */
 @media (min-width: 900px) {
-  .mobile-apply-bar { display: none; }
+  .mobile-apply-bar {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    max-width: 560px;
+    width: calc(100% - 48px);
+    border-radius: 20px 20px 0 0;
+    border-left: 1px solid rgba(32, 24, 16, .1);
+    border-right: 1px solid rgba(32, 24, 16, .1);
+  }
 }
 body.has-mobile-apply-bar { padding-bottom: 78px; }
-@media (min-width: 900px) {
-  body.has-mobile-apply-bar { padding-bottom: 0; }
-}
 
 /* ===== Persistent floating WhatsApp chat button (site-wide) ===== */
 .whatsapp-float {
