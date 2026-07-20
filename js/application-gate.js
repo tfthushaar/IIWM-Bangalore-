@@ -18,6 +18,7 @@ var LEADS_STORAGE_KEY = 'iiwm_application_leads';
 var COPY = {
   'Apply Now': {
     title: 'Apply Now',
+    intro: 'Step 1: Submit your application with your name &amp; contact number below. Step 2: Our team will reach out to schedule a quick counselling session and help you secure your seat.',
     submitLabel: 'Submit Application',
     successTitle: 'Thank you!',
     successBody: 'Thank you for your application. Our team will get back to you ASAP!'
@@ -55,12 +56,12 @@ function openApplicationForm(source, prefill) {
     '<button type="button" class="admin-login-close" aria-label="Close">&times;</button>' +
     '<p class="eyebrow">The Wedding Business School</p>' +
     '<h3>' + escapeHtml(copy.title) + '</h3>' +
+    introHtml +
     '<form id="applicationForm" novalidate>' +
     '<div class="admin-login-field"><label for="appName">Full Name</label>' +
     '<input type="text" id="appName" autocomplete="name" value="' + escapeHtml(name) + '" required></div>' +
     '<div class="admin-login-field"><label for="appPhone">Contact Number</label>' +
     '<input type="tel" id="appPhone" autocomplete="tel" value="' + escapeHtml(phone) + '" required></div>' +
-    introHtml +
     '<div class="admin-login-field"><label for="appMessage">Anything you\'d like to share? (optional)</label>' +
     '<textarea id="appMessage" rows="4"></textarea></div>' +
     '<p class="admin-login-error" id="appError"></p>' +
