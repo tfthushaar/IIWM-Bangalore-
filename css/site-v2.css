@@ -2,7 +2,7 @@
    IIWM Bangalore — "Wedding Invitation" direction (v2)
    Loaded AFTER css/style.css on every marketing page (index/about/program/
    course-details/placements/gallery/blog/contact). Never loaded by
-   quiz.html, so quiz.css and quiz.html stay completely unaffected.
+   careerprofiler.html, so quiz.css and careerprofiler.html stay completely unaffected.
    This file overrides the shared :root tokens from style.css (only on
    pages that load it) and adds every new-direction component.
    ========================================================================= */
@@ -396,7 +396,10 @@ body { background: var(--ivory); }
   .hero-fade-content {
     max-width: none;
     text-align: center;
-    padding: 26px var(--side-pad) 6px;
+    /* Clears the absolutely-positioned launch-banner ribbon pinned to the
+       top-left corner (top:10px, up to ~190px tall) so it never overlaps
+       the headline text below it. */
+    padding: clamp(190px, 46vw, 220px) var(--side-pad) 6px;
   }
 }
 
@@ -407,8 +410,8 @@ body { background: var(--ivory); }
 .hero-title-kicker {
   display: block;
   font-family: var(--font-sans);
-  font-weight: 300;
-  font-size: clamp(20px, 6vw, 26px);
+  font-weight: 700;
+  font-size: clamp(24px, 7vw, 32px);
   letter-spacing: .3em;
   text-indent: .3em;
   text-transform: uppercase;
@@ -450,8 +453,8 @@ body { background: var(--ivory); }
 }
 .hero-fade-tagline {
   font-family: var(--font-sans);
-  font-weight: 300;
-  font-size: clamp(17px, 4.6vw, 21px);
+  font-weight: 700;
+  font-size: clamp(20px, 5.4vw, 25px);
   letter-spacing: .12em;
   color: var(--ink);
   margin: 0 0 22px;
@@ -836,6 +839,60 @@ body { background: var(--ivory); }
 }
 @media (min-width: 640px) { .career-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (min-width: 1080px) { .career-grid { grid-template-columns: repeat(6, 1fr); } }
+
+/* ===== Inner Circle mentor cards ===== */
+.inner-circle-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 260px));
+  justify-content: center;
+  gap: clamp(20px, 3vw, 32px);
+  max-width: 900px;
+  margin: clamp(28px, 5vw, 44px) auto 0;
+}
+.inner-circle-card {
+  display: block;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--white);
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(184, 134, 63, .25);
+  text-align: center;
+  transition: transform .22s ease, box-shadow .22s ease;
+}
+.inner-circle-card:hover, .inner-circle-card:focus-visible {
+  transform: translateY(-6px);
+  box-shadow: 0 30px 56px -20px rgba(124, 24, 48, .28);
+}
+.inner-circle-card-media {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: hidden;
+  padding: 10px 10px 0;
+}
+.inner-circle-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+  display: block;
+  border-radius: 14px;
+}
+.inner-circle-card-body { padding: 20px 18px 26px; }
+.inner-circle-card-name {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 22px;
+  color: var(--maroon);
+}
+.inner-circle-card-role {
+  font-size: 12.5px;
+  letter-spacing: .02em;
+  color: var(--muted);
+  margin-top: 6px;
+  line-height: 1.4;
+}
+
 .career-card { text-align: center; }
 button.career-card {
   display: block;

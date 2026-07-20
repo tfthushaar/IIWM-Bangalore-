@@ -266,5 +266,5 @@ var QUIZ_QUESTIONS = [
 
 /* Section 10 (Current Status, Current Education, Current City) is not
    scored — it's collected as profile context alongside name/phone on
-   the lead-capture screen, see quiz.html #screenLead. */
+   the lead-capture screen, see careerprofiler.html #screenLead. */
 var QUIZ_STATUS_OPTIONS = ['Student', 'Graduate', 'Working Professional', 'Entrepreneur', 'Career Switcher', 'Homemaker'];

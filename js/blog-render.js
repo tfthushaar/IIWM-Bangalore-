@@ -70,7 +70,7 @@ function openPost(post, allPosts) {
     '<p class="blog-post-links-label">Continue Exploring</p>' +
     '<a href="program.html">Explore the Program</a>' +
     '<a href="admissions.html">Admissions &amp; Fees</a>' +
-    '<a href="quiz.html">Take the Career Assessment</a>' +
+    '<a href="careerprofiler.html">Take the Career Assessment</a>' +
     '<a href="srividya.html">Meet Our Mentors</a>' +
     '<a href="founder.html">Meet the Founder</a>' +
     '</div>' +

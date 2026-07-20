@@ -74,8 +74,8 @@ main p strong { font-weight: 800; color: var(--maroon); }
   animation: preloader-out 3s cubic-bezier(.65, 0, .35, 1) forwards;
 }
 /* Skip the intro on repeat visits within the same browser session —
-   index.html and quiz.html both set .no-intro via the same sessionStorage
-   key, so once the intro has played once (on either page) it won't
+   index.html and careerprofiler.html both set .no-intro via the same
+   sessionStorage key, so once the intro has played once (on either page) it won't
    replay when navigating between them. */
 .no-intro #preloader { display: none; }
 #preloader::before {
