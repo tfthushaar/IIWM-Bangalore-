@@ -18,7 +18,10 @@ var LEADS_STORAGE_KEY = 'iiwm_application_leads';
 var COPY = {
   'Apply Now': {
     title: 'Apply Now',
-    intro: 'Step 1: Submit your application with your name &amp; contact number below. Step 2: Our team will reach out to schedule a quick counselling session and help you secure your seat.',
+    introSteps: [
+      'Step 1: Submit your application with your name &amp; contact number below.',
+      'Step 2: Our team will reach out to schedule a quick counselling session and help you secure your seat.'
+    ],
     submitLabel: 'Submit Application',
     successTitle: 'Thank you!',
     successBody: 'Thank you for your application. Our team will get back to you ASAP!'
@@ -48,8 +51,11 @@ function openApplicationForm(source, prefill) {
   var phone = (prefill && prefill.phone) || '';
   var extra = (prefill && prefill.extra) || {};
 
-  var introHtml = copy.intro
-    ? '<p style="font-size:16.5px;font-weight:700;line-height:1.5;color:var(--ink);margin:4px 0 20px">' + copy.intro + '</p>'
+  var introHtml = copy.introSteps
+    ? copy.introSteps.map(function (step, i) {
+        var margin = i === copy.introSteps.length - 1 ? '0 0 20px' : '0 0 8px';
+        return '<p style="font-size:16.5px;font-weight:700;line-height:1.5;color:var(--ink);margin:' + margin + '">' + step + '</p>';
+      }).join('')
     : '';
 
   modal.innerHTML =

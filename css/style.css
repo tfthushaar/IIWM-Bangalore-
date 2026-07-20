@@ -267,7 +267,7 @@ main p strong { font-weight: 800; }
 .site-nav a,
 .site-nav .nav-dropdown-trigger {
   position: relative;
-  font-size: clamp(12.5px, 1.05vw, 14px);
+  font-size: clamp(15px, 1.25vw, 17px);
   font-weight: 600;
   letter-spacing: .02em;
   padding-bottom: 5px;
@@ -429,13 +429,19 @@ main p strong { font-weight: 800; }
   nav.mobile-quicknav { display: none; }
 }
 /* 900–1699px (most laptop screens, incl. the common 1280/1366/1536/1600
-   widths): with only 6 tabs now, the base clamp() gap already fits this
-   band comfortably, so this override just trims it slightly rather than
-   the aggressive 9px it used to need for the old 13-tab nav. */
+   widths): with only 6 tabs now, the base clamp() gap and type size
+   already fit this band comfortably — just trim the gap slightly rather
+   than the aggressive 9px/12px it used to need for the old 13-tab nav. */
 @media (min-width: 900px) and (max-width: 1699px) {
-  .site-nav { gap: 12px 22px; }
+  .site-nav { gap: 12px 16px; }
+}
+/* Right at the 900px floor there still isn't quite room for 6 tabs at the
+   larger type size with even 16px gaps — trim a little further just in
+   this narrow band. */
+@media (min-width: 900px) and (max-width: 999px) {
+  .site-nav { gap: 10px 11px; }
   .site-nav a,
-  .site-nav .nav-dropdown-trigger { font-size: 13px; }
+  .site-nav .nav-dropdown-trigger { font-size: 14px; }
 }
 
 /* ===== Mobile/tablet quick-nav — its own full-width line below the
