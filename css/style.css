@@ -767,6 +767,17 @@ main p strong { font-weight: 800; }
     border-radius: 20px 20px 0 0;
     border-left: 1px solid rgba(32, 24, 16, .1);
     border-right: 1px solid rgba(32, 24, 16, .1);
+    transition: opacity .25s ease, transform .25s ease;
+  }
+  /* The homepage hero has its own inline Explore Program/Download
+     Brochure/Watch Video row, so the floating dock would otherwise sit
+     right on top of it — hide it until the visitor scrolls past. Pages
+     without a #hero (main.js only toggles this class when one exists)
+     keep the bar visible as normal. */
+  body.hero-in-view .mobile-apply-bar {
+    opacity: 0;
+    pointer-events: none;
+    transform: translate(-50%, 16px);
   }
 }
 body.has-mobile-apply-bar { padding-bottom: 78px; }
