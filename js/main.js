@@ -109,6 +109,22 @@
     }, { passive: true });
   }
 
+  /* ---- Desktop floating apply bar: hidden while the homepage hero is
+     in view, since the hero has its own inline Explore Program/Download
+     Brochure/Watch Video row that the fixed bar would otherwise sit on
+     top of. CSS only applies the resulting class at desktop widths, so
+     mobile — where the bar is meant to stay visible throughout — is
+     unaffected. Pages without a #hero section simply never get the
+     class removed, so the bar shows as normal everywhere else. */
+  var hero = document.getElementById('hero');
+  if (hero && 'IntersectionObserver' in window) {
+    document.body.classList.add('hero-in-view');
+    var heroObserver = new IntersectionObserver(function (entries) {
+      document.body.classList.toggle('hero-in-view', entries[0].isIntersecting);
+    }, { threshold: 0, rootMargin: '-72px 0px 0px 0px' });
+    heroObserver.observe(hero);
+  }
+
   /* ---- Career roles: show 3, expand to see the rest ---- */
   var careerExtra = document.getElementById('careerExtra');
   var careerExpandToggle = document.getElementById('careerExpandToggle');

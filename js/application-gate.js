@@ -18,10 +18,8 @@ var LEADS_STORAGE_KEY = 'iiwm_application_leads';
 var COPY = {
   'Apply Now': {
     title: 'Apply Now',
-    introSteps: [
-      'Step 1: Submit your application with your name &amp; contact number below.',
-      'Step 2: Our team will reach out to schedule a quick counselling session and help you secure your seat.'
-    ],
+    introBefore: 'Step 1: Submit your application with your name &amp; contact number below, or email your resume to <a href="mailto:apply@theweddingbusiness.school">apply@theweddingbusiness.school</a>.',
+    introAfter: 'Our team will reach out to schedule a quick counselling session and help you secure your seat.',
     submitLabel: 'Submit Application',
     successTitle: 'Thank you!',
     successBody: 'Thank you for your application. Our team will get back to you ASAP!'
@@ -51,18 +49,19 @@ function openApplicationForm(source, prefill) {
   var phone = (prefill && prefill.phone) || '';
   var extra = (prefill && prefill.extra) || {};
 
-  var introHtml = copy.introSteps
-    ? copy.introSteps.map(function (step, i) {
-        var margin = i === copy.introSteps.length - 1 ? '0 0 20px' : '0 0 8px';
-        return '<p style="font-size:16.5px;font-weight:700;line-height:1.5;color:var(--ink);margin:' + margin + '">' + step + '</p>';
-      }).join('')
+  var introStyle = 'font-size:16.5px;font-weight:700;line-height:1.5;color:var(--ink);';
+  var introBeforeHtml = copy.introBefore
+    ? '<p style="' + introStyle + 'margin:4px 0 20px">' + copy.introBefore + '</p>'
+    : '';
+  var introAfterHtml = copy.introAfter
+    ? '<p style="' + introStyle + 'margin:4px 0 20px">' + copy.introAfter + '</p>'
     : '';
 
   modal.innerHTML =
     '<button type="button" class="admin-login-close" aria-label="Close">&times;</button>' +
     '<p class="eyebrow">The Wedding Business School</p>' +
     '<h3>' + escapeHtml(copy.title) + '</h3>' +
-    introHtml +
+    introBeforeHtml +
     '<form id="applicationForm" novalidate>' +
     '<div class="admin-login-field"><label for="appName">Full Name</label>' +
     '<input type="text" id="appName" autocomplete="name" value="' + escapeHtml(name) + '" required></div>' +
@@ -70,6 +69,7 @@ function openApplicationForm(source, prefill) {
     '<input type="tel" id="appPhone" autocomplete="tel" value="' + escapeHtml(phone) + '" required></div>' +
     '<div class="admin-login-field"><label for="appMessage">Anything you\'d like to share? (optional)</label>' +
     '<textarea id="appMessage" rows="4"></textarea></div>' +
+    introAfterHtml +
     '<p class="admin-login-error" id="appError"></p>' +
     '<button type="submit" class="admin-login-submit" id="appSubmitBtn">' + escapeHtml(copy.submitLabel) + '</button>' +
     '</form>';
