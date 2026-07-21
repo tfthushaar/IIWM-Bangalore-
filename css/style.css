@@ -427,19 +427,19 @@ main p strong { font-weight: 800; }
   nav.mobile-quicknav { display: none; }
 }
 /* 900–1699px (most laptop screens, incl. the common 1280/1366/1536/1600
-   widths): with only 6 tabs now, the base clamp() gap and type size
-   already fit this band comfortably — just trim the gap slightly rather
-   than the aggressive 9px/12px it used to need for the old 13-tab nav. */
+   widths): with 7 tabs now (Curriculum re-added), the base clamp() gap
+   and type size still fit this band comfortably — just trim the gap
+   slightly rather than the aggressive spacing it used to need for the
+   old 13-tab nav. */
 @media (min-width: 900px) and (max-width: 1699px) {
-  .site-nav { gap: 12px 16px; }
+  .site-nav { gap: 12px 14px; }
 }
-/* Right at the 900px floor there still isn't quite room for 6 tabs at the
-   larger type size with even 16px gaps — trim a little further just in
-   this narrow band. */
-@media (min-width: 900px) and (max-width: 999px) {
-  .site-nav { gap: 10px 11px; }
+/* Right at the 900px floor there still isn't quite room for 7 tabs at the
+   larger type size — trim further just in this narrow band. */
+@media (min-width: 900px) and (max-width: 1050px) {
+  .site-nav { gap: 9px 9px; }
   .site-nav a,
-  .site-nav .nav-dropdown-trigger { font-size: 14px; }
+  .site-nav .nav-dropdown-trigger { font-size: 13px; }
 }
 
 /* ===== Mobile/tablet quick-nav — sits inline in the header row itself,

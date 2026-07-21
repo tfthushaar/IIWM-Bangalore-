@@ -35,8 +35,9 @@ body { background: var(--ivory); }
 /* ===== Eyebrows restyled for this direction ===== */
 .eyebrow {
   color: var(--ink);
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: .02em;
+  font-size: clamp(21px, 2.8vw, 26px);
 }
 
 /* ===== Buttons ===== */
