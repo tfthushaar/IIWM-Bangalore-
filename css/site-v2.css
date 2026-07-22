@@ -1320,12 +1320,14 @@ button.career-card {
   grid-template-columns: 1fr minmax(150px, 54%);
   grid-template-areas:
     "head media"
+    "intro media"
     "copy copy";
   column-gap: 14px;
   row-gap: 26px;
   align-items: center;
 }
 .founder-v2-head { grid-area: head; }
+.founder-v2-intro { grid-area: intro; }
 .founder-v2-copy-wrap { grid-area: copy; }
 .founder-v2-media { grid-area: media; }
 @media (min-width: 900px) {
@@ -1335,12 +1337,13 @@ button.career-card {
      the whole bio, but align-items:center then centered the (much
      shorter) photo across that huge combined height, stranding it far
      down the page under a massive empty gap. Keeping media to just the
-     head row — same shape as the mobile/tablet layout below — avoids
-     the problem entirely instead of fighting it. */
+     head+intro rows — same shape as the mobile/tablet layout below —
+     avoids the problem entirely instead of fighting it. */
   .founder-v2 {
     grid-template-columns: 1.05fr .95fr;
     grid-template-areas:
       "head media"
+      "intro media"
       "copy copy";
     column-gap: 44px;
     row-gap: 26px;
@@ -1537,13 +1540,19 @@ button.career-card {
 @media (max-width: 679px) {
   .founder-v2 {
     grid-template-columns: 1fr 1.05fr;
+    /* Intro paragraph drops to its own full-width row here instead of
+       stacking under the name/role/button (as it does from 680px up).
+       In that narrower two-up arrangement the paragraph wraps to many
+       more lines than the photo is tall, so keeping it paired with
+       media would leave a dead gap on one side or the other no matter
+       how the row is aligned — full-width avoids the mismatch entirely. */
+    grid-template-areas:
+      "head media"
+      "intro intro"
+      "copy copy";
     column-gap: 14px;
     row-gap: 20px;
-    /* start, not center: the text column now carries an intro paragraph
-       under the Watch Video button, making it taller than the photo —
-       centering the row would strand the (shorter) photo lower down,
-       leaving a dead gap above it next to the name/role/button. */
-    align-items: start;
+    align-items: center;
   }
   .founder-v2-media {
     padding: 4% 6% 12px;
