@@ -1415,7 +1415,7 @@ button.career-card {
   color: var(--muted);
   line-height: 1.75;
   margin-top: 20px;
-  max-width: 62ch;
+  max-width: 88ch;
 }
 .founder-v2-copy + .founder-v2-copy { margin-top: 14px; }
 .founder-v2-actions {
@@ -1592,18 +1592,6 @@ button.career-card {
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-card);
 }
-.founder-v2-sprig {
-  position: absolute;
-  z-index: 2;
-  left: -6%;
-  bottom: 10%;
-  width: 30%;
-  max-width: 96px;
-  color: var(--gold);
-  opacity: .85;
-  pointer-events: none;
-}
-.founder-v2-sprig svg { width: 100%; height: auto; display: block; }
 @media (min-width: 900px) {
   .founder-v2-media { margin-bottom: -56px; }
 }
