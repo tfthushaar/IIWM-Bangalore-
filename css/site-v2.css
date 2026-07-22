@@ -1314,13 +1314,21 @@ button.career-card {
 .founder-v2-copy-wrap { grid-area: copy; }
 .founder-v2-media { grid-area: media; }
 @media (min-width: 900px) {
+  /* `copy` (the long bio) spans the full width below — NOT paired
+     alongside `media` in its own column. An earlier version had media
+     span both the head and copy rows so the photo ran down the side of
+     the whole bio, but align-items:center then centered the (much
+     shorter) photo across that huge combined height, stranding it far
+     down the page under a massive empty gap. Keeping media to just the
+     head row — same shape as the mobile/tablet layout below — avoids
+     the problem entirely instead of fighting it. */
   .founder-v2 {
     grid-template-columns: 1.05fr .95fr;
     grid-template-areas:
       "head media"
-      "copy media";
+      "copy copy";
     column-gap: 44px;
-    row-gap: 0;
+    row-gap: 26px;
     /* Without a cap this stretches to the section's full padded width on
        wide desktops, leaving a large dead gap between the (intentionally
        readable-width) bio copy and the photo column. */
@@ -1331,7 +1339,7 @@ button.career-card {
     grid-template-columns: .95fr 1.05fr;
     grid-template-areas:
       "media head"
-      "media copy";
+      "copy copy";
   }
 }
 /* Homepage variant: the badge is now a small stamp overlapping the photo
