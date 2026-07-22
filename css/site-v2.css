@@ -1539,7 +1539,11 @@ button.career-card {
     grid-template-columns: 1fr 1.05fr;
     column-gap: 14px;
     row-gap: 20px;
-    align-items: center;
+    /* start, not center: the text column now carries an intro paragraph
+       under the Watch Video button, making it taller than the photo —
+       centering the row would strand the (shorter) photo lower down,
+       leaving a dead gap above it next to the name/role/button. */
+    align-items: start;
   }
   .founder-v2-media {
     padding: 4% 6% 12px;
