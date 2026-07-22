@@ -178,11 +178,10 @@ main p strong { font-weight: 800; }
   grid-template-columns: auto 1fr auto;
   align-items: center;
   column-gap: clamp(16px, 2.4vw, 24px);
-  /* Slimmer vertical padding — the enlarged logo mark carries the height.
-     Horizontal padding is intentionally narrower than the page's usual
+  /* Horizontal padding is intentionally narrower than the page's usual
      --side-pad: pulling the logo and Apply Now pill closer to the edges
      frees up real width for the nav list to breathe. */
-  padding: 12px clamp(16px, 3vw, 40px);
+  padding: 18px clamp(16px, 3vw, 40px);
   background: rgba(247, 242, 233, .88);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -192,8 +191,8 @@ main p strong { font-weight: 800; }
               border-color .35s ease;
 }
 .site-header.is-scrolled {
-  padding-top: 8px;
-  padding-bottom: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   background: rgba(247, 242, 233, .97);
   border-color: rgba(32, 24, 16, .12);
 }
@@ -232,7 +231,7 @@ main p strong { font-weight: 800; }
 }
 /* Removed on desktop: redundant with the logo, which already links home. */
 .wordmark-mark {
-  width: clamp(62px, 8vw, 84px);
+  width: clamp(84px, 9.5vw, 116px);
   height: auto;
   display: block;
 }
@@ -255,12 +254,12 @@ main p strong { font-weight: 800; }
 
 .site-nav {
   display: none;
-  /* Only 6 tabs now — plenty of room to let them breathe. flex-wrap stays
+  /* Only 7 tabs now — plenty of room to let them breathe. flex-wrap stays
      as a safety net for a graceful wrap to a second centered row rather
      than overflowing, but shouldn't trigger at normal desktop widths. */
   flex-wrap: wrap;
   justify-content: center;
-  gap: 14px clamp(26px, 3.4vw, 46px);
+  gap: 14px clamp(34px, 4.2vw, 60px);
   justify-self: center;
   grid-column: 2;
 }
@@ -282,15 +281,16 @@ main p strong { font-weight: 800; }
   bottom: 0;
   height: 1px;
   background: var(--gold);
-  transform: scaleX(0);
+  /* Always on, not just hover/active — hover just thickens it. */
+  transform: scaleX(1);
   transform-origin: center;
-  transition: transform .32s cubic-bezier(.4, 0, .2, 1);
+  transition: transform .32s cubic-bezier(.4, 0, .2, 1), height .18s ease;
 }
 .site-nav a:hover::after,
 .site-nav a:focus-visible::after,
 .site-nav .nav-dropdown-trigger:hover::after,
 .site-nav .nav-dropdown-trigger:focus-visible::after {
-  transform: scaleX(1);
+  height: 2px;
 }
 
 /* ===== Nav dropdown (e.g. Inner Circle members) ===== */
@@ -475,8 +475,8 @@ main p strong { font-weight: 800; }
   .mobile-quicknav a { font-size: 9.2px; letter-spacing: 0; }
 }
 @media (max-width: 330px) {
-  .mobile-quicknav { gap: 4px; }
-  .mobile-quicknav a { font-size: 8.8px; }
+  .mobile-quicknav { gap: 3px; }
+  .mobile-quicknav a { font-size: 8.4px; }
 }
 
 /* ===== Mobile / overlay menu ===== */
@@ -686,108 +686,11 @@ main p strong { font-weight: 800; }
   margin: 0 0 12px;
 }
 
-/* ===== Fixed mobile "Apply Now" bar (desktop already has it in the sticky
-   header's cta-pill, so this is hidden at the same breakpoint) ===== */
-.mobile-apply-bar {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 60;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 12px var(--side-pad) calc(12px + env(safe-area-inset-bottom, 0px));
-  background: rgba(247, 242, 233, .96);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-top: 1px solid rgba(32, 24, 16, .1);
-  box-shadow: 0 -8px 24px rgba(32, 24, 16, .1);
-}
-.mobile-apply-bar a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-  text-align: center;
-  line-height: 1.15;
-  background: var(--coral, var(--gold));
-  color: #fff;
-  border: 1px solid transparent;
-  font-family: var(--font-sans);
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: .02em;
-  text-transform: uppercase;
-  padding: 10px 6px;
-  border-radius: 14px;
-  box-shadow: 0 10px 24px -10px rgba(169, 131, 79, .5);
-  transition: transform .18s ease;
-}
-.mobile-apply-bar a:active { transform: scale(.97); }
-/* "Watch Video" sits in a flex:1 wrapper (rather than being a direct
-   .mobile-apply-bar child like the other two) purely so its "coming
-   soon" note can float as a small tooltip above the bar instead of
-   pushing the fixed-height bar taller when it appears. */
-.mobile-bar-video-wrap { flex: 1; position: relative; display: flex; }
-.mobile-bar-video-wrap .video-soon-note {
-  position: absolute;
-  bottom: calc(100% + 10px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--ink);
-  color: #fff;
-  padding: 7px 14px;
-  border-radius: 8px;
-  font-size: 13px;
-  font-style: normal;
-  white-space: nowrap;
-  margin-top: 0;
-  box-shadow: 0 8px 20px -8px rgba(32, 24, 16, .4);
-}
-.mobile-bar-video-wrap .video-soon-note::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border: 5px solid transparent;
-  border-top-color: var(--ink);
-}
-/* Kept visible at all widths now — Apply Now must stay persistent at the
-   bottom on desktop too, not just mobile. Above 900px it becomes a
-   centered floating dock instead of a full-bleed bar, so it doesn't
-   stretch edge-to-edge on wide screens. */
-@media (min-width: 900px) {
-  .mobile-apply-bar {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%);
-    max-width: 560px;
-    width: calc(100% - 48px);
-    border-radius: 20px 20px 0 0;
-    border-left: 1px solid rgba(32, 24, 16, .1);
-    border-right: 1px solid rgba(32, 24, 16, .1);
-    transition: opacity .25s ease, transform .25s ease;
-  }
-  /* The homepage hero has its own inline Explore Program/Download
-     Brochure/Watch Video row, so the floating dock would otherwise sit
-     right on top of it — hide it until the visitor scrolls past. Pages
-     without a #hero (main.js only toggles this class when one exists)
-     keep the bar visible as normal. */
-  body.hero-in-view .mobile-apply-bar {
-    opacity: 0;
-    pointer-events: none;
-    transform: translate(-50%, 16px);
-  }
-}
-body.has-mobile-apply-bar { padding-bottom: 78px; }
-
 /* ===== Persistent floating WhatsApp chat button (site-wide) ===== */
 .whatsapp-float {
   position: fixed;
   right: 16px;
-  bottom: calc(78px + 14px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   z-index: 65;
   width: 50px;
   height: 50px;
@@ -801,7 +704,3 @@ body.has-mobile-apply-bar { padding-bottom: 78px; }
 }
 .whatsapp-float:hover, .whatsapp-float:focus-visible { transform: scale(1.06); }
 .whatsapp-float svg { width: 26px; height: 26px; fill: #fff; }
-@media (min-width: 900px) {
-  .whatsapp-float { bottom: 24px; }
-}
-body:not(.has-mobile-apply-bar) .whatsapp-float { bottom: 24px; }
