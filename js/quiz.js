@@ -82,6 +82,21 @@
           });
         });
         Object.keys(perKey).forEach(function (k) { max[k] += perKey[k]; });
+      } else if (q.type === 'multi') {
+        /* Best case is picking the `pick` highest-weighted options for
+           each key, so max possible is the sum of the top N weights
+           per key rather than a single max like 'single' questions. */
+        var byKey = {};
+        q.options.forEach(function (opt) {
+          var ow = getOptionWeights(opt) || {};
+          Object.keys(ow).forEach(function (k) {
+            (byKey[k] = byKey[k] || []).push(ow[k]);
+          });
+        });
+        Object.keys(byKey).forEach(function (k) {
+          var top = byKey[k].slice().sort(function (a, b) { return b - a; }).slice(0, q.pick);
+          max[k] += top.reduce(function (s, v) { return s + v; }, 0);
+        });
       }
     });
     return max;
@@ -118,6 +133,18 @@
             dimScores[k] += opt.dimensionWeights[k];
           });
         }
+      } else if (q.type === 'multi') {
+        (ans || []).forEach(function (idx) {
+          var mopt = q.options[idx];
+          Object.keys(mopt.archetypeWeights || {}).forEach(function (a) {
+            var w = mopt.archetypeWeights[a];
+            scores[a] += w;
+            contributions[a].push({ label: mopt.label, amount: w });
+          });
+          Object.keys(mopt.dimensionWeights || {}).forEach(function (k) {
+            dimScores[k] += mopt.dimensionWeights[k];
+          });
+        });
       }
     });
 

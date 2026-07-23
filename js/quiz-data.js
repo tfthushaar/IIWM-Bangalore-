@@ -112,7 +112,7 @@ var QUIZ_QUESTIONS = [
     archetypeWeights: { planner: 4, production: 3 }, dimensionWeights: { leadership: 4, business: 2 } },
 
   // ==================== Section 2 — Work Style ====================
-  { id: 'w1', section: 'Work Style', type: 'single', text: 'Which excites you most?',
+  { id: 'w1', section: 'Work Style', type: 'multi', pick: 2, text: 'Which excites you most?',
     options: [
       { label: 'Designing', archetypeWeights: { designer: 4, florist: 3 }, dimensionWeights: { creativity: 4, luxury: 2 } },
       { label: 'Planning', archetypeWeights: { logistics: 4, planner: 3 }, dimensionWeights: { organization: 4 } },

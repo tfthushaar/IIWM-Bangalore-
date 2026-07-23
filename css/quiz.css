@@ -173,7 +173,10 @@
    caption otherwise — sized up substantially so it lands as an actual
    section marker above each question. */
 .quiz-question .quiz-eyebrow {
-  font-size: clamp(56px, 15vw, 84px);
+  /* Lower floor than before — at the old 56px minimum, longer section
+     names ("Situational Judgement", "Entrepreneurial Mindset") wrapped
+     to two lines on phones instead of reading as a single heading. */
+  font-size: clamp(22px, 6.4vw, 64px);
   line-height: 1.05;
   margin-bottom: 20px;
 }
