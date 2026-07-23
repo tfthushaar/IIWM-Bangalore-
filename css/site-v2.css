@@ -116,9 +116,10 @@ body { background: var(--ivory); }
   justify-content: flex-start;
   overflow-y: auto;
   padding-top: 88px;
-  /* Must clear the fixed WhatsApp float button that sits in the bottom
-     corner, or the last nav item (Apply Now) ends up unreachable. */
-  padding-bottom: 90px;
+  /* Must clear the fixed .mobile-apply-bar (~78px) plus the WhatsApp
+     float button that also sits in that corner, or the last nav item
+     (Apply Now) ends up unreachable. */
+  padding-bottom: 130px;
 }
 .mobile-menu a {
   font-size: clamp(20px, 6vw, 26px);

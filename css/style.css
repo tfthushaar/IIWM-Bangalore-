@@ -686,11 +686,60 @@ main p strong { font-weight: 800; }
   margin: 0 0 12px;
 }
 
+/* ===== Fixed mobile "Apply Now" bar — mobile only. Desktop already has
+   the header's cta-pill, the homepage's own inline hero buttons, and
+   each page's CTA banner, so the bar is hidden above 900px instead of
+   duplicating those. ===== */
+.mobile-apply-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px var(--side-pad) calc(12px + env(safe-area-inset-bottom, 0px));
+  background: rgba(247, 242, 233, .96);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(32, 24, 16, .1);
+  box-shadow: 0 -8px 24px rgba(32, 24, 16, .1);
+}
+.mobile-apply-bar a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  text-align: center;
+  line-height: 1.15;
+  background: var(--coral, var(--gold));
+  color: #fff;
+  border: 1px solid transparent;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  padding: 10px 6px;
+  border-radius: 14px;
+  box-shadow: 0 10px 24px -10px rgba(169, 131, 79, .5);
+  transition: transform .18s ease;
+}
+.mobile-apply-bar a:active { transform: scale(.97); }
+@media (min-width: 900px) {
+  .mobile-apply-bar { display: none; }
+}
+body.has-mobile-apply-bar { padding-bottom: 78px; }
+@media (min-width: 900px) {
+  body.has-mobile-apply-bar { padding-bottom: 0; }
+}
+
 /* ===== Persistent floating WhatsApp chat button (site-wide) ===== */
 .whatsapp-float {
   position: fixed;
   right: 16px;
-  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(78px + 14px + env(safe-area-inset-bottom, 0px));
   z-index: 65;
   width: 50px;
   height: 50px;
@@ -704,3 +753,6 @@ main p strong { font-weight: 800; }
 }
 .whatsapp-float:hover, .whatsapp-float:focus-visible { transform: scale(1.06); }
 .whatsapp-float svg { width: 26px; height: 26px; fill: #fff; }
+@media (min-width: 900px) {
+  .whatsapp-float { bottom: 24px; }
+}
