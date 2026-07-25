@@ -1894,9 +1894,10 @@ button.career-card {
   font-family: var(--font-serif);
   font-style: italic;
   font-weight: 700;
-  font-size: clamp(23px, 2.6vw, 28px);
+  font-size: clamp(26px, 3.2vw, 34px);
   color: var(--ink);
   line-height: 1.2;
+  margin-top: clamp(32px, 5vw, 44px);
   margin-bottom: 4px;
 }
 /* :not(.eyebrow) — otherwise this beats the plain .eyebrow class on
