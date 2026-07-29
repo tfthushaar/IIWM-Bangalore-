@@ -223,8 +223,8 @@ main p strong { font-weight: 800; }
    proportioned to that instance's logo size. ===== */
 .tm-mark {
   position: absolute;
-  top: 5%;
-  right: 4%;
+  top: 8%;
+  right: 8%;
   font-family: var(--font-sans);
   font-weight: 700;
   line-height: 1;
