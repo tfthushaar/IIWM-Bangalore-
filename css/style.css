@@ -215,12 +215,16 @@ main p strong { font-weight: 800; }
   transition: opacity .2s ease;
 }
 /* ===== Trademark mark, overlaid on the logo image itself rather than
-   baked into the asset — each context below sets its own font-size to
-   stay legibly proportioned to that instance's logo size. ===== */
+   baked into the asset. The crest artwork sits inset within a lot of
+   transparent canvas margin (roughly 11-12% on every side), so the mark
+   is positioned as a percentage of the image box to land just outside
+   the crest's actual top-right corner instead of out at the canvas
+   edge. Each context below sets its own font-size to stay legibly
+   proportioned to that instance's logo size. ===== */
 .tm-mark {
   position: absolute;
-  top: 0;
-  right: -0.85em;
+  top: 5%;
+  right: 4%;
   font-family: var(--font-sans);
   font-weight: 700;
   line-height: 1;
