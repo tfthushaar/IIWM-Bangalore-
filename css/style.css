@@ -107,6 +107,10 @@ main p strong { font-weight: 800; }
   transform: translateY(12px) scale(.92);
   animation: preloader-in 1s cubic-bezier(.19, 1, .22, 1) .1s forwards;
 }
+/* Wraps just the logo image (not the whole padded/centered flex column)
+   so the mark's position tracks the image's own edge at every size. */
+.preloader-logo-wrap { position: relative; display: inline-block; line-height: 0; }
+.preloader-logo-wrap .tm-mark { font-size: 26px; }
 /* The full logo lockup (monogram + institute name baked into the image) —
    sized against the viewport height so the whole portrait card fits above
    the fold on phones. */
@@ -204,11 +208,26 @@ main p strong { font-weight: 800; }
   justify-self: start;
 }
 .wordmark {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 14px;
   transition: opacity .2s ease;
 }
+/* ===== Trademark mark, overlaid on the logo image itself rather than
+   baked into the asset — each context below sets its own font-size to
+   stay legibly proportioned to that instance's logo size. ===== */
+.tm-mark {
+  position: absolute;
+  top: 0;
+  right: -0.85em;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--gold-text);
+  pointer-events: none;
+}
+.wordmark .tm-mark { font-size: 12px; }
 .wordmark:hover,
 .wordmark:focus-visible { opacity: .78; }
 .home-btn {
@@ -584,6 +603,8 @@ main p strong { font-weight: 800; }
   gap: 28px;
 }
 .footer-logo { display: block; margin: 0 auto; width: clamp(160px, 14vw, 200px); height: auto; }
+.footer-logo-wrap { position: relative; display: inline-block; line-height: 0; }
+.footer-logo-wrap .tm-mark { font-size: 20px; }
 .footer-tagline {
   font-size: 16px;
   color: var(--muted);
