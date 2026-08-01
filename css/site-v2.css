@@ -1745,6 +1745,11 @@ button.career-card {
 .footer-col a:hover, .footer-col a:focus-visible { color: var(--coral); }
 .footer-col-contact li { display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; }
 .footer-col-contact svg { flex: none; width: 15px; height: 15px; margin-top: 2px; color: var(--gold); }
+/* The email address is one long unbroken token — without this, it just
+   overflows past its column (and into the next one) at widths where the
+   column is narrower than the address itself, rather than wrapping. */
+.footer-col-contact li span,
+.footer-col-contact li a { min-width: 0; overflow-wrap: anywhere; }
 .footer-enquire p:not(.footer-col-title) { font-size: 15px; color: var(--muted); line-height: 1.6; margin-bottom: 16px; }
 .footer-social { display: flex; gap: 10px; }
 .footer-social a {
